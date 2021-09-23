@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatGridListModule } from '@angular/material/grid-list';
+import {MatExpansionModule} from '@angular/material/expansion';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -44,6 +45,7 @@ import { QuestionComponent } from './user/question/question.component';
     MatIconModule,
     MatSelectModule,
     MatInputModule,
+    MatExpansionModule,
   ],
   exports:[
     FrontHeaderComponent,

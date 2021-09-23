@@ -26,6 +26,27 @@
     text-transform: uppercase;
 }
 
+.content .content-detail {
+    min-width: 585px;
+    width: 67%;
+    float: left;
+}
+
+mat-expansion-panel {
+    margin: 15px 0px;
+}
+
+mat-expansion-panel mat-expansion-panel-header {
+    background-color: #C4C4C4;
+    height: 40px !important;
+}
+
+mat-panel-title {
+    font-weight: 600;
+    font-size: 15px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
 //Card
 .card {
     width: 32%;
