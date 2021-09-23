@@ -1,0 +1,36 @@
+div {
+    height: 40px;
+    background-color: #1B75BB;
+    --bs-breadcrumb-divider: '>';
+}
+
+div ol {
+    width: 70%;
+    margin: 0px auto;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+div ol li {
+    font-size: 18px;
+    font-weight: 500;
+    font-family: 'Times New Roman', Times, serif;
+    color: rgb(216, 216, 216);
+}
+
+div ol mat-icon {
+    // font-size: 18px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+div ol li a {
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    text-decoration: none;
+}

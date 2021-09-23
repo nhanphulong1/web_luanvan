@@ -1,0 +1,202 @@
+* {
+    padding: 0;
+    margin: 0;
+    // font-family: 'Times New Roman', Times, serif;
+}
+
+.content-1 {
+    height: calc(100% - 70px);
+    min-height: 650px;
+    background-image: url('../../assets/image/backgrouud-1.jpg');
+    background-size: cover;
+}
+
+.content-1 .content {
+    width: 70%;
+    margin: 0 auto;
+    padding-top: 120px;
+    display: flex;
+    align-items: center;
+}
+
+.content-1 .content div {
+    width: 50%;
+}
+
+.content-index h2 {
+    color: blue;
+    font-size: 28px;
+    font-weight: 800;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    margin: 0px;
+    text-transform: uppercase;
+}
+
+#text-center {
+    width: 100%;
+    margin-top: 10px;
+    text-align: center;
+}
+
+#text-center span {
+    // margin: auto;
+    // display: block;
+    font-size: 18px;
+    color: red;
+    background-color: white;
+    padding: 5px 20px;
+}
+
+.image {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.image img {
+    width: 400px;
+    height: 267px;
+    box-shadow: lightgray 3px 4px 5px;
+}
+
+#describe {
+    width: 70%;
+    margin: auto;
+    margin-top: 18px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#describe div {
+    width: 50%;
+    color: #024888;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#describe div mat-icon {
+    background-color: white;
+    padding: 7px;
+    border-radius: 50%;
+    margin-right: 8px;
+    // border: 1px solid lightgray;
+}
+
+.content-2 {
+    height: 100vh;
+    padding-top: 25px;
+    padding-bottom: 45px;
+    min-height: 700px;
+    background-color: #ecf3fd;
+}
+
+.content-2>h2 {
+    color: #024888;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 25px;
+    font-size: 24px;
+}
+
+.content-2 .course {
+    width: 70%;
+    margin: 20px auto;
+    background-color: white;
+    display: flex;
+    position: relative;
+    height: 200px;
+    border-radius: 5px;
+    box-shadow: rgba(49, 49, 49, 0.384) 2px 2px 5px;
+}
+
+.content-2 .course .course-image {
+    padding: 10px;
+    width: 350px;
+}
+
+.content-2 .course .course-image img {
+    border: 1px solid lightgray;
+    width: 300px;
+    height: 180px;
+}
+
+.content-2 .course-detail {
+    padding: 10px 25px;
+}
+
+.content-2 .course-detail .course-name {
+    font-size: 24px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.content-2 .course-detail .course-fee {
+    color: red;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+
+.content-2 .course-detail .course-describe {
+    font-size: 14px;
+    text-align: justify;
+}
+
+.content-2 .button {
+    position: absolute;
+    bottom: 10px;
+    right: 25px;
+}
+
+.content-2 .button a {
+    margin-left: 10px;
+    font-size: 14px;
+    border-radius: 17px;
+    padding: 0px 30px;
+    font-weight: normal;
+}
+
+.content-3 {
+    background-color: #ecf3fd;
+    font-family: 'Times New Roman', Times, serif;
+    padding-bottom: 25px;
+}
+
+.content-3>div {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 70%;
+    margin: auto;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: rgba(49, 49, 49, 0.384) 2px 2px 5px;
+}
+
+.content-3 h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #024888;
+    text-align: center;
+    margin-bottom: 0px;
+    text-transform: uppercase;
+}
+
+.content-3 hr {
+    width: 170px;
+    margin: auto;
+}
+
+.content-3 form {
+    width: 70%;
+    margin: 5px auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-3 form mat-form-field {
+    font-size: 13px;
+}
