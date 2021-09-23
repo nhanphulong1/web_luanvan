@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ServeHttpService } from '../Services/serve-http.service';
 import Swal from 'sweetalert2'
-import { Router, Routes } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-index',
@@ -40,7 +40,7 @@ export class IndexComponent implements OnInit {
   public onSubmit(){
     if(this.formRegis.valid){
       let data = this.getData();
-      this.service.postBussinessHouse(data).subscribe((result)=>{
+      this.service.postRegis(data).subscribe((result)=>{
         if(result.status == 1){
           Swal.fire(
             'Success!',
@@ -59,5 +59,4 @@ export class IndexComponent implements OnInit {
       });
     }
   }
-
 }
