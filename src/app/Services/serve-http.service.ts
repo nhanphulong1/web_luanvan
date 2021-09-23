@@ -37,8 +37,19 @@ export class ServeHttpService {
       'Something bad happened; please try again later.');
   }
 
-  public postBussinessHouse(data): Observable<any>{
+
+  //Register
+  public postRegis(data): Observable<any>{
     const url = this.REST_API_SERVER+'/regis';
+    return this.httpClient
+    .post<any>(url, data ,this.httpOptions)
+    .pipe(catchError(this.handleError));
+  }
+
+
+  //Contact
+  public postContact(data): Observable<any>{
+    const url = this.REST_API_SERVER+'/contact';
     return this.httpClient
     .post<any>(url, data ,this.httpOptions)
     .pipe(catchError(this.handleError));

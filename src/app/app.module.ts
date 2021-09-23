@@ -18,6 +18,7 @@ import { FrontFooterComponent } from './layout/front-footer/front-footer.compone
 import { IntroduceComponent } from './user/introduce/introduce.component';
 import { BreadcrumbComponent } from './layout/breadcrumb/breadcrumb.component';
 import { ContactComponent } from './user/contact/contact.component';
+import { QuestionComponent } from './user/question/question.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ContactComponent } from './user/contact/contact.component';
     IntroduceComponent,
     BreadcrumbComponent,
     ContactComponent,
+    QuestionComponent,
   ],
   imports: [
     BrowserModule,
