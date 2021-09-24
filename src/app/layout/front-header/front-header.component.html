@@ -3,11 +3,11 @@
     <div class="menu">
         <div><a [routerLink]="['/home']" routerLinkActive="router-link-active">Trang chủ</a></div>
         <div id="course">
-            <a href="#">Khóa học</a>
+            <a>Khóa học</a>
             <ul>
-                <li><a href="">Khóa học B1</a></li>
-                <li><a href="">Khóa học B2</a></li>
-                <li><a href="">Khóa học C1</a></li>
+                <li><a [routerLink]="['/front/course/b1']" routerLinkActive="router-link-active">Khóa học B1</a></li>
+                <li><a [routerLink]="['/front/course/b2']" routerLinkActive="router-link-active">Khóa học B2</a></li>
+                <li><a [routerLink]="['/front/course/c1']" routerLinkActive="router-link-active">Khóa học C1</a></li>
             </ul>
         </div>
         <div><a [routerLink]="['/front/introduce']" routerLinkActive="router-link-active">Giới thiệu</a></div>

@@ -19,6 +19,9 @@ import { IntroduceComponent } from './user/introduce/introduce.component';
 import { BreadcrumbComponent } from './layout/breadcrumb/breadcrumb.component';
 import { ContactComponent } from './user/contact/contact.component';
 import { QuestionComponent } from './user/question/question.component';
+import { CourseB1Component } from './user/coure/course-b1/course-b1.component';
+import { CourseB2Component } from './user/coure/course-b2/course-b2.component';
+import { CourseC1Component } from './user/coure/course-c1/course-c1.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,9 @@ import { QuestionComponent } from './user/question/question.component';
     BreadcrumbComponent,
     ContactComponent,
     QuestionComponent,
+    CourseB1Component,
+    CourseB2Component,
+    CourseC1Component,
   ],
   imports: [
     BrowserModule,
