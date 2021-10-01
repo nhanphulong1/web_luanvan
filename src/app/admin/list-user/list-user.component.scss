@@ -1,0 +1,112 @@
+.body {
+    float: right;
+    width: calc(100% - 250px);
+}
+
+.content {
+    background-color: white;
+    width: 98%;
+    box-shadow: 1px 1px 5px rgb(172, 172, 172);
+    margin: 10px auto;
+    padding-top: 2px;
+    padding-bottom: 20px;
+    margin-bottom: 80px;
+    min-height: calc(100vh - 180px);
+}
+
+.content h2 {
+    margin: 15px 10px;
+    font-size: 24px;
+    border-bottom: 1px solid black;
+    color: #024888;
+    margin-bottom: 25px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.search {
+    width: 95%;
+    margin: auto;
+}
+
+.search mat-form-field {
+    font-size: 12px;
+    width: 90%;
+}
+
+.search_btn ::ng-deep figure {
+    align-items: flex-start;
+    justify-content: flex-start!important;
+}
+
+.search_btn ::ng-deep figure button {
+    margin-left: 15px;
+    margin-top: 7px;
+    height: 45px;
+    padding: 0px 25px;
+}
+
+.table {
+    width: 95%;
+    margin: auto;
+}
+
+.table table {
+    width: 100%;
+}
+
+.table table .mat-header-row {
+    background-color: #024888;
+}
+
+::ng-deep .table table .mat-sort-header-button {
+    color: #fff !important;
+    font-weight: bold;
+}
+
+th.mat-sort-header-sorted {
+    color: white;
+}
+
+// ::ng-deep .mat-sort-header-container {
+//     display: flex;
+//     justify-content: center;
+// }
+// ::ng-deep .mat-cell {
+//     text-align: center;
+// }
+.mat-column-action {
+    flex: none;
+    width: 120px;
+}
+
+.badge-primary {
+    background-color: #0d6efd;
+    padding: .35em .65em;
+    font-weight: 500;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    border-radius: 5px;
+    font-size: 0.95em;
+}
+
+.badge-info {
+    background-color: #0dcaf0;
+    padding: .35em .65em;
+    font-weight: 500;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    border-radius: 5px;
+    font-size: 0.95em;
+}
+
+.badge-warning {
+    background-color: #ffc107;
+    padding: .35em .65em;
+    font-weight: 500;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    border-radius: 5px;
+    font-size: 0.95em;
+}

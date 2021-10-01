@@ -1,0 +1,34 @@
+<h1 mat-dialog-title>ĐĂNG KÝ KHÓA HỌC</h1>
+<form [formGroup]="formRegis">
+    <div mat-dialog-content>
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input formControlName="res_email" matInput type="text">
+            <mat-error *ngIf="formRegis.get('res_email').hasError('required')">Vui lòng nhập email!</mat-error>
+            <mat-error *ngIf="!formRegis.get('res_email').hasError('required') && formRegis.get('res_email').hasError('email')">Vui lòng nhập đúng định dạng email!</mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Họ và tên</mat-label>
+            <input formControlName="res_name" matInput type="text">
+            <mat-error *ngIf="formRegis.get('res_name').hasError('required')">Vui lòng nhập tên!</mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Số điện thoại</mat-label>
+            <input formControlName="res_phone" matInput type="text">
+            <mat-error *ngIf="formRegis.get('res_phone').hasError('required')">Vui lòng nhập số điện thoại!</mat-error>
+            <mat-error *ngIf="!formRegis.get('res_phone').hasError('required') && formRegis.get('res_phone').hasError('pattern')">Vui lòng nhập đúng định dạng!</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Loại bằng lái</mat-label>
+            <mat-select formControlName="res_type">
+                <mat-option value="B1">B1</mat-option>
+                <mat-option value="B2">B2</mat-option>
+                <mat-option value="C1">C1</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="btn" mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary" [mat-dialog-close]="formRegis.value" [disabled]="formRegis.invalid">Đăng ký</button>
+        <button type="button" mat-raised-button mat-dialog-close="false">Đóng</button>
+    </div>
+</form>

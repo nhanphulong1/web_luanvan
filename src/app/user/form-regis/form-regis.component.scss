@@ -1,0 +1,17 @@
+h1 {
+    text-align: center;
+    color: #0273af;
+    font-weight: bold;
+}
+
+form {
+    width: 70%;
+    margin: 5px auto;
+    display: flex;
+    flex-direction: column;
+}
+
+form mat-form-field {
+    font-size: 13px;
+    width: 90%;
+}

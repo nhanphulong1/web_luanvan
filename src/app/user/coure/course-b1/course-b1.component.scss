@@ -86,14 +86,34 @@
 }
 
 .card p {
-    font-size: 14px;
+    font-size: 16px;
     padding-left: 18px;
     padding-right: 10px;
-    margin: 0px;
+    // margin: 0px;
+    margin: 7px 0px;
 }
 
-.card-location h4 {
-    background-color: #9D6A06;
+.card-content .btn {
+    text-align: center;
+}
+
+.card-content .btn button {
+    background-color: #CE2439;
+    color: white;
+}
+
+.text-danger {
+    color: red;
+    font-weight: bold;
+}
+
+.text-info {
+    color: #131E83;
+    font-weight: bold;
+}
+
+.card-info h4 {
+    background-color: #902727;
 }
 
 .card-course h4 {

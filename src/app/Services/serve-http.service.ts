@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,6 @@ export class ServeHttpService {
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
-      // Authorization: 'my-auth-token'
       'Access-Control-Allow-Origin': 'http://localhost:3000'
     })
   };
@@ -37,12 +36,128 @@ export class ServeHttpService {
       'Something bad happened; please try again later.');
   }
 
+  //User
+    //Get all user
+    public getAllUser(): Observable<any>{
+      const url = this.REST_API_SERVER+'/user';
+      return this.httpClient.get<any>(url)
+      .pipe(
+        map((data)=>{
+          // console.log('data: ',data, this.httpOptions);
+          if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+            console.log('DataService: getUsers: error', data);
+          }
+          return data;
+        })
+      ).pipe(catchError(this.handleError));
+    }
+
+    //get user by id
+    public getUserById(id): Observable<any>{
+      const url = this.REST_API_SERVER+'/user/'+id;
+      return this.httpClient.get<any>(url)
+      .pipe(
+        map((data)=>{
+          // console.log('data: ',data, this.httpOptions);
+          if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+            console.log('DataService: getUsers: error', data);
+          }
+          return data;
+        })
+      ).pipe(catchError(this.handleError));
+    }
+
+    //search user
+    public searchUser(data): Observable<any>{
+      const url = this.REST_API_SERVER+'/user/search';
+      return this.httpClient.post<any>(url,data)
+      .pipe(
+        map((data)=>{
+          if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+            console.log('DataService: getUsers: error', data);
+          }
+          return data;
+        })
+      ).pipe(catchError(this.handleError));
+    }
+
+    //search user
+    public checkEmail(email){
+      const url = this.REST_API_SERVER+'/user/email/'+email;
+      return this.httpClient.get<any>(url);
+    }
+
+    //create user
+    public createUser(data): Observable<any>{
+      const url = this.REST_API_SERVER+'/user';
+      return this.httpClient.post<any>(url,data)
+      .pipe(
+        map((data)=>{
+          if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+            console.log('DataService: getUsers: error', data);
+          }
+          return data;
+        })
+      ).pipe(catchError(this.handleError));
+    }
+
+    //create user
+    public updateUser(id,data): Observable<any>{
+      const url = this.REST_API_SERVER+'/user/'+id;
+      return this.httpClient.put<any>(url,data)
+      .pipe(
+        map((data)=>{
+          if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+            console.log('DataService: getUsers: error', data);
+          }
+          return data;
+        })
+      ).pipe(catchError(this.handleError));
+    }
+
+    //reset user
+    public resetPassUser(id): Observable<any>{
+      const url = this.REST_API_SERVER+'/user/reset/'+id;
+      return this.httpClient.get<any>(url)
+      .pipe(
+        map((data)=>{
+          if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+            console.log('DataService: getUsers: error', data);
+          }
+          return data;
+        })
+      ).pipe(catchError(this.handleError));
+    }
+
+    //delete user
+    public deleteUser(id): Observable<any>{
+      const url = this.REST_API_SERVER+'/user/'+id;
+      return this.httpClient.delete<any>(url)
+      .pipe(
+        map((data)=>{
+          if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+            console.log('DataService: getUsers: error', data);
+          }
+          return data;
+        })
+      ).pipe(catchError(this.handleError));
+    }
+
 
   //Register
   public postRegis(data): Observable<any>{
     const url = this.REST_API_SERVER+'/regis';
     return this.httpClient
-    .post<any>(url, data ,this.httpOptions)
+    .post<any>(url, data)
+    .pipe(
+      map((data)=>{
+        // console.log('data: ',data, this.httpOptions);
+        if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+          console.log('DataService: getUsers: error', data);
+        }
+        return data;
+      })
+    )
     .pipe(catchError(this.handleError));
   }
 

@@ -41,6 +41,8 @@ export class IndexComponent implements OnInit {
     if(this.formRegis.valid){
       let data = this.getData();
       this.service.postRegis(data).subscribe((result)=>{
+        console.log('result: ',result);
+        
         if(result.status == 1){
           Swal.fire(
             'Success!',

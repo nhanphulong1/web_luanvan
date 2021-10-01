@@ -1,12 +1,13 @@
 * {
     padding: 0;
-    font-family: 'Times New Roman', Times, serif;
+    // font-family: 'Times New Roman', Times, serif;
     margin: 0;
 }
 
 .header {
     font-size: 24px;
     border-bottom: 1px solid black;
+    background-color: white;
 }
 
 .name_logo {
@@ -34,6 +35,7 @@
     width: 63%;
     height: 70px;
     padding-right: 30px;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .menu a {
@@ -43,11 +45,40 @@
     color: #0083C9;
 }
 
-.menu div button {
+.menu div #btn-login {
+    padding: 0px 15px;
+    color: white;
     border-radius: 15px;
     margin-left: 15px;
-    font-size: 18px;
+    font-size: 17px;
     font-weight: normal;
+}
+
+#btn-login:hover {
+    background-color: #4f63d8;
+}
+
+// .btn_login {
+//     padding: 0px;
+// }
+.btn_login button {
+    background-color: rgb(226, 226, 226);
+    padding: 0px 4px;
+    font-size: 15px;
+    // display: flex;
+    // align-items: center;
+}
+
+.mat-button-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.btn_login button img {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
 }
 
 .menu a:hover {

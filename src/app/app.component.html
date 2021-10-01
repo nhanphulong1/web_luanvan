@@ -1,2 +1,9 @@
-<!-- <app-front-header></app-front-header> -->
-<router-outlet></router-outlet>
+<app-front-header *ngIf="isFront"></app-front-header>
+<app-sidenav *ngIf="!isFront"></app-sidenav>
+<router-outlet *ngIf="isFront" (activate)="onActivate($event)"></router-outlet>
+<div class="body" *ngIf="!isFront">
+    <app-toolbar></app-toolbar>
+    <router-outlet (activate)="onActivate($event)"></router-outlet>
+    <app-back-footer></app-back-footer>
+</div>
+<app-front-footer *ngIf="isFront"></app-front-footer>
