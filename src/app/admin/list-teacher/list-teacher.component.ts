@@ -2,21 +2,25 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { CourseService } from 'src/app/Services/course.service';
+import { TeacherService } from 'src/app/Services/teacher.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-list-course',
-  templateUrl: './list-course.component.html',
-  styleUrls: ['./list-course.component.scss']
+  selector: 'app-list-teacher',
+  templateUrl: './list-teacher.component.html',
+  styleUrls: ['./list-teacher.component.scss']
 })
-export class ListCourseComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'price', 'training', 'action'];
+export class ListTeacherComponent implements OnInit {
+  displayedColumns: string[] = ['id', 'tea_name', 'tea_email','tea_image', 'tea_phone', 'cla_status', 'action'];
   dataSource = new MatTableDataSource();
+  email = "";
+  name = "";
+  type = 3;
 
   constructor(
-    private service: CourseService
+    private service: TeacherService
   ) { }
+
 
   @ViewChild(MatSort) set matSort(sort: MatSort) {
     if (!this.dataSource.sort) {
@@ -27,26 +31,38 @@ export class ListCourseComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
   ngOnInit(): void {
-    this.service.getAllCourse().subscribe((result) => {
-      console.log(result.data);
+    this.service.getAllTeacher().subscribe((result) => {
       this.dataSource = new MatTableDataSource(result.data);
     });
   }
 
-  // ngAfterViewInit(): void {
-  //   this.dataSource.paginator = this.paginator; // For pagination
-  // }
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator; // For pagination
+  }
 
   loadTable(){
-    this.service.getAllCourse().subscribe((result) => {
+    this.service.getAllTeacher().subscribe((result) => {
       this.dataSource = new MatTableDataSource(result.data);
     });
   }
 
-  deleteCourse(id) {
+  onSearch() {
+    var data = {
+      'email': this.email,
+      'name': this.name,
+      'type': this.type
+    };
+    this.service.searchTeacher(data).subscribe((result) => {
+      this.dataSource = new MatTableDataSource(result.data);
+    })
+  }
+
+
+  
+  deleteTeacher(id) {
     Swal.fire({
-      title: 'Xóa khóa học?',
-      text: "Bạn có muốn xóa khóa học này!",
+      title: 'Xóa giáo viên?',
+      text: "Bạn có muốn xóa giáo viên này!",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -54,12 +70,12 @@ export class ListCourseComponent implements OnInit {
       confirmButtonText: 'Xóa'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.service.deleteCourse(id).subscribe((result) => {
+        this.service.deleteTeacher(id).subscribe((result) => {
           console.log(result);
           if (result.status == 1) {
             Swal.fire(
               'Deleted!',
-              'Xóa khóa học thành công!',
+              'Xóa giáo viên thành công!',
               'success'
             );
             this.loadTable();
@@ -67,11 +83,12 @@ export class ListCourseComponent implements OnInit {
             Swal.fire({
               icon: 'error',
               title: 'Lỗi!!!',
-              text: 'Bạn phải xóa tất cả các lớp học thuộc khóa học này!.',
+              text: 'Xóa giáo viên thất bại.',
             })
           }
         })
       }
     })
   }
+
 }

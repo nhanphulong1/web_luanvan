@@ -1,0 +1,48 @@
+<div class="content">
+    <h2>Thêm khóa học mới</h2>
+    <div class="btn_back">
+        <a [routerLink]="['/admin/course']" routerLinkActive="router-link-active">
+            <mat-icon>keyboard_backspace</mat-icon>Quay lại
+        </a>
+    </div>
+    <div class="form_user">
+        <h4>Thông tin khóa học:</h4>
+        <form [formGroup]="formCourse" (ngSubmit)="(!isUpdate) ? onSubmit() : onUpdate()">
+            <mat-grid-list cols="2" rowHeight="9:1">
+                <mat-grid-tile colspan="2">
+                    <mat-form-field style="width: 100%;" class="example-full-width" appearance="outline">
+                        <mat-label>Tên khóa học</mat-label>
+                        <input formControlName="cou_name" matInput>
+                        <mat-error *ngIf="formCourse.get('cou_name').hasError('required')">Vui lòng nhập tên khóa học!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile class="form_left">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Học phí</mat-label>
+                        <input formControlName="cou_fee" matInput>
+                        <mat-error *ngIf="formCourse.get('cou_fee').hasError('required')">Vui lòng nhập học phí!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile class="form_right">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Thời gian đào tạo</mat-label>
+                        <input formControlName="cou_training" matInput>
+                        <mat-error *ngIf="formCourse.get('cou_training').hasError('required')">Vui lòng nhập thời gian đào tạo!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile class="form_left">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Số tiết học</mat-label>
+                        <input formControlName="cou_quantity" type="number" matInput>
+                        <mat-error *ngIf="formCourse.get('cou_quantity').hasError('required')">Vui lòng nhập số lượng tiết học!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <div class="form-btn">
+                <button *ngIf="!isUpdate" type="submit" mat-raised-button color="primary">Thêm mới</button>
+                <button *ngIf="isUpdate" type="submit" mat-raised-button color="primary">Cập nhật</button>
+                <button type="reset" mat-raised-button color="secondary">Làm mới</button>
+            </div>
+        </form>
+    </div>
+</div>

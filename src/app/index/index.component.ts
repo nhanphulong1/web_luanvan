@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ServeHttpService } from '../Services/serve-http.service';
 import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
+import { CourseService } from '../Services/course.service';
 
 @Component({
   selector: 'app-index',
@@ -14,6 +15,7 @@ export class IndexComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private service: ServeHttpService,
+    private courseService: CourseService,
     private route: Router
   ) { }
 
@@ -23,8 +25,22 @@ export class IndexComponent implements OnInit {
     res_type: ['B1', Validators.required],
     res_phone: ['', [Validators.required,Validators.pattern("^[0][0-9]{9}")]],
   });
+  b1; b2; c1;
 
   ngOnInit(): void {
+    this.courseService.getCourseByName('b1').subscribe((data)=>{
+      this.b1 = data.data;
+      console.log(this.b1);
+      
+    });
+    this.courseService.getCourseByName('b2').subscribe((data)=>{
+      this.b2 = data.data;
+    });
+    this.courseService.getCourseByName('c1').subscribe((data)=>{
+      this.c1 = data.data;
+    });
+    console.log(this.b1,this.b2,this.c1);
+    
   }
 
   public getData(){

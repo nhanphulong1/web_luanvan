@@ -1,0 +1,98 @@
+<!-- <app-sidenav></app-sidenav>
+<div class="body">
+    <app-toolbar></app-toolbar> -->
+<div class="content">
+    <h2>Thêm tài khoản mới</h2>
+    <div class="btn_back">
+        <a [routerLink]="['/admin/teacher']" routerLinkActive="router-link-active">
+            <mat-icon>keyboard_backspace</mat-icon>Quay lại
+        </a>
+    </div>
+    <div class="form_user">
+        <h4>Thông tin tài khoản:</h4>
+        <form [formGroup]="formTeacher" (ngSubmit)="(!isUpdate) ? onSubmit() : onUpdate()">
+            <mat-grid-list cols="2" rowHeight="9:1">
+
+                <mat-grid-tile colspan="2">
+                    <mat-form-field style="width: 100%;" appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input formControlName="tea_email" matInput>
+                        <mat-error *ngIf="formTeacher.get('tea_email').hasError('required')">Vui lòng nhập email!</mat-error>
+                        <mat-error *ngIf="!formTeacher.get('tea_email').hasError('required') && formTeacher.get('tea_email').hasError('email')">Vui lòng nhập đúng định dạng!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile class="form_left">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Họ và tên</mat-label>
+                        <input formControlName="tea_name" matInput>
+                        <mat-error *ngIf="formTeacher.get('tea_name').hasError('required')">Vui lòng nhập họ và tên!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile class="form_right">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Số điện thoại</mat-label>
+                        <input formControlName="tea_phone" matInput>
+                        <mat-error *ngIf="formTeacher.get('tea_phone').hasError('required')">Vui lòng nhập số điện thoại!</mat-error>
+                        <mat-error *ngIf="!formTeacher.get('tea_phone').hasError('required') && formTeacher.get('tea_phone').hasError('pattern')">Vui lòng chỉ nhập số!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile class="form_left issueType">
+                    <span>Giới tính:</span>
+                    <mat-radio-group aria-label="Select an option" formControlName="tea_gender">
+                        <mat-radio-button value="0" [checked]="formTeacher.value.tea_gender == '0'">Nam</mat-radio-button>
+                        <mat-radio-button value="1" [checked]="formTeacher.value.tea_gender == '1'">Nữ</mat-radio-button>
+                        <mat-radio-button value="2" [checked]="(formTeacher.value.tea_gender != '0') && (formTeacher.value.tea_gender != '1')">Khác</mat-radio-button>
+                    </mat-radio-group>
+                </mat-grid-tile>
+                <mat-grid-tile>
+
+                </mat-grid-tile>
+
+
+            </mat-grid-list>
+            <div class="form_image">
+                <span class="input_file">Ảnh đại diện:</span><input type="file" (change)="onSelectFile($event)" accept="image/*"><br>
+                <!--  -->
+                <img [src]="url_image" height="200px">
+                <mat-error *ngIf="formTeacher.get('tea_image').hasError('required') && imageInvalid">Vui lòng chọn ảnh đại diện!</mat-error>
+            </div>
+            <mat-grid-list cols="2" rowHeight="9:1">
+
+                <mat-grid-tile class="form_left">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Số CMND</mat-label>
+                        <input type="number" formControlName="tea_cmnd" matInput>
+                        <mat-error *ngIf="formTeacher.get('tea_cmnd').hasError('required')">Vui lòng chọn loại tài khoản!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile class="form_right">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Ngày sinh</mat-label>
+                        <input type="date" formControlName="tea_birthday" matInput>
+                        <mat-error *ngIf="formTeacher.get('tea_birthday').hasError('required')">Vui lòng chọn chức vụ!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile colspan="2">
+                    <mat-form-field style="width: 100%;" class="example-full-width" appearance="outline">
+                        <mat-label>Địa chỉ</mat-label>
+                        <input formControlName="tea_address" matInput>
+                        <mat-error *ngIf="formTeacher.get('tea_address').hasError('required')">Vui lòng nhập địa chỉ!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+            </mat-grid-list>
+            <div class="form-btn">
+                <button *ngIf="!isUpdate" type="submit" mat-raised-button color="primary">Thêm mới</button>
+                <button *ngIf="isUpdate" type="submit" mat-raised-button color="primary">Cập nhật</button>
+                <button type="reset" mat-raised-button color="secondary">Làm mới</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- <app-back-footer></app-back-footer>
+    </div> -->

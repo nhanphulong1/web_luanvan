@@ -1,0 +1,82 @@
+<!-- <div class="body">
+    <app-toolbar></app-toolbar> -->
+<div class="content">
+    <h2>Chi tiết giáo viên</h2>
+    <div class="btn_back">
+        <a [routerLink]="['/admin/teacher']" routerLinkActive="router-link-active">
+            <mat-icon>keyboard_backspace</mat-icon>Quay lại
+        </a>
+    </div>
+    <div class="info">
+        <h4>Thông tin chi tiết:</h4>
+        <mat-grid-list cols='6' rowHeight='35px' style="width: 90%; margin: 0 auto;">
+            <mat-grid-tile class="list_header">Tên giáo viên:</mat-grid-tile>
+            <mat-grid-tile class="bold">{{ data?.tea_name }}</mat-grid-tile>
+
+            <mat-grid-tile class="border-left list_header">Địa chỉ:</mat-grid-tile>
+            <mat-grid-tile class="border-right">{{ data?.tea_address }}</mat-grid-tile>
+
+            <mat-grid-tile class="list_header">Ngày sinh:</mat-grid-tile>
+            <mat-grid-tile>{{ data?.tea_birthday | date : 'dd/MM/yyyy' }}</mat-grid-tile>
+
+            <mat-grid-tile class="list_header">Email:</mat-grid-tile>
+            <mat-grid-tile class="bold red">{{ data?.tea_email }}</mat-grid-tile>
+
+            <mat-grid-tile class="border-left list_header">Số điện thoại:</mat-grid-tile>
+            <mat-grid-tile class="border-right">{{data?.tea_phone}}</mat-grid-tile>
+
+            <mat-grid-tile class="list_header">CMND:</mat-grid-tile>
+            <mat-grid-tile>{{ data?.tea_cmnd }}</mat-grid-tile>
+        </mat-grid-list>
+    </div>
+    <div class="table">
+        <h4>Danh sách lớp học phụ trách:</h4>
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> STT </th>
+                <td mat-cell *matCellDef="let i= index"> {{i+1}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="cla_name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Mã lớp học </th>
+                <td mat-cell *matCellDef="let element"> {{element.cla_name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="cou_name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Khóa học </th>
+                <td mat-cell *matCellDef="let element"> {{element.cou_name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="cla_start">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Năm học </th>
+                <td mat-cell *matCellDef="let element"> {{element.cla_start | date : 'MM/yyyy'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="cla_status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Trạng thái </th>
+                <td mat-cell *matCellDef="let element">
+                    <span class="badge-primary" *ngIf="element.cla_status == 1">Đang dạy</span>
+                    <span class="badge-info" *ngIf="element.cla_status == 0">Chuẩn bị mở</span>
+                    <span class="badge-info" *ngIf="element.cla_status == 2">Đã hoàn thành</span>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Hành động</th>
+                <td mat-cell *matCellDef="let element">
+                    <a mat-menu-item>
+                        <mat-icon style="color: #024888;">visibility</mat-icon>
+                    </a>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+        </mat-paginator>
+    </div>
+</div>
+<!-- <app-back-footer></app-back-footer>
+        </div> -->

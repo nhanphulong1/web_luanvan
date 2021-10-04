@@ -3,19 +3,20 @@ import {
   HttpErrorResponse,
   HttpParams,
 } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Observable, throwError } from 'rxjs';
+import { Observable, Subject, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { LoginComponent } from '../user/login/login.component';
-import { FrontHeaderComponent } from '../layout/front-header/front-header.component';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  // @Output() getLoggedInName: EventEmitter<any> = new EventEmitter();
+  public getLoggedInName = new Subject();
   public permissions = [];
   public type = 0;
   public dangnhap = true;
@@ -46,7 +47,7 @@ export class AuthService {
   public getInfo(){
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(this.getToken());
-    return decodedToken;
+    return decodedToken.result.id;
   }
 
   public isLoggedIn(): boolean {
@@ -75,9 +76,10 @@ export class AuthService {
 
   public logout() {
     this.removeToken();
-    this.router.navigateByUrl('/front/header', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['/home']);
-    }); 
+    this.router.navigate(['/home']);
+    // this.router.navigateByUrl('/front/header', { skipLocationChange: true }).then(() => {
+    //   this.router.navigate(['/home']);
+    // }); 
   }
 
   public login(backUrl): void {
@@ -99,7 +101,9 @@ export class AuthService {
         this.login(backUrl);
       }else if (!!email && !!password && !!token) {
         this.dangnhap= true;
+        // this.getLoggedInName.emit(true);
         this.setToken(token.token);
+        this.getLoggedInName.next();
         this.router.navigateByUrl('/front/header', { skipLocationChange: true }).then(() => {
           this.router.navigate([backUrl]);
         }); 

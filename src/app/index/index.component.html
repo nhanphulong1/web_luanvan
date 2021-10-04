@@ -27,35 +27,35 @@
         <div class="course-image"><img src="../../assets/image/IMG_3886_thumb.jpg" alt="Ảnh đại diện khóa học"></div>
         <div class="course-detail">
             <h2 class="course-name">Học bằng lái xe B1</h2>
-            <p class="course-fee">Học phí: 8.000.000đ</p>
+            <p class="course-fee">Học phí: {{ b1?.cou_fee | number }}đ</p>
             <p class="course-describe">Trung tâm dạy lái xe Hà An là đơn vị chuyên đào tạo học lái xe oto bằng B1 số tự động uy tín, giá cả hợp lý, giáo trình đầy đủ với hơn 90 giáo viên và 12 sân tập phủ khắp quận huyện mở lớp chiêu sinh thường xuyên.</p>
         </div>
         <div class="button">
-            <a href="" mat-raised-button color="primary">Chi tiết</a>
+            <a [routerLink]="['/front/course/b1']" routerLinkActive="router-link-active" mat-raised-button color="primary">Chi tiết</a>
             <a href="#formdangky" mat-raised-button color="accent">Đăng ký</a>
         </div>
     </div>
     <div class="course">
         <div class="course-image"><img src="../../assets/image/IMG_3886_thumb.jpg" alt="Ảnh đại diện khóa học"></div>
         <div class="course-detail">
-            <h2 class="course-name">Học bằng lái xe B1</h2>
-            <p class="course-fee">Học phí: 8.000.000đ</p>
+            <h2 class="course-name">Học bằng lái xe B2</h2>
+            <p class="course-fee">Học phí: {{ b2?.cou_fee | number }}đ</p>
             <p class="course-describe">Trung tâm dạy lái xe Hà An là đơn vị chuyên đào tạo học lái xe oto bằng B1 số tự động uy tín, giá cả hợp lý, giáo trình đầy đủ với hơn 90 giáo viên và 12 sân tập phủ khắp quận huyện mở lớp chiêu sinh thường xuyên.</p>
         </div>
         <div class="button">
-            <a href="" mat-raised-button color="primary">Chi tiết</a>
+            <a [routerLink]="['/front/course/b2']" routerLinkActive="router-link-active" mat-raised-button color="primary">Chi tiết</a>
             <a href="#formdangky" mat-raised-button color="accent">Đăng ký</a>
         </div>
     </div>
     <div class="course">
         <div class="course-image"><img src="../../assets/image/IMG_3886_thumb.jpg" alt="Ảnh đại diện khóa học"></div>
         <div class="course-detail">
-            <h2 class="course-name">Học bằng lái xe B1</h2>
-            <p class="course-fee">Học phí: 8.000.000đ</p>
+            <h2 class="course-name">Học bằng lái xe C1</h2>
+            <p class="course-fee">Học phí: {{ c1?.cou_fee | number }}đ</p>
             <p class="course-describe">Trung tâm dạy lái xe Hà An là đơn vị chuyên đào tạo học lái xe oto bằng B1 số tự động uy tín, giá cả hợp lý, giáo trình đầy đủ với hơn 90 giáo viên và 12 sân tập phủ khắp quận huyện mở lớp chiêu sinh thường xuyên.</p>
         </div>
         <div class="button">
-            <a href="" mat-raised-button color="primary">Chi tiết</a>
+            <a [routerLink]="['/front/course/b1']" routerLinkActive="router-link-active" mat-raised-button color="primary">Chi tiết</a>
             <a href="#formdangky" mat-raised-button color="accent">Đăng ký</a>
         </div>
     </div>

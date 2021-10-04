@@ -14,6 +14,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -41,6 +42,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { AddUserComponent } from './form/add-user/add-user.component';
 import { ListCourseComponent } from './admin/list-course/list-course.component';
 import { ListClassComponent } from './admin/list-class/list-class.component';
+import { CourseComponent } from './form/course/course.component';
+import { ListTeacherComponent } from './admin/list-teacher/list-teacher.component';
+import { TeacherComponent } from './form/teacher/teacher.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { DetailTeacherComponent } from './admin/detail-teacher/detail-teacher.component';
+import { ListRegisComponent } from './admin/list-regis/list-regis.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +73,11 @@ import { ListClassComponent } from './admin/list-class/list-class.component';
     AddUserComponent,
     ListCourseComponent,
     ListClassComponent,
+    CourseComponent,
+    ListTeacherComponent,
+    TeacherComponent,
+    DetailTeacherComponent,
+    ListRegisComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +90,7 @@ import { ListClassComponent } from './admin/list-class/list-class.component';
     MatButtonModule,
     MatIconModule,
     MatSelectModule,
+    MatFormFieldModule,
     MatInputModule,
     MatExpansionModule,
     MatDialogModule,
@@ -86,6 +99,7 @@ import { ListClassComponent } from './admin/list-class/list-class.component';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
+    MatRadioModule,
   ],
   exports:[
     FrontHeaderComponent,

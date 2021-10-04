@@ -6,6 +6,7 @@ import { catchError, map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ServeHttpService {
 
   private REST_API_SERVER = 'http://localhost:3000/api';
@@ -21,7 +22,7 @@ export class ServeHttpService {
 
   constructor(private httpClient: HttpClient) { }
 
-  private handleError(error: HttpErrorResponse) {
+  private handleError(error: HttpErrorResponse) : Observable<any>{
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error);

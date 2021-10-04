@@ -14,7 +14,7 @@ export class AppComponent {
   ){}
 
   ngOnInit(){
-    console.log(this.router);
+    // console.log(this.router);
   }
   
   onActivate(elementRef) {

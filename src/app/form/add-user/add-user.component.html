@@ -59,6 +59,7 @@
                     <mat-form-field appearance="outline">
                         <mat-label>Chức vụ</mat-label>
                         <input formControlName="position" matInput>
+                        <mat-error *ngIf="formUser.get('position').hasError('required')">Vui lòng chọn chức vụ!</mat-error>
                     </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile colspan="2">
