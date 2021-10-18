@@ -162,6 +162,51 @@ export class ServeHttpService {
     .pipe(catchError(this.handleError));
   }
 
+  public getAllRegis(): Observable<any>{
+    const url = this.REST_API_SERVER+'/regis';
+    return this.httpClient
+    .get<any>(url)
+    .pipe(
+      map((data)=>{
+        // console.log('data: ',data, this.httpOptions);
+        if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+          console.log('DataService: getUsers: error', data);
+        }
+        return data;
+      })
+    )
+    .pipe(catchError(this.handleError));
+  }
+
+  public searchRegis(data): Observable<any>{
+    const url = this.REST_API_SERVER+'/regis/search';
+    return this.httpClient.post<any>(url,data)
+    .pipe(
+      map((data)=>{
+        if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+          console.log('DataService: getRegis: error', data);
+        }
+        return data;
+      })
+    ).pipe(catchError(this.handleError));
+  }
+
+  public updateRegis(id): Observable<any>{
+    const url = this.REST_API_SERVER+'/regis/update/'+id;
+    return this.httpClient
+    .get<any>(url)
+    .pipe(
+      map((data)=>{
+        // console.log('data: ',data, this.httpOptions);
+        if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+          console.log('DataService: getUsers: error', data);
+        }
+        return data;
+      })
+    )
+    .pipe(catchError(this.handleError));
+  }
+
 
   //Contact
   public postContact(data): Observable<any>{

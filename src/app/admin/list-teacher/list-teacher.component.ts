@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./list-teacher.component.scss']
 })
 export class ListTeacherComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'tea_name', 'tea_email','tea_image', 'tea_phone', 'cla_status', 'action'];
+  displayedColumns: string[] = ['id', 'tea_code','tea_name', 'tea_email','tea_image', 'tea_phone', 'cla_status', 'action'];
   dataSource = new MatTableDataSource();
   email = "";
   name = "";
@@ -28,17 +28,23 @@ export class ListTeacherComponent implements OnInit {
     }
   }
 
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatPaginator, {static: false})
+  set paginator(value: MatPaginator) {
+    if (this.dataSource){
+      this.dataSource.paginator = value;
+    }
+  }
 
   ngOnInit(): void {
     this.service.getAllTeacher().subscribe((result) => {
       this.dataSource = new MatTableDataSource(result.data);
+      console.log(result.data);
     });
   }
 
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator; // For pagination
-  }
+  // ngAfterViewInit(): void {
+  //   this.dataSource.paginator = this.paginator; // For pagination
+  // }
 
   loadTable(){
     this.service.getAllTeacher().subscribe((result) => {

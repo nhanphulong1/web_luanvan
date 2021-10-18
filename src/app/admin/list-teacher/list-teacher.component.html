@@ -39,6 +39,11 @@
                 <td mat-cell *matCellDef="let i= index"> {{i+1}} </td>
             </ng-container>
 
+            <ng-container matColumnDef="tea_code">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Mã giáo viên </th>
+                <td mat-cell *matCellDef="let element"> {{element.tea_code}} </td>
+            </ng-container>
+
             <ng-container matColumnDef="tea_name">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Họ và tên </th>
                 <td mat-cell *matCellDef="let element"> {{element.tea_name}} </td>

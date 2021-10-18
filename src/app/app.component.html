@@ -1,9 +1,10 @@
 <app-front-header *ngIf="isFront"></app-front-header>
-<app-sidenav *ngIf="!isFront"></app-sidenav>
+<app-sidenav *ngIf="isBack"></app-sidenav>
 <router-outlet *ngIf="isFront" (activate)="onActivate($event)"></router-outlet>
-<div class="body" *ngIf="!isFront">
+<div class="body" *ngIf="isBack">
     <app-toolbar></app-toolbar>
     <router-outlet (activate)="onActivate($event)"></router-outlet>
     <app-back-footer></app-back-footer>
 </div>
 <app-front-footer *ngIf="isFront"></app-front-footer>
+<router-outlet (activate)="onActivate($event)" *ngIf="!isFront && !isBack"></router-outlet>

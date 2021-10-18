@@ -27,7 +27,12 @@ export class ListUserComponent implements OnInit {
     }
   }
 
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatPaginator, {static: false})
+  set paginator(value: MatPaginator) {
+    if (this.dataSource){
+      this.dataSource.paginator = value;
+    }
+  }
 
   ngOnInit(): void {
     this.service.getAllUser().subscribe((result) => {
@@ -35,9 +40,9 @@ export class ListUserComponent implements OnInit {
     });
   }
 
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator; // For pagination
-  }
+  // ngAfterViewInit(): void {
+  //   this.dataSource.paginator = this.paginator; // For pagination
+  // }
 
   loadTable(){
     this.service.getAllUser().subscribe((result) => {

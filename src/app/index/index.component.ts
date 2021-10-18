@@ -30,8 +30,7 @@ export class IndexComponent implements OnInit {
   ngOnInit(): void {
     this.courseService.getCourseByName('b1').subscribe((data)=>{
       this.b1 = data.data;
-      console.log(this.b1);
-      
+      // console.log(this.b1);
     });
     this.courseService.getCourseByName('b2').subscribe((data)=>{
       this.b2 = data.data;
@@ -39,7 +38,7 @@ export class IndexComponent implements OnInit {
     this.courseService.getCourseByName('c1').subscribe((data)=>{
       this.c1 = data.data;
     });
-    console.log(this.b1,this.b2,this.c1);
+    // console.log(this.b1,this.b2,this.c1);
     
   }
 

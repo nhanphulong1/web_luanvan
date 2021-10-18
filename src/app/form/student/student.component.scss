@@ -1,0 +1,116 @@
+.body {
+    float: right;
+    width: calc(100% - 250px);
+}
+
+.content {
+    background-color: white;
+    width: 98%;
+    box-shadow: 1px 1px 5px rgb(172, 172, 172);
+    margin: 10px auto;
+    padding-top: 2px;
+    padding-bottom: 20px;
+    margin-bottom: 80px;
+    min-height: calc(100vh - 180px);
+    position: relative;
+}
+
+.content h2 {
+    margin: 15px 10px;
+    font-size: 24px;
+    border-bottom: 1px solid black;
+    color: #024888;
+    margin-bottom: 25px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.btn_back {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    border: 1px solid black;
+}
+
+.btn_back a {
+    // display: block;
+    text-decoration: none;
+    color: black;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+}
+
+.form_user {
+    width: 95%;
+    margin: auto;
+}
+
+.form_user h4 {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.form_user form {
+    width: 90%;
+    min-width: 1050px;
+    margin: auto;
+}
+
+.form_user form img {
+    // margin: 10px 0px;
+    margin-top: 10px;
+}
+
+.input_file {
+    font-size: 14px;
+    font-family: 'Times New Roman', Times, serif;
+    margin-right: 10px;
+    font-weight: 500;
+}
+
+.form_image {
+    padding-bottom: 15px;
+}
+
+.form_image mat-error {
+    font-size: 10px;
+}
+
+.form_user form mat-form-field {
+    width: 90%;
+    font-size: 11px;
+}
+
+.issueType {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.issueType span {
+    margin-right: 15px;
+    // font-weight: 500;
+}
+
+.issueType mat-radio-group mat-radio-button {
+    margin-right: 15px;
+    font-size: 10px;
+}
+
+.form_left> ::ng-deep figure {
+    justify-content: flex-start !important;
+}
+
+.form_right> ::ng-deep figure {
+    justify-content: flex-end !important;
+}
+
+.form-btn {
+    text-align: center;
+}
+
+.form-btn button {
+    margin-right: 10px;
+}

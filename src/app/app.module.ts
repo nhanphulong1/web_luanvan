@@ -4,6 +4,8 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
+// import { ChartsModule } from 'ng2-charts';
+import { ChartsModule } from 'ng2-charts';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -15,6 +17,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatStepperModule } from '@angular/material/stepper';
+import { NgxPayPalModule } from 'ngx-paypal';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -48,6 +52,18 @@ import { TeacherComponent } from './form/teacher/teacher.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { DetailTeacherComponent } from './admin/detail-teacher/detail-teacher.component';
 import { ListRegisComponent } from './admin/list-regis/list-regis.component';
+import { ListStudentComponent } from './admin/list-student/list-student.component';
+import { StudentComponent } from './form/student/student.component';
+import { ClassComponent } from './form/class/class.component';
+import { DetailClassComponent } from './admin/detail-class/detail-class.component';
+import { TimeTableComponent } from './admin/time-table/time-table.component';
+import { ScheduleComponent } from './form/schedule/schedule.component';
+import { RegisClassComponent } from './form/regis-class/regis-class.component';
+import { AssignmentComponent } from './admin/assignment/assignment.component';
+import { StatisticComponent } from './admin/statistic/statistic.component';
+import { DialogResultComponent } from './form/dialog-result/dialog-result.component';
+import { StatisticCourseComponent } from './admin/statistic-course/statistic-course.component';
+import { LoginAdminComponent } from './admin/login-admin/login-admin.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +94,18 @@ import { ListRegisComponent } from './admin/list-regis/list-regis.component';
     TeacherComponent,
     DetailTeacherComponent,
     ListRegisComponent,
+    ListStudentComponent,
+    StudentComponent,
+    ClassComponent,
+    DetailClassComponent,
+    TimeTableComponent,
+    ScheduleComponent,
+    RegisClassComponent,
+    AssignmentComponent,
+    StatisticComponent,
+    DialogResultComponent,
+    StatisticCourseComponent,
+    LoginAdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,6 +113,7 @@ import { ListRegisComponent } from './admin/list-regis/list-regis.component';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
+    ChartsModule,
     BrowserAnimationsModule,
     MatGridListModule,
     MatButtonModule,
@@ -100,6 +129,8 @@ import { ListRegisComponent } from './admin/list-regis/list-regis.component';
     MatSortModule,
     MatPaginatorModule,
     MatRadioModule,
+    MatStepperModule,
+    NgxPayPalModule,
   ],
   exports:[
     FrontHeaderComponent,
@@ -109,6 +140,7 @@ import { ListRegisComponent } from './admin/list-regis/list-regis.component';
     SidenavComponent,
     ToolbarComponent,
     BackFooterComponent,
+    MatStepperModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }

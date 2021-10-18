@@ -31,7 +31,12 @@ export class DetailTeacherComponent implements OnInit {
     }
   }
 
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatPaginator, {static: false})
+  set paginator(value: MatPaginator) {
+    if (this.dataSource){
+      this.dataSource.paginator = value;
+    }
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap)=>{
@@ -45,10 +50,6 @@ export class DetailTeacherComponent implements OnInit {
       console.log(result.data);
       this.dataSource = new MatTableDataSource(result.data);
     })
-  }
-
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator; // For pagination
   }
 
 }

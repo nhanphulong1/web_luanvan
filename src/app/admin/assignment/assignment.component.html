@@ -1,0 +1,125 @@
+<div class="content">
+    <h2>Phân công giảng dạy</h2>
+    <!-- <div class="btn_back">
+        <a [routerLink]="['/admin/class']" routerLinkActive="router-link-active">
+            <mat-icon>keyboard_backspace</mat-icon>Quay lại
+        </a>
+    </div> -->
+
+    <mat-horizontal-stepper linear #stepper>
+        <mat-step [stepControl]="firstFormGroup">
+            <form [formGroup]="firstFormGroup">
+                <ng-template matStepLabel>Chọn giáo viên cần phân công</ng-template>
+                <div class="table">
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>Mã GV/ Tên GV</mat-label>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="GV00000001">
+                    </mat-form-field>
+                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                        <ng-container matColumnDef="id">
+                            <th mat-header-cell *matHeaderCellDef></th>
+                            <mat-radio-group formControlName="tea_id" aria-label="Select an option">
+                                <td mat-cell *matCellDef="let element">
+                                    <mat-radio-button value="{{element.tea_id}}"></mat-radio-button>
+                                </td>
+                            </mat-radio-group>
+
+                        </ng-container>
+
+
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="tea_code">
+                            <th mat-header-cell *matHeaderCellDef> Mã giáo viên </th>
+                            <td mat-cell *matCellDef="let element"> {{element.tea_code}} </td>
+                        </ng-container>
+
+                        <!-- Weight Column -->
+                        <ng-container matColumnDef="tea_name">
+                            <th mat-header-cell *matHeaderCellDef> Tên giáo viên </th>
+                            <td mat-cell *matCellDef="let element"> {{element.tea_name}} </td>
+                        </ng-container>
+
+                        <!-- Symbol Column -->
+                        <ng-container matColumnDef="tea_email">
+                            <th mat-header-cell *matHeaderCellDef> Email </th>
+                            <td mat-cell *matCellDef="let element"> {{element.tea_email}} </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                    <mat-paginator #teacherPaginator="matPaginator" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+                    </mat-paginator>
+                </div>
+                <div class="btn">
+                    <mat-error *ngIf="firstFormGroup.get('tea_id').hasError('required') && checkTea">Vui lòng chọn giáo viên</mat-error>
+                    <button mat-raised-button color="primary" matStepperNext (click)="checkTea = true">Tiếp theo</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup">
+            <form [formGroup]="secondFormGroup">
+                <ng-template matStepLabel>Chọn lớp học</ng-template>
+                <div class="table">
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>Mã lớp học</mat-label>
+                        <input matInput (keyup)="applyFilter1($event)" placeholder="">
+                    </mat-form-field>
+                    <table mat-table [dataSource]="dataSource1" class="mat-elevation-z8">
+
+                        <ng-container matColumnDef="id">
+                            <th mat-header-cell *matHeaderCellDef></th>
+                            <mat-radio-group formControlName="cla_id" aria-label="Select an option">
+                                <td mat-cell *matCellDef="let element">
+                                    <mat-radio-button value="{{element.cla_id}}"></mat-radio-button>
+                                </td>
+                            </mat-radio-group>
+
+                        </ng-container>
+
+
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="cla_code">
+                            <th mat-header-cell *matHeaderCellDef> Mã lớp học </th>
+                            <td mat-cell *matCellDef="let element"> {{element.cla_code}} </td>
+                        </ng-container>
+
+                        <!-- Weight Column -->
+                        <ng-container matColumnDef="cla_name">
+                            <th mat-header-cell *matHeaderCellDef> Tên lớp học </th>
+                            <td mat-cell *matCellDef="let element"> {{element.cla_name}} </td>
+                        </ng-container>
+
+                        <!-- Symbol Column -->
+                        <ng-container matColumnDef="cou_name">
+                            <th mat-header-cell *matHeaderCellDef> Khóa học </th>
+                            <td mat-cell *matCellDef="let element"> {{element.cou_name}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="cla_start">
+                            <th mat-header-cell *matHeaderCellDef> Ngày khai giảng </th>
+                            <td mat-cell *matCellDef="let element"> {{element.cla_start | date: "dd/MM/yyyy"}} </td>
+                        </ng-container>
+
+                        <!-- <ng-container matColumnDef="tea_name">
+                            <th mat-header-cell *matHeaderCellDef> Giáo viên </th>
+                            <td mat-cell *matCellDef="let element"> {{element.cla_start}} </td>
+                        </ng-container> -->
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+                    </table>
+                    <mat-paginator #classPaginator="matPaginator" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+                    </mat-paginator>
+                </div>
+                <div class="btn">
+                    <button mat-raised-button matStepperPrevious>Quay lại</button>
+                    <button mat-raised-button color="primary" (click)="onSubmit()">Phân công</button>
+                </div>
+            </form>
+        </mat-step>
+    </mat-horizontal-stepper>
+
+
+</div>

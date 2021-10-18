@@ -51,6 +51,77 @@ export class CourseService {
     ).pipe(catchError(this.handleError));
   }
 
+  //Get all course
+  public getStatistic(): Observable<any>{
+    const url = this.REST_API_SERVER+'/course/statistic';
+    return this.httpClient.get<any>(url)
+    .pipe(
+      map((data)=>{
+        // console.log('data: ',data, this.httpOptions);
+        if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+          console.log('DataService: getCourse: error', data);
+        }
+        return data;
+      })
+    ).pipe(catchError(this.handleError));
+  }
+
+  public getStatisticByResult(): Observable<any>{
+    const url = this.REST_API_SERVER+'/course/statistic/result';
+    return this.httpClient.get<any>(url)
+    .pipe(
+      map((data)=>{
+        // console.log('data: ',data, this.httpOptions);
+        if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+          console.log('DataService: getCourse: error', data);
+        }
+        return data;
+      })
+    ).pipe(catchError(this.handleError));
+  }
+
+  public getStatisticByCountStudent(): Observable<any>{
+    const url = this.REST_API_SERVER+'/course/statistic/countStudent';
+    return this.httpClient.get<any>(url)
+    .pipe(
+      map((data)=>{
+        // console.log('data: ',data, this.httpOptions);
+        if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+          console.log('DataService: getCourse: error', data);
+        }
+        return data;
+      })
+    ).pipe(catchError(this.handleError));
+  }
+
+  public getStatisticByCourse(id): Observable<any>{
+    const url = this.REST_API_SERVER+'/course/statistic/course/'+id;
+    return this.httpClient.get<any>(url)
+    .pipe(
+      map((data)=>{
+        // console.log('data: ',data, this.httpOptions);
+        if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+          console.log('DataService: getCourse: error', data);
+        }
+        return data;
+      })
+    ).pipe(catchError(this.handleError));
+  }
+
+  public getStatisticResultbyCourse(id): Observable<any>{
+    const url = this.REST_API_SERVER+'/course/statistic/result/'+id;
+    return this.httpClient.get<any>(url)
+    .pipe(
+      map((data)=>{
+        // console.log('data: ',data, this.httpOptions);
+        if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+          console.log('DataService: getCourse: error', data);
+        }
+        return data;
+      })
+    ).pipe(catchError(this.handleError));
+  }
+
   //Get course by id
   public getCourseById(id): Observable<any>{
     const url = this.REST_API_SERVER+'/course/'+id;

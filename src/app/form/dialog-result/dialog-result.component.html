@@ -1,0 +1,57 @@
+<h1 mat-dialog-title>Cập nhật kết quả</h1>
+<form [formGroup]="formResult" (ngSubmit)="onSubmit()">
+    <div mat-dialog-content>
+        <div>
+            <h4>Phần thi lý thuyết:</h4>
+            <mat-form-field class="form-left" appearance="outline">
+                <mat-label>Điểm đạt được</mat-label>
+                <input type="number" formControlName="re_theory" matInput type="text">
+                <mat-error *ngIf="formResult.get('re_theory').hasError('required')">Vui lòng nhập điểm!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-right" appearance="outline">
+                <mat-label>Tổng điểm</mat-label>
+                <input type="number" formControlName="re_theoryTotal" matInput type="text">
+                <mat-error *ngIf="formResult.get('re_theoryTotal').hasError('required')">Vui lòng nhập tổng điểm!</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="width: 100%">
+                <mat-label>Kết quả</mat-label>
+                <mat-select [(value)]="formResult.value.re_theoryResult" formControlName="re_theoryResult">
+                    <mat-option [value]="0">Trượt</mat-option>
+                    <mat-option [value]="1">Đậu</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div>
+            <h4>Phần thi thực hành:</h4>
+            <mat-form-field class="form-left" appearance="outline">
+                <mat-label>Điểm đạt được</mat-label>
+                <input type="number" formControlName="re_practice" matInput type="text">
+                <mat-error *ngIf="formResult.get('re_practice').hasError('required')">Vui lòng nhập điểm!</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-right" appearance="outline">
+                <mat-label>Tổng điểm</mat-label>
+                <input type="number" formControlName="re_practiceTotal" matInput type="text">
+                <mat-error *ngIf="formResult.get('re_practiceTotal').hasError('required')">Vui lòng nhập tổng điểm!</mat-error>
+            </mat-form-field>
+            <mat-form-field style="width: 100%" appearance="outline">
+                <mat-label>Kết quả</mat-label>
+                <mat-select [(value)]="formResult.value.re_practiceResult" formControlName="re_practiceResult">
+                    <mat-option [value]="0">Trượt</mat-option>
+                    <mat-option [value]="1">Đậu</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <h4>Tổng kết:</h4>
+        <mat-form-field style="width: 100%" appearance="outline">
+            <mat-label>Tổng kết quả</mat-label>
+            <mat-select [(value)]="formResult.value.re_result" formControlName="re_result">
+                <mat-option [value]="0">Trượt</mat-option>
+                <mat-option [value]="1">Đậu</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="btn" mat-dialog-actions>
+        <button type="button" mat-raised-button mat-dialog-close="false">Đóng</button>
+        <button type="submit" mat-raised-button color="primary">Cập nhật</button>
+    </div>
+</form>

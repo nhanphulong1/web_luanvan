@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import * as moment from 'moment';
 import { TeacherService } from 'src/app/Services/teacher.service';
 import Swal from 'sweetalert2';
 
@@ -55,7 +56,7 @@ export class TeacherComponent implements OnInit {
     this.formTeacher.controls['tea_image'].setValue(data.tea_image);
     this.url_image = data.tea_image;
     // this.formTeacher.controls['type'].setValue(''+data.type);
-    this.formTeacher.controls['tea_birthday'].setValue(data.tea_birthday);
+    this.formTeacher.controls['tea_birthday'].setValue(moment(data.tea_birthday).format('YYYY-MM-DD'));
     this.formTeacher.controls['tea_address'].setValue(data.tea_adress);
     this.formTeacher.controls['tea_cmnd'].setValue(data.tea_cmnd);
   }

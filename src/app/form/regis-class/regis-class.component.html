@@ -1,0 +1,88 @@
+<div class="content">
+    <h2>{{(!isUpdate) ? "Đăng ký lớp học mới" : "Cập nhật lớp học"}}</h2>
+    <div class="btn_back">
+        <a [routerLink]="['/admin/student']" routerLinkActive="router-link-active">
+            <mat-icon>keyboard_backspace</mat-icon>Quay lại
+        </a>
+    </div>
+    <div class="form_user">
+        <form>
+            <h4>Thông tin học viên:</h4>
+            <mat-grid-list cols="2" rowHeight="9:1">
+                <mat-grid-tile class="form_left">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Mã học viên</mat-label>
+                        <input matInput [value]="studentData?.stu_code" readonly>
+                        <mat-error *ngIf="formRegisClass.get('stu_id').hasError('required')">Vui lòng nhập mã học viên!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                </mat-grid-tile>
+
+                <mat-grid-tile class="form_left">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Họ và tên</mat-label>
+                        <input matInput [value]="studentData?.stu_name" readonly>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile class="form_right">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Ngày sinh</mat-label>
+                        <input type="date" matInput [value]="studentData?.stu_birthday" readonly>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile class="form_left">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input matInput [value]="studentData?.stu_email" readonly>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile class="form_right">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Số CMND</mat-label>
+                        <input matInput [value]="studentData?.stu_cmnd" readonly>
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </form>
+        <form [formGroup]="formRegisClass" (ngSubmit)="(!isUpdate) ? onSubmit() : onUpdate()">
+            <h4>Thông tin lớp học:</h4>
+            <mat-grid-list cols="2" rowHeight="9:1">
+                <mat-grid-tile colspan="2">
+                    <mat-form-field style="width: 100%;" class="example-full-width" appearance="outline">
+                        <mat-label>Mã khóa học</mat-label>
+                        <mat-select formControlName="cou_id">
+                            <mat-option *ngFor="let item of courseData" [value]="item.cou_id" (click)="getClass(item.cou_id)">{{item.cou_name}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="formRegisClass.get('cou_id').hasError('required')">Vui lòng chọn khóa học</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="2">
+                    <mat-form-field style="width: 100%;" class="example-full-width" appearance="outline">
+                        <mat-label>Tên lớp học</mat-label>
+                        <mat-select formControlName="cla_id">
+                            <mat-option *ngFor="let item of classData" [value]="item.cla_id">{{item.cla_code}} - {{item.cla_name}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="formRegisClass.get('cla_id').hasError('required')">Vui lòng chọn tên lớp</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="2">
+                    <mat-form-field style="width: 100%;" class="example-full-width" appearance="outline">
+                        <mat-label>Trạng thái</mat-label>
+                        <mat-select formControlName="de_paidFee">
+                            <mat-option [value]="0">Chưa đóng học phí</mat-option>
+                            <mat-option [value]="1">Đã đóng học phí</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="formRegisClass.get('de_paidFee').hasError('required')">Vui lòng chọn tên lớp</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <div class="form-btn" style="margin-bottom: 10px;">
+                <button *ngIf="!isUpdate" type="submit" mat-raised-button color="primary">Thêm mới</button>
+                <button *ngIf="isUpdate" type="submit" mat-raised-button color="primary">Cập nhật</button>
+                <button type="reset" mat-raised-button color="secondary">Làm mới</button>
+            </div>
+        </form>
+    </div>
+</div>

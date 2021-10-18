@@ -56,16 +56,15 @@
             <ng-container matColumnDef="cla_status">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Trạng thái </th>
                 <td mat-cell *matCellDef="let element">
-                    <span class="badge-primary" *ngIf="element.cla_status == 1">Đang dạy</span>
-                    <span class="badge-info" *ngIf="element.cla_status == 0">Chuẩn bị mở</span>
-                    <span class="badge-info" *ngIf="element.cla_status == 2">Đã hoàn thành</span>
+                    <span class="badge-primary" *ngIf="element.cla_status == 1">Đã hoàn thành</span>
+                    <span class="badge-info" *ngIf="element.cla_status == 0">Đang mở lớp</span>
                 </td>
             </ng-container>
 
             <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Hành động</th>
                 <td mat-cell *matCellDef="let element">
-                    <a mat-menu-item>
+                    <a mat-menu-item [routerLink]="['/admin/class/detail/'+element.cla_id]" routerLinkActive="router-link-active">
                         <mat-icon style="color: #024888;">visibility</mat-icon>
                     </a>
                 </td>

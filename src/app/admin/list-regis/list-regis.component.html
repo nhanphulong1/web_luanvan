@@ -1,1 +1,94 @@
-<p>list-regis works!</p>
+<!-- <div class="body">
+    <app-toolbar></app-toolbar> -->
+<div class="content">
+    <h2>Danh sách học viên đăng ký</h2>
+    <div class="search">
+        <mat-grid-list cols="4" rowHeight="4:1">
+            <mat-grid-tile>
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Họ và tên</mat-label>
+                    <input matInput name="name" [(ngModel)]="name">
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Khóa học</mat-label>
+                    <mat-select name="type" [(ngModel)]="type">
+                        <mat-option value="all">Tất cả</mat-option>
+                        <mat-option value="b1">B1</mat-option>
+                        <mat-option value="b2">B2</mat-option>
+                        <mat-option value="c1">C1</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Trạng thái</mat-label>
+                    <mat-select name="status" [(ngModel)]="status">
+                        <mat-option value="2">Tất cả</mat-option>
+                        <mat-option value="0">Chưa liên hệ</mat-option>
+                        <mat-option value="1">Đã liên hệ</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile class="search_btn">
+                <button mat-raised-button color="primary" (click)="onSearch()">Tìm kiếm</button>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+    <div class="table">
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> STT </th>
+                <td mat-cell *matCellDef="let i= index"> {{i+1}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="res_name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Họ và tên </th>
+                <td mat-cell *matCellDef="let element"> {{element.res_name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="res_email">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                <td mat-cell *matCellDef="let element"> {{element.res_email}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="res_phone">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Số điện thoại </th>
+                <td mat-cell *matCellDef="let element"> {{element.res_phone}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="res_type">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Khóa học đăng ký </th>
+                <td mat-cell *matCellDef="let element">
+                    <span *ngIf="element.res_type == 'B1'" style="color: blue; font-weight: bold;">B1</span>
+                    <span *ngIf="element.res_type == 'B2'" style="color: darkorange; font-weight: bold;">B2</span>
+                    <span *ngIf="element.res_type == 'C1'" style="color: red; font-weight: bold;">C1</span>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="res_status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Trạng thái </th>
+                <td mat-cell *matCellDef="let element">
+                    <span class="badge-warning" *ngIf="element.res_status == '0'">Chưa liên hệ</span>
+                    <span class="badge-info" *ngIf="element.res_status == '1'">Đã liên hệ</span>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Hành động</th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-raised-button color="primary" (click)="updateRegis(element.res_id)">Cập nhật</button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+        </mat-paginator>
+    </div>
+</div>
+<!-- <app-back-footer></app-back-footer>
+        </div> -->
