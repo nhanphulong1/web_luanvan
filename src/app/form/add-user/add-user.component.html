@@ -1,0 +1,82 @@
+<!-- <app-sidenav></app-sidenav>
+<div class="body">
+    <app-toolbar></app-toolbar> -->
+<div class="content">
+    <h2>Thêm tài khoản mới</h2>
+    <div class="btn_back">
+        <a [routerLink]="['/admin/user']" routerLinkActive="router-link-active">
+            <mat-icon>keyboard_backspace</mat-icon>Quay lại
+        </a>
+    </div>
+    <div class="form_user">
+        <h4>Thông tin tài khoản:</h4>
+        <form [formGroup]="formUser" (ngSubmit)="(!isUpdate) ? onSubmit() : onUpdate()">
+            <mat-grid-list cols="2" rowHeight="9:1">
+                <mat-grid-tile colspan="2">
+                    <mat-form-field style="width: 100%;" class="example-full-width" appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input formControlName="email" matInput [readonly]="isUpdate">
+                        <mat-error *ngIf="formUser.get('email').hasError('required')">Vui lòng nhập email!</mat-error>
+                        <mat-error *ngIf="formUser.get('email').hasError('invalidEmail')">Email đã đăng ký!</mat-error>
+                        <mat-error *ngIf="!formUser.get('email').hasError('required') && formUser.get('email').hasError('email')">Vui lòng nhập đúng định dạng!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile class="form_left">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Họ và tên</mat-label>
+                        <input formControlName="name" matInput>
+                        <mat-error *ngIf="formUser.get('name').hasError('required')">Vui lòng nhập họ và tên!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile class="form_right">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Số điện thoại</mat-label>
+                        <input formControlName="phone" matInput>
+                        <mat-error *ngIf="formUser.get('phone').hasError('required')">Vui lòng nhập số điện thoại!</mat-error>
+                        <mat-error *ngIf="!formUser.get('phone').hasError('required') && formUser.get('phone').hasError('pattern')">Vui lòng chỉ nhập số!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <div class="form_image">
+                <span class="input_file">Ảnh đại diện:</span><input type="file" (change)="onSelectFile($event)" accept="image/*"><br>
+                <!--  -->
+                <img [src]="url_image" height="200px">
+                <mat-error *ngIf="formUser.get('image').hasError('required') && imageInvalid">Vui lòng chọn ảnh đại diện!</mat-error>
+            </div>
+            <mat-grid-list cols="2" rowHeight="9:1">
+                <mat-grid-tile class="form_left">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Loại tài khoản</mat-label>
+                        <mat-select formControlName="type" [(value)]="formUser.value.type">
+                            <mat-option value="0">Học viên</mat-option>
+                            <mat-option value="1">Giáo viên</mat-option>
+                            <mat-option value="2">Quản trị</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="formUser.get('type').hasError('required')">Vui lòng chọn loại tài khoản!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile class="form_right">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Chức vụ</mat-label>
+                        <input formControlName="position" matInput>
+                        <mat-error *ngIf="formUser.get('position').hasError('required')">Vui lòng chọn chức vụ!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="2">
+                    <mat-form-field style="width: 100%;" class="example-full-width" appearance="outline">
+                        <mat-label>Địa chỉ</mat-label>
+                        <input formControlName="address" matInput>
+                        <mat-error *ngIf="formUser.get('address').hasError('required')">Vui lòng nhập địa chỉ!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <div class="form-btn">
+                <button *ngIf="!isUpdate" type="submit" mat-raised-button color="primary">Thêm mới</button>
+                <button *ngIf="isUpdate" type="submit" mat-raised-button color="primary">Cập nhật</button>
+                <button type="reset" mat-raised-button color="secondary">Làm mới</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- <app-back-footer></app-back-footer>
+</div> -->

@@ -1,0 +1,21 @@
+<div mat-dialog-content>
+    <div class="content">
+        <h2>Đăng nhập</h2>
+        <div class="form-login">
+            <h4>Đăng nhập</h4>
+            <mat-error *ngIf="!data.status">Email hoặc mật khẩu không chính xác!</mat-error>
+            <form (ngSubmit)="submitLogin()">
+                <!-- [formGroup]="formLogin" -->
+                <mat-form-field appearance="outline" style="width: 90%">
+                    <mat-label>Email</mat-label>
+                    <input type="text" name="email" matInput [(ngModel)]="data.email">
+                </mat-form-field>
+                <mat-form-field appearance="outline" style="width: 90%">
+                    <mat-label>Password</mat-label>
+                    <input type="password" name="password" matInput [(ngModel)]="data.password">
+                </mat-form-field>
+                <div class="form-btn"><button type="submit" mat-raised-button color="primary">Đăng nhập</button></div>
+            </form>
+        </div>
+    </div>
+</div>

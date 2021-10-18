@@ -1,0 +1,79 @@
+<!-- <div class="body">
+    <app-toolbar></app-toolbar> -->
+<div class="content">
+    <h2>Danh mục khóa học</h2>
+    <!-- <div class="search">
+        <mat-grid-list cols="4" rowHeight="4:1">
+            <mat-grid-tile>
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput name="email" [(ngModel)]="email">
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Họ và tên</mat-label>
+                    <input matInput name="name" [(ngModel)]="name">
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Loại tài khoản</mat-label>
+                    <mat-select name="type" [(ngModel)]="type">
+                        <mat-option value="3">Tất cả</mat-option>
+                        <mat-option value="0">Học viên</mat-option>
+                        <mat-option value="1">Giáo viên</mat-option>
+                        <mat-option value="2">Quản trị</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile class="search_btn">
+                <button mat-raised-button color="primary" (click)="onSearch()">Tìm kiếm</button>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div> -->
+    <div class="table">
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> STT </th>
+                <td mat-cell *matCellDef="let i= index"> {{i+1}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Tên khóa học </th>
+                <td mat-cell *matCellDef="let element"> {{element.cou_name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Học phí </th>
+                <td mat-cell *matCellDef="let element" style="color: red; font-weight: 500;"> {{element.cou_fee | number}} VNĐ </td>
+            </ng-container>
+
+            <ng-container matColumnDef="training">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Thời gian đào tạo </th>
+                <td mat-cell *matCellDef="let element"> {{element.cou_training}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Hành động</th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-button [matMenuTriggerFor]="menu"><mat-icon>more_horiz</mat-icon></button>
+                    <mat-menu #menu="matMenu">
+                        <a mat-menu-item [routerLink]="['/admin/course/edit/'+ element.cou_id]" routerLinkActive="router-link-active">
+                            <mat-icon style="color: #024888;">border_color</mat-icon>Cập nhật</a>
+                        <a mat-menu-item (click)="deleteCourse(element.cou_id)">
+                            <mat-icon style="color: red;">delete</mat-icon>Xóa khóa học</a>
+                    </mat-menu>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+        </mat-paginator> -->
+    </div>
+</div>
+<!-- <app-back-footer></app-back-footer>
+    </div> -->

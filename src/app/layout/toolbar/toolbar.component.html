@@ -1,0 +1,21 @@
+<mat-toolbar>
+    <mat-toolbar-row class="header">
+        <button mat-icon-button class="icon-button">
+        <mat-icon color="primary">format_indent_increase</mat-icon>
+        <!-- <mat-icon color="primary">format_indent_decrease</mat-icon> -->
+        </button>
+        <span class="text">HỆ THỐNG QUẢN LÝ ĐĂNG KÝ VÀ HỌC LÁI XE</span>
+        <span class="spacer"></span>
+        <button mat-icon-button class="icon">
+            <mat-icon color="primary">home</mat-icon>
+        </button> |
+        <button mat-icon-button class="icon">
+            <mat-icon color="primary" matBadge="1" matBadgeColor="warn">notifications</mat-icon>
+        </button> &nbsp;&nbsp;|&nbsp;&nbsp;
+        <button mat-button [matMenuTriggerFor]="menu" class="btn_login"><img [src]="data?.image"> {{data?.name}}<mat-icon>expand_more</mat-icon></button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>Item 1</button>
+            <button (click)="logOut()" mat-menu-item><mat-icon>logout</mat-icon> Đăng xuất</button>
+        </mat-menu>
+    </mat-toolbar-row>
+</mat-toolbar>

@@ -13,7 +13,14 @@
         <div><a [routerLink]="['/front/introduce']" routerLinkActive="router-link-active">Giới thiệu</a></div>
         <div><a [routerLink]="['/front/contact']" routerLinkActive="router-link-active">Liên hệ</a></div>
         <div><a [routerLink]="['/front/question']" routerLinkActive="router-link-active">Câu hỏi thường gặp?</a></div>
-        <div><button mat-raised-button color="primary">Đăng nhập</button></div>
+        <div class="btn_login">
+            <a *ngIf="!isLogin" id="btn-login" (click)="Login()" mat-raised-button color="primary">Đăng nhập</a>
+            <button *ngIf="isLogin" mat-button [matMenuTriggerFor]="menu"><img [src]="data?.image"> {{data?.name}}<mat-icon>expand_more</mat-icon></button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item>Item 1</button>
+                <button (click)="logOut()" mat-menu-item><mat-icon>logout</mat-icon> Đăng xuất</button>
+            </mat-menu>
+        </div>
     </div>
     <div class="clear"></div>
 </div>

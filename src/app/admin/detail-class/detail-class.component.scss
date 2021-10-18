@@ -1,0 +1,146 @@
+.content {
+    background-color: white;
+    width: 98%;
+    box-shadow: 1px 1px 5px rgb(172, 172, 172);
+    margin: 10px auto;
+    padding-top: 2px;
+    padding-bottom: 20px;
+    margin-bottom: 80px;
+    min-height: calc(100vh - 180px);
+    position: relative;
+}
+
+.content h2 {
+    margin: 15px 10px;
+    font-size: 24px;
+    border-bottom: 1px solid black;
+    color: #024888;
+    margin-bottom: 25px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.btn_back {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    border: 1px solid black;
+}
+
+.btn_back a {
+    text-decoration: none;
+    color: black;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+}
+
+.btn-detail {
+    padding: 0px 25px;
+    margin-bottom: 15px;
+}
+
+.btn-detail a {
+    margin-right: 10px;
+}
+
+.info {
+    padding: 0px 25px;
+}
+
+.info h4 {
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+::ng-deep figure {
+    font-size: 12px !important;
+}
+
+.table {
+    margin-top: 20px;
+    width: 95%;
+    padding: 0 25px;
+}
+
+.table h4 {
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.table table {
+    width: 100%;
+}
+
+.table table .mat-header-row {
+    background-color: #024888;
+}
+
+::ng-deep .table table .mat-sort-header-button {
+    color: #fff !important;
+    font-weight: bold;
+}
+
+th.mat-sort-header-sorted {
+    color: white;
+}
+
+.mat-column-action {
+    flex: none;
+    width: 120px;
+}
+
+.badge-info {
+    background-color: #0dcaf0;
+    padding: .35em .65em;
+    font-weight: 500;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    border-radius: 5px;
+    font-size: 0.95em;
+}
+
+.badge-primary {
+    background-color: #0d6efd;
+    padding: .35em .65em;
+    font-weight: 500;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    border-radius: 5px;
+    font-size: 0.95em;
+}
+
+.badge-warning {
+    background-color: #ffc107;
+    padding: .35em .65em;
+    font-weight: 500;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    border-radius: 5px;
+    font-size: 0.95em;
+}
+
+.border-left {
+    border-left: 1px solid black;
+}
+
+.border-right {
+    border-right: 1px solid black;
+}
+
+::ng-deep figure {
+    justify-content: flex-start !important;
+}
+
+.list_header> ::ng-deep figure {
+    padding-left: 10px !important;
+}
+
+.bold> ::ng-deep figure {
+    font-weight: 600;
+}

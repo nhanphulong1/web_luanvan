@@ -1,0 +1,76 @@
+<!-- <app-sidenav></app-sidenav>
+<div class="body">
+    <app-toolbar></app-toolbar> -->
+<div class="content">
+    <h2>Thêm lớp học mới</h2>
+    <div class="btn_back">
+        <a [routerLink]="['/admin/class']" routerLinkActive="router-link-active">
+            <mat-icon>keyboard_backspace</mat-icon>Quay lại
+        </a>
+    </div>
+    <div class="form_user">
+        <h4>Thông tin lớp học:</h4>
+        <form [formGroup]="formClass" (ngSubmit)="(!isUpdate) ? onSubmit() : onUpdate()">
+            <mat-grid-list cols="2" rowHeight="9:1">
+
+                <mat-grid-tile colspan="2">
+                    <mat-form-field style="width: 100%;" appearance="outline">
+                        <mat-label>Tên lớp học</mat-label>
+                        <input formControlName="cla_name" matInput>
+                        <mat-error *ngIf="formClass.get('cla_name').hasError('required')">Vui lòng nhập tên!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile class="form_left">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Khóa học</mat-label>
+                        <mat-select formControlName="cou_id">
+                            <mat-option *ngFor="let item of courseData" [value]="item.cou_id" (click)="setFee(item)">{{item.cou_name}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="formClass.get('cou_id').hasError('required')">Vui lòng chọn khóa học!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile class="form_right">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Ngày bắt đầu</mat-label>
+                        <input type="date" formControlName="cla_start" matInput>
+                        <mat-error *ngIf="formClass.get('cla_start').hasError('required')">Vui lòng chọn ngày!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile class="form_left">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Học phí</mat-label>
+                        <input type="number" formControlName="cla_fee" matInput>
+                        <mat-error *ngIf="formClass.get('cla_fee').hasError('required')">Vui lòng nhập học phí!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile class="form_right">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Số lượng học viên</mat-label>
+                        <input formControlName="cla_quantity" matInput>
+                        <mat-error *ngIf="formClass.get('cla_quantity').hasError('required')">Vui lòng nhập số lượng học viên!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile colspan="2">
+                    <mat-form-field style="width: 100%;" class="example-full-width" appearance="outline">
+                        <mat-label>Số tiết học</mat-label>
+                        <input type="number" formControlName="cla_count" matInput>
+                        <mat-error *ngIf="formClass.get('cla_count').hasError('required')">Vui lòng nhập số tiết học!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+            </mat-grid-list>
+            <div class="form-btn">
+                <button *ngIf="!isUpdate" type="submit" mat-raised-button color="primary">Thêm mới</button>
+                <button *ngIf="isUpdate" type="submit" mat-raised-button color="primary">Cập nhật</button>
+                <button type="reset" mat-raised-button color="secondary">Làm mới</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- <app-back-footer></app-back-footer>
+            </div> -->

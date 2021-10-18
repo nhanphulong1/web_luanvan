@@ -1,0 +1,64 @@
+<!-- <app-sidenav></app-sidenav>
+<div class="body">
+    <app-toolbar></app-toolbar> -->
+<div class="content">
+    <h2>Thêm lớp học mới</h2>
+    <div class="btn_back">
+        <a [routerLink]="['/admin/class']" routerLinkActive="router-link-active">
+            <mat-icon>keyboard_backspace</mat-icon>Quay lại
+        </a>
+    </div>
+    <div class="form_user">
+        <h4>Thông tin lớp học:</h4>
+        <form [formGroup]="formSchedule" (ngSubmit)="onSubmit()">
+            <mat-grid-list cols="2" rowHeight="9:1">
+
+                <mat-grid-tile colspan="2">
+                    <mat-form-field style="width: 100%;" appearance="outline">
+                        <mat-label>Thứ</mat-label>
+                        <mat-select formControlName="day_id" [(value)]="formSchedule.value.cou_id">
+                            <mat-option *ngFor="let item of dayData" value="{{item.day_id}}">{{item.day_name}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="formSchedule.get('day_id').hasError('required')">Vui lòng chọn thứ!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile class="form_left">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Tiết bắt đầu</mat-label>
+                        <mat-select formControlName="shi_id">
+                            <mat-option *ngFor="let item of shiftData" value="{{item.shi_id}}">Tiết {{item.shi_id}} ({{item.shi_start}})</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="formSchedule.get('shi_id').hasError('required')">Vui lòng chọn tiết bắt đầu!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile class="form_right">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Số lượng tiết học</mat-label>
+                        <input type="number" formControlName="sche_quantity" matInput>
+                        <mat-error *ngIf="formSchedule.get('sche_quantity').hasError('required')">Vui lòng nhập số lượng!</mat-error>
+                        <mat-error *ngIf="formSchedule.get('sche_quantity').hasError('invalidQuantity')">Số lượng tiết học không hợp lệ!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile colspan="2">
+                    <mat-form-field style="width: 100%;" appearance="outline">
+                        <mat-label>Địa điểm</mat-label>
+                        <mat-select formControlName="loc_id">
+                            <mat-option *ngFor="let item of locationData" value="{{item.loc_id}}">{{item.loc_name}} - {{item.loc_address}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="formSchedule.get('loc_id').hasError('required')">Vui lòng nhập học phí!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+            </mat-grid-list>
+            <div class="form-btn">
+                <button type="submit" mat-raised-button color="primary">Thêm mới</button>
+                <button type="reset" mat-raised-button color="secondary">Làm mới</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- <app-back-footer></app-back-footer>
+                </div> -->
