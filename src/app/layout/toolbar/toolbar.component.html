@@ -12,9 +12,9 @@
         <button mat-icon-button class="icon">
             <mat-icon color="primary" matBadge="1" matBadgeColor="warn">notifications</mat-icon>
         </button> &nbsp;&nbsp;|&nbsp;&nbsp;
-        <button mat-button [matMenuTriggerFor]="menu" class="btn_login"><img [src]="data?.image"> {{data?.name}}<mat-icon>expand_more</mat-icon></button>
+        <button *ngIf="data?.type==1" mat-button [matMenuTriggerFor]="menu" class="btn_login"><img [src]="data?.image"> {{data?.name}}<mat-icon>expand_more</mat-icon></button>
+        <button *ngIf="data?.type==2" mat-button [matMenuTriggerFor]="menu" class="btn_login" style="width: 130px"><mat-icon>people</mat-icon> Admin<mat-icon>expand_more</mat-icon></button>
         <mat-menu #menu="matMenu">
-            <button mat-menu-item>Item 1</button>
             <button (click)="logOut()" mat-menu-item><mat-icon>logout</mat-icon> Đăng xuất</button>
         </mat-menu>
     </mat-toolbar-row>

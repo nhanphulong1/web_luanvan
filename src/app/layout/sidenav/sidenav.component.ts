@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/Services/auth.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -7,18 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidenavComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private auth: AuthService
+  ) { }
+
+  permission;
+  type;
 
   ngOnInit(): void {
+    this.permission = this.auth.getPermission();
+    this.type = this.auth.getType();
   }
 
-  // showUser = true;
-  // showStudent = false;
-  // showClass = false;
-  // showTeacher = false;
-  // showCourse = false;
-  // showStatistic = false;
   show = 0;
+
+  checkPermission(per){
+    if(per == 0 && this.type != 2){
+      return false;
+    }
+    return this.permission.includes(per) || this.type == 2;
+  }
 
   showNav(temp){
     if(this.show == temp){

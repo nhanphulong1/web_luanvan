@@ -4,10 +4,10 @@ import { AuthdataService } from 'src/app/Services/authdata.service';
 // import * as internal from 'stream';
 
 export interface DialogData {
-    email: string;
+    user: string;
     password: string;
     token: string;
-    status: boolean;
+    status: number;
 }
 
 @Component({
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
 
     submitLogin(): void {
         this.authdataService
-            .authLogin(this.data.email, this.data.password)
+            .authLogin(this.data.user, this.data.password)
             .subscribe(
                 (data) => {
                     if (Object.prototype.hasOwnProperty.call(data, 'error')) {

@@ -1,0 +1,12 @@
+<div class="card">
+    <h4 class="card-header">Quản lý lớp học</h4>
+    <div class="card-content">
+        <a [routerLink]="['/front/class/'+cla_id]">Lớp học</a>
+        <a *ngIf="type != 0" [routerLink]="['/front/class/student/'+cla_id]">Danh sách học viên</a>
+        <a *ngIf="type != 0" [routerLink]="['/front/class/diaries/'+cla_id]">Nhật ký giảng dạy</a>
+        <a *ngIf="type == 0" (click)="attendance()">Điểm danh</a>
+        <a [routerLink]="['/front/class/schedule/'+cla_id]">Thời khóa biểu</a>
+        <a *ngIf="type == 0" [routerLink]="['/front/class/result/'+cla_id]">Xem kết quả</a>
+        <a *ngIf="type != 0" (click)="completeClass()">Hoàn thành lớp học</a>
+    </div>
+</div>

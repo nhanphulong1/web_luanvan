@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { ClassService } from 'src/app/Services/class.service';
+import { MailService } from 'src/app/Services/mail.service';
 import { ScheduleService } from 'src/app/Services/schedule.service';
 import { TeacherService } from 'src/app/Services/teacher.service';
 import Swal from 'sweetalert2';
@@ -22,6 +23,7 @@ export class AssignmentComponent implements OnInit {
 	dataSource = new MatTableDataSource();
 	displayedColumns1: string[] = ['id', 'cla_code', 'cla_name', 'cou_name', 'cla_start'];
 	dataSource1 = new MatTableDataSource();
+	dataTeacher;
 	checkTea = false;
 
 	constructor(
@@ -30,6 +32,7 @@ export class AssignmentComponent implements OnInit {
 		private classService: ClassService,
 		private schedule: ScheduleService,
 		private router: Router,
+		private mail: MailService,
 	) { }
 
 	@ViewChild('teacherPaginator', { read: MatPaginator }) teacherPaginator: MatPaginator;
@@ -44,6 +47,7 @@ export class AssignmentComponent implements OnInit {
 		});
 		this.teacher.getAllTeacher().subscribe((result) => {
 			this.dataSource = new MatTableDataSource(result.data);
+			this.dataTeacher = result.data;
 			this.dataSource.paginator = this.teacherPaginator;
 		});
 		this.classService.getAllClassByTeacherNull().subscribe((result) => {
@@ -74,23 +78,24 @@ export class AssignmentComponent implements OnInit {
 			var result = await this.schedule.checkScheduleByTeacher(data).toPromise();
 			if(result.status == 1 && result.valid == 0)
 				check= false;
-			// console.log(result);
 		}
 		if(check==true){
 			var dataClass = await this.classService.getClassById(cla_id).toPromise();
 			dataClass = dataClass.data[0];
 			dataClass.tea_id = tea_id;
+			dataClass.teacher = this.dataTeacher.filter( element => element.tea_id == tea_id);
 			dataClass.cla_start = moment(dataClass.cla_start).format('YYYY-MM-DD');
-			console.log(dataClass);
 			this.classService.updateClass(cla_id,dataClass).subscribe((result)=>{
 				if(result.status == 1){
-					Swal.fire(
-						'Success!',
-						'Phân công giảng dạy thành công!',
-						'success'
-					  ).then(()=>{
-							this.router.navigate(['/admin/class/detail/'+cla_id]); 
-					  });
+					this.mail.sendMailAssign(dataClass).subscribe(result => {
+						Swal.fire(
+							'Success!',
+							'Phân công giảng dạy thành công!',
+							'success'
+						  ).then(()=>{
+								this.router.navigate(['/admin/class/detail/'+cla_id]);
+						  });
+					});
 				}else{
 					Swal.fire({
 						icon: 'error',

@@ -14,13 +14,13 @@ import Swal from 'sweetalert2';
 })
 export class ListClassComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'cla_code', 'cla_name', 'cou_name', 'tea_name', 'cla_start', 'cla_number', 'cla_status', 'action'];
+  displayedColumns: string[] = ['id', 'cla_code', 'cla_name', 'cou_name', 'tea_name', 'cla_course', 'cla_start', 'cla_number','cla_admission', 'cla_status', 'action'];
   dataSource = new MatTableDataSource();
   courseData = [];
-  name='';
+  tea_name='';
   cou_id='';
   nowDate = moment(new Date).format('YYYY-MM-DD');
-  status='';
+  cla_course='';
 
 
   constructor(
@@ -44,7 +44,6 @@ export class ListClassComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.getAllClass().subscribe((result) => {
-      console.log(result.data);
       this.dataSource = new MatTableDataSource(result.data);
     });
     this.course.getAllCourse().subscribe((result)=>{
@@ -60,11 +59,10 @@ export class ListClassComponent implements OnInit {
 
   onSearch() {
     var data = {
-      'name': this.name,
-      'course': this.cou_id,
-      'status': this.status,
+      'tea_name': this.tea_name,
+      'cou_id': this.cou_id,
+      'cla_course': this.cla_course,
     };
-    console.log(data);
     this.service.searchClass(data).subscribe((result) => {
       this.dataSource = new MatTableDataSource(result.data);
     })

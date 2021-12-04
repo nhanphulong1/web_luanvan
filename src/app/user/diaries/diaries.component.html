@@ -1,0 +1,72 @@
+<app-breadcrumb name="Nhật ký giảng dạy"></app-breadcrumb>
+<div class="body">
+    <div class="content">
+        <h2>Quản lý lớp học</h2>
+        <app-card-class [type]="type" [cla_id]="id"></app-card-class>
+        <div class="nofitication">
+            <h4>Tạo nhật ký giảng dạy</h4>
+            <form [formGroup]="formDiaries" (ngSubmit)="onSubmit()">
+                <mat-grid-list cols="2" rowHeight="6:1">
+
+                    <mat-grid-tile colspan="2">
+                        <mat-form-field style="width: 100%;" appearance="outline">
+                            <mat-label>Nội dung buổi học</mat-label>
+                            <input formControlName="di_content" matInput>
+                            <mat-error *ngIf="formDiaries.get('di_content').hasError('required')">Vui lòng nhập nội dung!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile class="form_left">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Ngày dạy</mat-label>
+                            <input type="date" formControlName="di_date" matInput>
+                            <mat-error *ngIf="formDiaries.get('di_date').hasError('required')">Vui lòng chọn ngày dạy!</mat-error>
+                            <mat-error *ngIf="formDiaries.get('di_date').hasError('minDate')">Không được chọn ngày trong quá khứ!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile></mat-grid-tile>
+
+                    <mat-grid-tile class="form_left issueType">
+                        <span>Loại tiết học: </span>
+                        <mat-radio-group aria-label="Select an option" formControlName="di_type">
+                            <mat-radio-button [value]="0" [checked]="true">Lý thuyết</mat-radio-button>
+                            <mat-radio-button [value]="1">Thực hành</mat-radio-button>
+                        </mat-radio-group>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile></mat-grid-tile>
+
+                    <mat-grid-tile class="form_left">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Thời gian bắt đầu</mat-label>
+                            <input type="time" formControlName="di_start" matInput>
+                            <mat-error *ngIf="formDiaries.get('di_start').hasError('required')">Vui lòng chọn thời gian bắt đầu!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile class="form_right">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Thời gian kết thúc</mat-label>
+                            <input type="time" formControlName="di_end" matInput>
+                            <mat-error *ngIf="formDiaries.get('di_end').hasError('required')">Vui lòng chọn thời gian kết thúc!</mat-error>
+                            <mat-error *ngIf="!formDiaries.get('di_end').hasError('required') && formDiaries.get('di_end').hasError('min')">Thời gian kết thúc phải trể hơn thời gian bắt đầu!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile colspan="2">
+                        <mat-form-field style="width: 100%;" class="example-full-width" appearance="outline">
+                            <mat-label>Địa điểm</mat-label>
+                            <input type="text" formControlName="di_location" matInput>
+                            <mat-error *ngIf="formDiaries.get('di_location').hasError('required')">Vui lòng nhập địa điểm!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                </mat-grid-list>
+                <div class="btn">
+                    <button type="reset" mat-raised-button color="secondary">Làm mới</button>
+                    <button type="submit" mat-raised-button color="primary">Thêm mới</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

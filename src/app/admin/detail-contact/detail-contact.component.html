@@ -1,0 +1,42 @@
+<!-- <div class="body">
+    <app-toolbar></app-toolbar> -->
+<div class="content">
+    <h2>Chi tiết Liên Hệ</h2>
+    <div class="btn_back">
+        <a [routerLink]="['/admin/contact']" routerLinkActive="router-link-active">
+            <mat-icon>keyboard_backspace</mat-icon>Quay lại
+        </a>
+    </div>
+    <div class="info">
+        <h4>Thông tin chi tiết:</h4>
+        <table class="table-info">
+            <tr>
+                <th style="width: 10%;">Họ và tên:</th>
+                <td class="bold border-right" style="width: 25%;">{{ data?.con_name }}</td>
+
+                <th style="width: 10%;">Ngày gửi:</th>
+                <td style="width: 30%;">{{ data?.created_at | date: 'dd/MM/yyyy HH:ss' }}</td>
+            </tr>
+            <tr>
+                <th style="width: 10%;">Email:</th>
+                <td class="border-right" style="width: 25%;">{{ data?.con_email }}</td>
+
+                <th>Số điện thoại:</th>
+                <td class="border-right">{{ data?.con_phone }}</td>
+            </tr>
+        </table>
+        <br>
+        <h4>Nội dung liên hệ:</h4>
+        <div class="con_content">
+            <h6><b>Tiêu đề</b>: {{data?.con_title}}</h6>
+            <p><b>Nội dung</b>:</p>
+            <p>{{data?.con_content}}</p>
+        </div>
+        <br>
+        <h4>Trả lời:</h4>
+        <textarea name="content" [(ngModel)]="content" style="width: 100%; min-height: 120px;"></textarea>
+        <div class="btn">
+            <button mat-raised-button color="primary" (click)="sendMail()">Phản hồi</button>
+        </div>
+    </div>
+</div>

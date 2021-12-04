@@ -4,6 +4,10 @@ import * as pluginAnnotations from 'chart.js';
 import * as pluginDataLabels from 'chart.js';
 import { BaseChartDirective, Color, Label, SingleDataSet } from 'ng2-charts';
 import { CourseService } from 'src/app/Services/course.service';
+import { ClassService } from 'src/app/Services/class.service';
+import { StudentService } from 'src/app/Services/student.service';
+import { ServeHttpService } from 'src/app/Services/serve-http.service';
+import { TeacherService } from 'src/app/Services/teacher.service';
 
 @Component({
 	selector: 'app-statistic',
@@ -15,6 +19,11 @@ export class StatisticComponent implements OnInit {
 	public dataLineChar;
 	public dataPieChar;
 	public dataPolarChar;
+
+	countStudent = 0;
+	countClass = 0;
+	countTeacher = 0;
+	countContact = 0;
 
 	//Line chart
 		public lineChartData: ChartDataSets[] = [
@@ -28,7 +37,7 @@ export class StatisticComponent implements OnInit {
 				xAxes: [{
 					scaleLabel: {
 						display: true,
-						labelString: 'Tháng/năm'
+						labelString: 'Khóa'
 					}
 				}],
 				yAxes: [
@@ -61,14 +70,14 @@ export class StatisticComponent implements OnInit {
 			},
 		};
 		public lineChartColors: Color[] = [
-			{ // grey
-			backgroundColor: 'rgba(148,159,177,0.2)',
-			borderColor: 'rgba(148,159,177,1)',
-			pointBackgroundColor: 'rgba(148,159,177,1)',
-			pointBorderColor: '#fff',
-			pointHoverBackgroundColor: '#fff',
-			pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-			},
+			// { // grey
+			// backgroundColor: 'rgba(148,159,177,0.2)',
+			// borderColor: 'rgba(148,159,177,1)',
+			// pointBackgroundColor: 'rgba(148,159,177,1)',
+			// pointBorderColor: '#fff',
+			// pointHoverBackgroundColor: '#fff',
+			// pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+			// },
 			// { // dark grey
 			//   backgroundColor: 'rgba(77,83,96,0.2)',
 			//   borderColor: 'rgba(77,83,96,1)',
@@ -139,6 +148,10 @@ export class StatisticComponent implements OnInit {
 
 	constructor(
 		private course: CourseService,
+		private student: StudentService,
+		private teacher: TeacherService,
+		private classService: ClassService,
+		private contact: ServeHttpService,
 	) { }
 
 	ngOnInit(): void {
@@ -149,16 +162,28 @@ export class StatisticComponent implements OnInit {
 			});
 		})
 		this.course.getStatistic().subscribe((result) => {
-			this.dataLineChar = result.data;
+			this.dataLineChar = result.data.reverse();
 			this.buildChart();
 		});
-		this.course.getStatisticByResult().subscribe((result)=>{
-			this.dataPieChar = result.data;
+		this.course.getStatisticByResult().subscribe((result1)=>{
+			this.dataPieChar = result1.data;
 			this.buildPieChart();
 		});
-		this.course.getStatisticByCountStudent().subscribe((result)=>{
-			this.dataPolarChar = result.data;
+		this.course.getStatisticByCountStudent().subscribe((result2)=>{
+			this.dataPolarChar = result2.data;
 			this.buildPolarChart();
+		});
+		this.student.getCountStudent().subscribe((result3)=>{
+			this.countStudent = result3.data;
+		});
+		this.teacher.getCountTeacher().subscribe((result3)=>{
+			this.countTeacher = result3.data;
+		});
+		this.classService.getCountClass().subscribe((result3)=>{
+			this.countClass = result3.data;
+		});
+		this.contact.getCountContact().subscribe((result3)=>{
+			this.countContact = result3.data;
 		});
 	}
 
@@ -172,32 +197,43 @@ export class StatisticComponent implements OnInit {
 	}
 
 
-	buildChart() { //Char line tổng số học sinh
-		var charData = [];
+	// buildChart() { //Char line tổng số học sinh
+	// 	let charData = [];
+	// 	this.dataLineChar.forEach(element => {
+	// 		if(!this.lineChartLabels.includes(element.month))
+	// 			this.lineChartLabels.push(element.month);
+	// 	});
+	// 	for (let index = 0; index < this.label.length; index++) {
+	// 		charData[index]={ data: [], label: this.label[index] };//Định hình dữ liệu có bao nhiêu kiểu
+	// 		for (let j = 0; j < this.lineChartLabels.length; j++) {
+	// 			for (let z = 0; z < this.dataLineChar.length; z++) {//gán dữ liệu vào từng kiểu dữ liệu đã định hình ở trên
+	// 				if(this.dataLineChar[z].cou_name == this.label[index] && this.dataLineChar[z].month == this.lineChartLabels[j]){
+	// 					charData[index].data.push(this.dataLineChar[z].count);
+	// 					// console.log(this.label[index],this.dataLineChar[z]);
+	// 				}
+	// 			}
+	// 			if(charData[index].data.length == j){
+	// 				charData[index].data.push(0);
+	// 			}
+	// 		}
+	// 	}
+	// 	this.lineChartData = charData;
+	// }
+
+	buildChart(){
+		let datachart = [];
 		this.dataLineChar.forEach(element => {
-			if(!this.lineChartLabels.includes(element.month))
-				this.lineChartLabels.push(element.month);
+			// if(!this.lineChartLabels.includes(element.cla_course))
+			this.lineChartLabels.push(element.cla_course);
+			datachart.push(+element.count);
 		});
-		for (let index = 0; index < this.label.length; index++) {
-			charData[index]={ data: [], label: this.label[index] };//Định hình dữ liệu có bao nhiêu kiểu
-			for (let j = 0; j < this.lineChartLabels.length; j++) {
-				for (let z = 0; z < this.dataLineChar.length; z++) {//gán dữ liệu vào từng kiểu dữ liệu đã định hình ở trên
-					if(this.dataLineChar[z].cou_name == this.label[index] && this.dataLineChar[z].month == this.lineChartLabels[j]){
-						charData[index].data.push(this.dataLineChar[z].count);
-						// console.log(this.label[index],this.dataLineChar[z]);
-					}
-				}
-				if(charData[index].data.length == j){
-					charData[index].data.push(0);
-				}
-			}
-		}
-		this.lineChartData = charData;
+		let data = [{ data: datachart, label: 'Học viên'}];
+		this.lineChartData = data;
 	}
 
 	buildPieChart() { //Char line tổng số học sinh
-		var pieData = [];
-		var pieLabel = [];
+		let pieData = [];
+		let pieLabel = [];
 		this.dataPieChar.forEach(element => {
 			if(element.re_result == 1){
 				pieLabel.push("Đậu");
@@ -212,10 +248,9 @@ export class StatisticComponent implements OnInit {
 	}
 
 	buildPolarChart() { //Char line tổng số học sinh
-		var polarData = [];
-		var polarLabel = [];
+		let polarData = [];
+		let polarLabel = [];
 		this.dataPolarChar.forEach(element => {
-			console.log(element);
 			polarLabel.push(element.cou_name);
 			polarData.push(+element.cou_count);
 		});

@@ -1,0 +1,32 @@
+<app-breadcrumb name="Thay đổi mật khẩu"></app-breadcrumb>
+<div class="body">
+    <div class="content">
+        <h2>Thay đổi mật khẩu</h2>
+        <div>
+            <form [formGroup]="formChange" (submit)="onSubmit()">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Mật khẩu cũ</mat-label>
+                    <input formControlName="oldPass" matInput type="password">
+                    <mat-error *ngIf="formChange.get('oldPass').hasError('required')">Vui lòng nhập mật khẩu cũ!</mat-error>
+                    <mat-error *ngIf="!formChange.get('oldPass').hasError('required') && formChange.get('oldPass').hasError('unvalid')">Mật khẩu không chính xác!</mat-error>
+                </mat-form-field>
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Mật khẩu mới</mat-label>
+                    <input formControlName="newPass" matInput type="password">
+                    <mat-error *ngIf="formChange.get('newPass').hasError('required')">Vui lòng nhập mật khẩu mới!</mat-error>
+                    <mat-error *ngIf="!formChange.get('newPass').hasError('required') && formChange.get('newPass').hasError('pattern')">Mật khẩu phải có ít nhất 6 ký tự!</mat-error>
+                </mat-form-field>
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Nhập lại mật khẩu mới</mat-label>
+                    <input formControlName="RenewPass" matInput type="password">
+                    <mat-error *ngIf="formChange.get('RenewPass').hasError('required')">Vui lòng nhập lại mật khẩu mới!</mat-error>
+                    <mat-error *ngIf="!formChange.get('RenewPass').hasError('required') && formChange.get('RenewPass').hasError('unvalid')">Nhập lại mật khẩu không giống với mật khẩu mới!</mat-error>
+                </mat-form-field>
+                <div class="btn">
+                    <button type="reset" mat-raised-button>Làm mới</button>
+                    <button type="submit" mat-raised-button color="primary">Thay đổi</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

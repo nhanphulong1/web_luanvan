@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Phân quyền</h1>
+
+<div class="content" mat-dialog-content>
+    <section [formGroup]="formPermission">
+        <p *ngFor="let item of listPermission">
+            <mat-checkbox [value]="item.per_id" (change)="onCheckboxChange($event)" [checked]="check(item.per_id)">{{item.per_name}}</mat-checkbox>
+        </p>
+    </section>
+</div>
+<div class="btn" mat-dialog-actions>
+    <button type="button" mat-raised-button (click)="onNoClick()">Đóng</button>
+    <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">Phân quyền</button>
+</div>

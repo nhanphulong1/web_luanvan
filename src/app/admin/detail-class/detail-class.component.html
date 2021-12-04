@@ -1,14 +1,14 @@
 <div class="content">
-    <h2>Chi tiết giáo viên</h2>
+    <h2>Chi tiết Lớp học</h2>
     <div class="btn_back">
         <a [routerLink]="['/admin/class']" routerLinkActive="router-link-active">
             <mat-icon>keyboard_backspace</mat-icon>Quay lại
         </a>
     </div>
     <div class="btn-detail">
-        <a [routerLink]="['/admin/class/edit/'+id]" routerLinkActive="router-link-active" mat-raised-button color="primary">Cập nhật</a>
+        <a *ngIf="data?.status != 1" [routerLink]="['/admin/class/edit/'+id]" routerLinkActive="router-link-active" mat-raised-button color="primary">Cập nhật</a>
         <a [routerLink]="['/admin/timetable/'+id]" routerLinkActive="router-link-active" mat-raised-button color="primary">Quản lý thời khóa biểu</a>
-        <button mat-raised-button color="primary">Xóa lớp học</button>
+        <button mat-raised-button color="primary" (click)="deleteClass(id)">Xóa lớp học</button>
     </div>
     <div class="info">
         <h4>Thông tin chi tiết:</h4>
@@ -58,26 +58,26 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Số điện thoại </th>
                 <td mat-cell *matCellDef="let element"> {{element.stu_phone}} </td>
             </ng-container>
-            <!-- 
-            <ng-container matColumnDef="stu_count">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Số buổi học </th>
-                <td mat-cell *matCellDef="let element"> {{element.stu_start}} </td>
-            </ng-container> -->
 
-            <ng-container matColumnDef="de_paidFee">
+            <ng-container matColumnDef="stu_count">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Điểm danh </th>
+                <td mat-cell *matCellDef="let element"> {{element.stu_count}}/{{data?.cla_count}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="pay_type">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Trạng thái </th>
                 <td mat-cell *matCellDef="let element">
-                    <span class="badge-primary" *ngIf="element.de_paidFee == 0">Chưa đóng học phí</span>
-                    <span class="badge-info" *ngIf="element.de_paidFee == 1">Đã đóng học phí</span>
+                    <span class="badge-danger" *ngIf="element.pay_type == null">Chưa đóng học phí</span>
+                    <span class="badge-success" *ngIf="element.pay_type != null">Đã đóng học phí</span>
                 </td>
             </ng-container>
 
             <ng-container matColumnDef="re_result">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Kết quả </th>
                 <td mat-cell *matCellDef="let element">
-                    <span style="color: #707070; font-weight: 600;" *ngIf="element.re_result == null">Chưa có</span>
-                    <span style="color: #0d6efd; font-weight: 600;" *ngIf="element.re_result == 1">Đậu</span>
-                    <span style="color: red; font-weight: 600;" *ngIf="element.re_result == 0">Trượt</span>
+                    <span style="color: darkgray;" *ngIf="element.re_result == null">Chưa thi</span>
+                    <span style="color: red; font-weight: bold;" *ngIf="element.re_result == 0">Trượt</span>
+                    <span style="color: blue; font-weight: bold;" *ngIf="element.re_result == 1">Đậu</span>
                 </td>
             </ng-container>
 
@@ -87,12 +87,12 @@
                     <button mat-button [matMenuTriggerFor]="menu"><mat-icon>more_horiz</mat-icon></button>
                     <mat-menu #menu="matMenu">
                         <a mat-menu-item [routerLink]="['/admin/student/detail/'+element.stu_id]" routerLinkActive="router-link-active">
-                            <mat-icon style="color: #419ff7;">visibility</mat-icon> Thông tin học viên
+                            <mat-icon style="color: #419ff7;">visibility</mat-icon> Thông tin chi tiết
                         </a>
-                        <a mat-menu-item [routerLink]="['/admin/class/regis/'+ element.stu_id +'/'+element.de_id]" routerLinkActive="router-link-active">
-                            <mat-icon style="color: #024888;">border_color</mat-icon>Cập nhật trạng thái</a>
-                        <a mat-menu-item (click)="openDialog(element.de_id)">
-                            <mat-icon style="color: #cabd00;">ballot</mat-icon>Cập nhật kết quả</a>
+                        <!-- <a mat-menu-item [routerLink]="['/admin/class/regis/'+ element.stu_id +'/'+element.de_id]" routerLinkActive="router-link-active">
+                            <mat-icon style="color: #024888;">border_color</mat-icon>Cập nhật thanh toán</a> -->
+                        <!-- <a *ngIf="data?.cla_status == 1" mat-menu-item (click)="openDialog(element.de_id)">
+                            <mat-icon style="color: #cabd00;">ballot</mat-icon>Cập nhật kết quả</a> -->
                         <a mat-menu-item (click)="deleteUserInClass(element.de_id)">
                             <mat-icon style="color: red;">delete</mat-icon>Xóa học viên</a>
                     </mat-menu>

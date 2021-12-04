@@ -1,0 +1,161 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.body {
+    background-color: #ecf3fd;
+    padding-bottom: 25px;
+}
+
+.body .content {
+    width: 70%;
+    background-color: white;
+    padding: 10px 25px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.body .content h2 {
+    font-size: 24px;
+    border-bottom: 2px solid black;
+    color: #024888;
+    margin-bottom: 25px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+//Form
+.form-student {
+    min-width: 585px;
+    width: 67%;
+    max-width: 700px;
+    // border: 1px solid black;
+    float: left;
+    // overflow: hidden;
+}
+
+.form-student form>h4 {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.form-student form {
+    width: 100%;
+    // min-width: 1050px;
+    margin: auto;
+}
+
+.form-student form mat-form-field {
+    width: 90%;
+    font-size: 13px;
+}
+
+.issueType {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+}
+
+.issueType span {
+    margin-right: 15px;
+    // font-weight: 500;
+}
+
+.issueType mat-radio-group mat-radio-button {
+    margin-right: 15px;
+    font-size: 10px;
+}
+
+.form_left> ::ng-deep figure {
+    justify-content: flex-start !important;
+}
+
+.form_right> ::ng-deep figure {
+    justify-content: flex-end !important;
+}
+
+#class-info {
+    background-color: rgba(211, 211, 211, 0.705);
+    height: 0px;
+    overflow: hidden;
+    transition: height 0.2s;
+}
+
+#class-info h4 {
+    margin-left: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.show {
+    height: 140px !important;
+}
+
+.form-btn {
+    text-align: center;
+}
+
+.form-btn button {
+    margin-right: 10px;
+    padding: 2px 20px;
+}
+
+//Card
+.card {
+    width: 32%;
+    min-width: 315px;
+    // border: 1px solid green;
+    font-family: 'Times New Roman', Times, serif;
+    float: right;
+    background-color: #c4c4c45d;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.card h4 {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    padding: 8px 0px;
+    text-align: center;
+    margin-bottom: 2px;
+}
+
+.card h6 {
+    font-size: 15px;
+    font-weight: bold;
+    padding: 2px 10px;
+    margin: 0px;
+    margin-top: 12px;
+}
+
+.card p {
+    font-size: 14px;
+    padding-left: 18px;
+    padding-right: 10px;
+    margin: 0px;
+}
+
+.card-location h4 {
+    background-color: #9D6A06;
+}
+
+.card-course h4 {
+    background-color: #1B75BB;
+}
+
+.card-course .card-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-course .card-content a {
+    display: block;
+    color: #0083C9;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 5px 15px;
+}

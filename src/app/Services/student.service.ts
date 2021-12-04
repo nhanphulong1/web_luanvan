@@ -51,6 +51,32 @@ export class StudentService {
     ).pipe(catchError(this.handleError));
   }
 
+  public getCountStudent(): Observable<any>{
+    const url = this.REST_API_SERVER+'/count/1';
+    return this.httpClient.get<any>(url)
+    .pipe(
+      map((data)=>{
+        if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+          console.log('DataService: getStudent: error', data);
+        }
+        return data;
+      })
+    ).pipe(catchError(this.handleError));
+  }
+
+  public checkStudent(data): Observable<any>{
+    const url = this.REST_API_SERVER+'/check';
+    return this.httpClient.post<any>(url,data)
+    .pipe(
+      map((data)=>{
+        if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+          console.log('DataService: getStudent: error', data);
+        }
+        return data;
+      })
+    ).pipe(catchError(this.handleError));
+  }
+
   //Get Student by id
   public getStudentById(id): Observable<any>{
     const url = this.REST_API_SERVER+'/'+id;

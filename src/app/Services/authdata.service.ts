@@ -17,19 +17,14 @@ export class AuthdataService {
 
   constructor(private httpClient: HttpClient) {}
 
-  public authLogin(email, password): Observable<any> {
+  public authLogin(user, password): Observable<any> {
     const httpParams = new HttpParams();
-    const payload = { email, password };
+    const payload = { user, password };
     return (
       this.httpClient
         .post(this.REST_API_SERVER, payload, {
           params: httpParams,
         })
-        // .pipe(delay(3000))
-        // .pipe(map(data => {
-        //   console.log('DataService: login', data);
-        //   return data;
-        // }))
         .pipe(catchError(this.handleError))
     );
   }

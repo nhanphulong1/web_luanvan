@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
     styleUrls: ['./detail-class.component.scss']
 })
 export class DetailClassComponent implements OnInit {
-    displayedColumns: string[] = ['id', 'stu_code', 'stu_name', 'stu_phone', 'de_paidFee', 're_result', 'action'];
+    displayedColumns: string[] = ['id', 'stu_code', 'stu_name', 'stu_phone', 'stu_count', 'pay_type', 're_result','action'];
     dataSource = new MatTableDataSource();
     id;
     data;
@@ -46,7 +46,7 @@ export class DetailClassComponent implements OnInit {
             this.id = params.get('id');
         });
         this.classService.getClassById(this.id).subscribe((result) => {
-            if (result.status == 0) this.router.navigate(['/admin/teacher']);
+            if (result.status == 0) this.router.navigate(['/admin/class']);
             this.data = result.data[0];
         });
         this.classService.getStudentInClass(this.id).subscribe((result) => {
@@ -59,6 +59,10 @@ export class DetailClassComponent implements OnInit {
           width: '550px',
           data: {de_id: de_id}
         });
+
+        dialogRef.afterClosed().subscribe((result)=>{
+            this.loadTable();
+        })
       }
 
     loadTable(){
@@ -78,7 +82,6 @@ export class DetailClassComponent implements OnInit {
             confirmButtonText: 'Xóa'
         }).then((result) => {
             if (result.isConfirmed) {
-                console.log(id);
                 this.classService.deleteClass(id).subscribe((result) => {
                     console.log(result);
                     if (result.status == 1) {
@@ -101,22 +104,34 @@ export class DetailClassComponent implements OnInit {
     }
 
     deleteUserInClass(de_id) {
-        this.detail.deleteDetail(de_id).toPromise()
-        .then((result)=>{
-            if(result.status=1){
-                Swal.fire(
-                    'Deleted!',
-                    'Xóa học viên thành công!',
-                    'success'
-                );
-                this.loadTable();
+        Swal.fire({
+            title: 'Xóa học viên?',
+            text: "Bạn có muốn xóa học viên khỏi lớp học này!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Xóa'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.detail.deleteDetail(de_id).toPromise()
+                .then((result)=>{
+                    if(result.status=1){
+                        Swal.fire(
+                            'Deleted!',
+                            'Xóa học viên thành công!',
+                            'success'
+                        );
+                        this.loadTable();
+                    }
+                    else 
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Lỗi!!!',
+                            text: 'Xóa học viên thất bại.',
+                    });
+                })
             }
-            else 
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Lỗi!!!',
-                    text: 'Xóa học viên thất bại.',
-            });
         })
     }
 

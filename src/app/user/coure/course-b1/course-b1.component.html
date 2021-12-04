@@ -42,19 +42,20 @@
         <div class="card card-info">
             <h4 class="card-header">Thông tin khoá học</h4>
             <div class="card-content">
-                <p>Học phí: <span class="text-danger">8.600.000vnđ</span></p>
-                <p>Thời gian đào tạo: <span class="text-info">3 tháng</span></p>
+                <p>Tên khóa học: <span><b>{{data?.cou_name}}</b></span></p>
+                <p>Học phí: <span class="text-danger">{{ data?.cou_fee | number }}vnđ</span></p>
+                <p>Thời gian đào tạo: <span class="text-info">{{data?.cou_training}}</span></p>
                 <p>Số tiết học: 3 buổi/tuần</p>
                 <p>Hình thức: <b>Lý thuyết + thực hành(hướng dẫn trực tiếp)</b></p>
-                <div class="btn"><button (click)="openDialog()" mat-raised-button>Đăng ký khóa học</button></div>
+                <div class="btn"><a mat-raised-button [routerLink]="['/front/regis']" routerLinkActive="router-link-active">Đăng ký khóa học</a></div>
             </div>
         </div>
         <div class="card card-course">
             <h4 class="card-header">Các khóa đào tạo</h4>
             <div class="card-content">
-                <a href="">+ Khóa học lái xe bằng B1</a>
-                <a href="">+ Khóa học lái xe bằng B2</a>
-                <a href="">+ Khóa học lái xe bằng C1</a>
+                <a [routerLink]="['/front/course/b1']" routerLinkActive="router-link-active">+ Khóa học lái xe bằng B1</a>
+                <a [routerLink]="['/front/course/b2']" routerLinkActive="router-link-active">+ Khóa học lái xe bằng B2</a>
+                <a [routerLink]="['/front/course/c1']" routerLinkActive="router-link-active">+ Khóa học lái xe bằng C1</a>
             </div>
         </div>
     </div>

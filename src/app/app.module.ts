@@ -18,7 +18,16 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatStepperModule } from '@angular/material/stepper';
-import { NgxPayPalModule } from 'ngx-paypal';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatChipsModule } from '@angular/material/chips';
+
+// Firebase services + enviorment module
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+
+import { environment } from '../environments/environment'
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -62,8 +71,43 @@ import { RegisClassComponent } from './form/regis-class/regis-class.component';
 import { AssignmentComponent } from './admin/assignment/assignment.component';
 import { StatisticComponent } from './admin/statistic/statistic.component';
 import { DialogResultComponent } from './form/dialog-result/dialog-result.component';
-import { StatisticCourseComponent } from './admin/statistic-course/statistic-course.component';
+// import { StatisticCourseComponent } from './admin/statistic-course/statistic-course.component';
 import { LoginAdminComponent } from './admin/login-admin/login-admin.component';
+import { DetailStudentComponent } from './admin/detail-student/detail-student.component';
+import { InfoAccountComponent } from './user/info-account/info-account.component';
+import { ChangPassComponent } from './user/chang-pass/chang-pass.component';
+import { ChangeInfoComponent } from './user/change-info/change-info.component';
+import { VerifyComponent } from './user/verify/verify.component';
+import { PermissionComponent } from './form/permission/permission.component';
+import { HomeAdminComponent } from './admin/home-admin/home-admin.component';
+import { ListContactComponent } from './admin/list-contact/list-contact.component';
+import { ClassManageComponent } from './user/class-manage/class-manage.component';
+import { ClassTeacherComponent } from './user/class-teacher/class-teacher.component';
+import { ClassScheduleComponent } from './user/class-schedule/class-schedule.component';
+import { ClassListStudentComponent } from './user/class-list-student/class-list-student.component';
+import { NotificationComponent } from './user/notification/notification.component';
+import { QuillModule } from 'ngx-quill';
+import { ClassResultComponent } from './user/class-result/class-result.component';
+import { DetailContactComponent } from './admin/detail-contact/detail-contact.component';
+import { DetailResultComponent } from './admin/detail-result/detail-result.component';
+import { DiariesComponent } from './user/diaries/diaries.component';
+import { CardClassComponent } from './user/card-class/card-class.component';
+import { ClassDiariesComponent } from './user/class-diaries/class-diaries.component';
+import { AttendanceComponent } from './user/attendance/attendance.component';
+import { DetailDiariesComponent } from './user/detail-diaries/detail-diaries.component';
+import { ClassCompleteComponent } from './admin/class-complete/class-complete.component';
+import { DetailClassCompleteComponent } from './admin/detail-class-complete/detail-class-complete.component';
+import { Statistic1Component } from './admin/statistic1/statistic1.component';
+import { Statistic2Component } from './admin/statistic2/statistic2.component';
+import { PaymentComponent } from './form/payment/payment.component';
+import { ListExamComponent } from './admin/list-exam/list-exam.component';
+import { ExamComponent } from './form/exam/exam.component';
+import { DetailExamComponent } from './admin/detail-exam/detail-exam.component';
+import { ListNewsComponent } from './admin/list-news/list-news.component';
+import { NewsComponent } from './form/news/news.component';
+import { DetailNewsComponent } from './user/detail-news/detail-news.component';
+import { Statistic3Component } from './admin/statistic3/statistic3.component';
+import { ConfigComponent } from './admin/config/config.component';
 
 @NgModule({
   declarations: [
@@ -104,8 +148,42 @@ import { LoginAdminComponent } from './admin/login-admin/login-admin.component';
     AssignmentComponent,
     StatisticComponent,
     DialogResultComponent,
-    StatisticCourseComponent,
+    // StatisticCourseComponent,
     LoginAdminComponent,
+    DetailStudentComponent,
+    InfoAccountComponent,
+    ChangPassComponent,
+    ChangeInfoComponent,
+    VerifyComponent,
+    PermissionComponent,
+    HomeAdminComponent,
+    ListContactComponent,
+    ClassManageComponent,
+    ClassTeacherComponent,
+    ClassScheduleComponent,
+    ClassListStudentComponent,
+    NotificationComponent,
+    ClassResultComponent,
+    DetailContactComponent,
+    DetailResultComponent,
+    DiariesComponent,
+    CardClassComponent,
+    ClassDiariesComponent,
+    AttendanceComponent,
+    DetailDiariesComponent,
+    ClassCompleteComponent,
+    DetailClassCompleteComponent,
+    Statistic1Component,
+    Statistic2Component,
+    PaymentComponent,
+    ListExamComponent,
+    ExamComponent,
+    DetailExamComponent,
+    ListNewsComponent,
+    NewsComponent,
+    DetailNewsComponent,
+    Statistic3Component,
+    ConfigComponent,
   ],
   imports: [
     BrowserModule,
@@ -130,7 +208,13 @@ import { LoginAdminComponent } from './admin/login-admin/login-admin.component';
     MatPaginatorModule,
     MatRadioModule,
     MatStepperModule,
-    NgxPayPalModule,
+    MatCheckboxModule,
+    MatAutocompleteModule,
+    MatChipsModule,
+    QuillModule.forRoot(),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
   ],
   exports:[
     FrontHeaderComponent,

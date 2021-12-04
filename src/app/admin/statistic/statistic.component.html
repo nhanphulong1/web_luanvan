@@ -1,8 +1,25 @@
 <div class="content">
-    <h2>Thống kê tổng quát</h2>
+    <div class="thongke">
+        <div class="card card-student">
+            <h2>Tổng số học viên</h2>
+            <p>{{countStudent}}</p>
+        </div>
+        <div class="card card-teacher">
+            <h2>Tổng số giáo viên</h2>
+            <p>{{countTeacher}}</p>
+        </div>
+        <div class="card card-class">
+            <h2>Tổng số lớp học</h2>
+            <p>{{countClass}}</p>
+        </div>
+        <div class="card card-contact">
+            <h2>Tổng số góp ý</h2>
+            <p>{{countContact}}</p>
+        </div>
+    </div>
     <div>
         <div class="statistic" id="lineChart">
-            <h4>Biểu đồ thống kê số lượng học viên đăng ký học</h4>
+            <h4>Biểu đồ thống kê số lượng học viên đăng ký học theo từng khóa</h4>
             <div style="display: block;">
                 <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
             </div>
@@ -17,7 +34,7 @@
                 </div>
             </div>
 
-            <div class="statistic">
+            <div class="statistic statistic_end">
                 <h4>Biểu đồ thống kê tỷ lệ thi đậu của học viên</h4>
                 <div class="chart">
                     <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColors" [legend]="pieChartLegend">

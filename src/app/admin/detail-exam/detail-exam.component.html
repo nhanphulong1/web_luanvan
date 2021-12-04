@@ -1,0 +1,112 @@
+<!-- <div class="body">
+    <app-toolbar></app-toolbar> -->
+<div class="content">
+    <h2>Chi tiết kỳ thi</h2>
+    <div class="btn_back">
+        <a [routerLink]="['/admin/exam']" routerLinkActive="router-link-active">
+            <mat-icon>keyboard_backspace</mat-icon>Quay lại
+        </a>
+    </div>
+    <div class="btn-detail">
+        <button (click)="getStudent(data?.cou_id)" mat-raised-button color="primary" [disabled]="check">Cập nhật học viên</button>
+        <button (click)="createStudentExam(data?.ex_id)" mat-raised-button color="primary" [disabled]="check1">Xác nhận</button>
+    </div>
+    <div class="info">
+        <h4>Thông tin kỳ thi:</h4>
+        <table class="table-info">
+            <tr>
+                <th style="width: 10%;">Loại bằng lái:</th>
+                <td class="bold border-right" style="width: 20%;">{{ data?.cou_name }}</td>
+
+                <th style="width: 10%;">Ngày thi:</th>
+                <td class="border-right" style="width: 20%;">{{ data?.ex_date | date: "dd/MM/yyyy" }}</td>
+
+                <th style="width: 10%;">Địa điểm thi:</th>
+                <td style="width: 30%;">{{ data?.ex_location }}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="table">
+        <h4><b>Danh sách học viên thi:</b> (Tổng số học viên: {{dataStudent?.length}})</h4>
+        <div class="example-container">
+            <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> STT </th>
+                    <td mat-cell *matCellDef="let i= index"> {{i+1}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="stu_code" sticky>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Mã học viên </th>
+                    <td mat-cell *matCellDef="let element"> {{element.stu_code}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="stu_name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Họ và tên </th>
+                    <td mat-cell *matCellDef="let element"> {{element.stu_name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="stu_email">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                    <td mat-cell *matCellDef="let element"> {{element.stu_email}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="stu_gender">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Giới tính </th>
+                    <td mat-cell *matCellDef="let element"> {{(element.stu_gender==0)? 'Nam': 'Nữ'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="stu_phone">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Số điện thoại </th>
+                    <td mat-cell *matCellDef="let element"> {{element.stu_phone}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="cla_code">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Mã lớp </th>
+                    <td mat-cell *matCellDef="let element"> {{element.cla_code}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="cla_name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Tên lớp</th>
+                    <td mat-cell *matCellDef="let element"> {{element.cla_name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="cla_course">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Khóa học </th>
+                    <td mat-cell *matCellDef="let element">{{element.cla_course}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="tea_name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Giáo viên chủ nhiệm</th>
+                    <td mat-cell *matCellDef="let element"> {{element.tea_name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="re_result">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Kết quả </th>
+                    <td mat-cell *matCellDef="let element">
+                        <span *ngIf="element.re_result == 0" style="font-size: 13px; font-weight: bold; color: red;">Rớt</span>
+                        <span *ngIf="element.re_result == 1" style="font-size: 13px; font-weight: bold; color: blue;">Đậu</span>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Hành động</th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-button [matMenuTriggerFor]="menu"><mat-icon>more_horiz</mat-icon></button>
+                        <mat-menu #menu="matMenu">
+                            <a mat-menu-item (click)="updateResult(element.es_id)" routerLinkActive="router-link-active">
+                                <mat-icon style="color: green;">rule</mat-icon>Cập nhật kết quả</a>
+                        </mat-menu>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+        </mat-paginator>
+    </div>
+
+
+</div>

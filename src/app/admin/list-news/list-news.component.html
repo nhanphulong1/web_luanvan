@@ -1,0 +1,80 @@
+<div class="content">
+    <h2>Quản lý tin tức</h2>
+    <div class="btn-detail">
+        <button (click)="createNews()" mat-raised-button color="primary">Thêm mới</button>
+    </div>
+    <!-- <div class="search">
+        <mat-grid-list cols="4" rowHeight="4:1">
+            <mat-grid-tile>
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Khóa học</mat-label>
+                    <mat-select name="cou_id" [(ngModel)]="cou_id">
+                        <mat-option value="">Tất cả</mat-option>
+                        <mat-option *ngFor="let item of courseData" value="{{item.cou_id}}">{{item.cou_name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Ngày thi</mat-label>
+                    <input matInput type="date" name="ex_date" [(ngModel)]="ex_date">
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Địa điểm thi</mat-label>
+                    <input matInput type="text" name="ex_location" [(ngModel)]="ex_location">
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile class="search_btn">
+                <button mat-raised-button color="primary">Tìm kiếm</button>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div> -->
+    <div class="table">
+        <h4>Danh sách tin tức:</h4>
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> STT </th>
+                <td mat-cell *matCellDef="let i= index"> {{i+1}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="n_title">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Tiêu đề </th>
+                <td mat-cell *matCellDef="let element"> {{element.n_title}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="created_at">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Ngày tạo </th>
+                <td mat-cell *matCellDef="let element"> {{element.created_at | date: 'dd/MM/yyyy'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="n_status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Trạng thái </th>
+                <td mat-cell *matCellDef="let element">
+                    <span *ngIf="element.n_status == 0" style="color: blue; font-weight: bold;">Mở</span>
+                    <span *ngIf="element.n_status == 1" style="color: red; font-weight: bold;">Tạm khóa</span>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Hành động</th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-button [matMenuTriggerFor]="menu"><mat-icon>more_horiz</mat-icon></button>
+                    <mat-menu #menu="matMenu">
+                        <a mat-menu-item (click)="updateNews(element.n_id)">
+                            <mat-icon style="color: #024888;">visibility</mat-icon>Chi tiết</a>
+                        <a mat-menu-item>
+                            <mat-icon style="color: red;">delete</mat-icon>Xóa tin tức</a>
+                    </mat-menu>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+        </mat-paginator>
+    </div>
+</div>

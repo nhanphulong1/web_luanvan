@@ -3,9 +3,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { PaymentComponent } from 'src/app/form/payment/payment.component';
+import { CourseService } from 'src/app/Services/course.service';
 import { StudentService } from 'src/app/Services/student.service';
 import Swal from 'sweetalert2';
-// import { DialogRegisClassComponent } from '../dialog-regis-class/dialog-regis-class.component';
 
 @Component({
   selector: 'app-list-student',
@@ -13,27 +14,30 @@ import Swal from 'sweetalert2';
   styleUrls: ['./list-student.component.scss']
 })
 export class ListStudentComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'stu_code','stu_name', 'stu_email', 'stu_image', 'stu_phone', 'stu_address', 'action'];
+  displayedColumns: string[] = ['id', 'stu_code', 'stu_name', 'stu_email', 'stu_gender', 'stu_phone', 'stu_birthday', 'cou_name', 'pay_type', 're_result', 'action'];
   dataSource = new MatTableDataSource();
+  courseData;
   name = "";
-  stu_code = "";
-  phone = "";
+  cou_id = "";
+  type = "";
 
   constructor(
     private service: StudentService,
+    private course: CourseService,
     public dialog: MatDialog
   ) { }
-
-  @ViewChild(MatSort) set matSort(sort: MatSort) {
-    if (!this.dataSource.sort) {
-      this.dataSource.sort = sort;
-    }
-  }
 
   @ViewChild(MatPaginator, {static: false})
   set paginator(value: MatPaginator) {
     if (this.dataSource){
       this.dataSource.paginator = value;
+    }
+  }  
+  
+  @ViewChild(MatSort, {static: false})
+  set sort(value: MatSort) {
+    if (this.dataSource){
+      this.dataSource.sort = value;
     }
   }
 
@@ -41,9 +45,12 @@ export class ListStudentComponent implements OnInit {
     this.service.getAllStudent().subscribe((result) => {
       this.dataSource = new MatTableDataSource(result.data);
     });
+    this.course.getAllCourse().subscribe((result)=>{
+      this.courseData = result.data;
+    })
   }
 
-  loadTable(){
+  loadTable() {
     this.service.getAllStudent().subscribe((result) => {
       this.dataSource = new MatTableDataSource(result.data);
     });
@@ -51,22 +58,24 @@ export class ListStudentComponent implements OnInit {
 
   onSearch() {
     var data = {
-      'phone': this.phone,
+      'type': this.type,
       'name': this.name,
-      'stu_code': this.stu_code
+      'cou_id': this.cou_id
     };
     this.service.searchStudent(data).subscribe((result) => {
       this.dataSource = new MatTableDataSource(result.data);
     })
   }
-  
-  // openDialog(id){
-  //   console.log(id);
-  //   var dialogRef = this.dialog.open(DialogRegisClassComponent, {
-  //     width: '550px',
-  //     data: {stu_id: id}
-  //   });
-  // }
+
+  openPayment(id){
+    const dialogRef = this.dialog.open(PaymentComponent, {
+      width: '850px',
+      data: {stu_id: id}
+    });
+    dialogRef.afterClosed().subscribe((result)=>{
+      this.loadTable();
+  })
+  }
 
   deleteStudent(id) {
     Swal.fire({

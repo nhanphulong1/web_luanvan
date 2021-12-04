@@ -1,0 +1,34 @@
+<app-breadcrumb name="Lớp học"></app-breadcrumb>
+<div class="body">
+    <div class="content">
+        <h2>Quản lý lớp học</h2>
+        <!-- <div class="card card-location">
+            <h4 class="card-header">Quản lý lớp học</h4>
+            <div class="card-content">
+                <a [routerLink]="['/front/class/'+id]" routerLinkActive="router-link-active">Lớp học</a>
+                <a [routerLink]="['/front/class/student/'+id]" routerLinkActive="router-link-active">Danh sách học viên</a>
+                <a [routerLink]="['/front/class/add/'+id]" routerLinkActive="router-link-active">Tạo thông báo mới</a>
+                <a [routerLink]="['/front/class/schedule/'+id]" routerLinkActive="router-link-active">Thời khóa biểu</a>
+            </div>
+        </div> -->
+        <app-card-class [type]="type" [cla_id]="id"></app-card-class>
+        <div class="nofitication">
+            <h4>{{(update)? 'Cập nhật thông báo':'Thêm thông báo mới'}}</h4>
+            <form [formGroup]="formNotifi" (ngSubmit)="(update)? onUpdate() : onSubmit()">
+                <mat-form-field appearance="outline" style="width: 100%">
+                    <mat-label>Tiêu đề</mat-label>
+                    <input type="text" formControlName="no_title" matInput>
+                    <mat-error *ngIf="formNotifi.get('no_title').hasError('required')">Vui lòng nhập tiêu đề!</mat-error>
+                </mat-form-field>
+                <label>Nội dung:</label>
+                <quill-editor class="content-editor" [placeholder]="''" [styles]="{'min-height': '220px'}" formControlName="no_content"></quill-editor>
+                <mat-error *ngIf="check &&formNotifi.get('no_content').hasError('required')">Vui lòng nhập nội dung!</mat-error>
+                <div class="btn">
+                    <button type="reset" mat-raised-button>Làm mới</button>
+                    <button *ngIf="!update" mat-raised-button color="primary">Tạo thông báo</button>
+                    <button *ngIf="update" mat-raised-button color="primary">Cập nhật</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

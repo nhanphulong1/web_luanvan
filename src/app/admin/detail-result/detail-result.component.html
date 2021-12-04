@@ -1,0 +1,83 @@
+<div class="content">
+    <h2>Chi tiết Học Viên</h2>
+    <div class="btn_back">
+        <a [routerLink]="['/admin/class/detail/'+classData?.cla_id]" routerLinkActive="router-link-active">
+            <mat-icon>keyboard_backspace</mat-icon>Quay lại
+        </a>
+    </div>
+    <!-- <div class="btn-detail">
+        <a *ngIf="studentData?.status != 1" [routerLink]="['/admin/class/edit/'+id]" routerLinkActive="router-link-active" mat-raised-button color="primary">Cập nhật</a>
+        <a [routerLink]="['/admin/timetable/'+id]" routerLinkActive="router-link-active" mat-raised-button color="primary">Quản lý thời khóa biểu</a>
+        <button mat-raised-button color="primary">Xóa lớp học</button>
+    </div> -->
+    <div class="info">
+        <h4>Thông tin học viên:</h4>
+        <mat-grid-list cols='6' rowHeight='35px' style="width: 90%; margin: 0 auto;">
+            <mat-grid-tile class="list_header">Mã HV:</mat-grid-tile>
+            <mat-grid-tile class="bold">{{ studentData?.stu_code }}</mat-grid-tile>
+
+            <mat-grid-tile class="border-left list_header">Tên học viên:</mat-grid-tile>
+            <mat-grid-tile class="border-right">{{studentData?.stu_name}}</mat-grid-tile>
+
+            <mat-grid-tile class="list_header">Ngày sinh:</mat-grid-tile>
+            <mat-grid-tile>{{ studentData?.stu_birthday | date: 'dd/MM/yyyy' }}</mat-grid-tile>
+
+            <mat-grid-tile class="list_header">Email:</mat-grid-tile>
+            <mat-grid-tile class="bold red">{{ studentData?.stu_email }}</mat-grid-tile>
+
+            <mat-grid-tile class="border-left list_header">SĐT:</mat-grid-tile>
+            <mat-grid-tile class="border-right">{{studentData?.stu_phone}}</mat-grid-tile>
+
+            <mat-grid-tile class="list_header">Giới tính:</mat-grid-tile>
+            <mat-grid-tile>{{ (studentData?.stu_gender == 0)? 'Nam': 'Nữ' }}</mat-grid-tile>
+
+            <mat-grid-tile class="list_header">Học phí:</mat-grid-tile>
+            <mat-grid-tile class="bold red">
+                <span *ngIf="detailData?.de_paidFee == 0" style="color: red; font-weight: bold;"> Chưa đóng </span>
+                <span *ngIf="detailData?.de_paidFee == 1" style="color: blue; font-weight: bold;"> Đã đóng </span>
+            </mat-grid-tile>
+
+            <mat-grid-tile class="border-left list_header">Phương thức thanh toán:</mat-grid-tile>
+            <mat-grid-tile class="border-right">
+                <span *ngIf="paymentData.length != 0 && paymentData[0].pay_type == 0" style="color: red; font-weight: bold;"> Tiền mặt </span>
+                <span *ngIf="paymentData.length != 0 && paymentData[0].pay_type == 1" style="color: blue; font-weight: bold;"> Chuyển khoản </span>
+                <span *ngIf="paymentData.length == 0" style="font-weight: bold;"> Không </span>
+            </mat-grid-tile>
+
+            <mat-grid-tile class="list_header"></mat-grid-tile>
+            <mat-grid-tile></mat-grid-tile>
+        </mat-grid-list>
+    </div>
+    <div class="info">
+        <h6>Chi tiết kết quả</h6>
+        <div *ngIf="resultData?.re_result != null">
+            <table class="result" border="1" style="width: 100%;">
+                <tr>
+                    <th colspan="4" class="header">Phần thi Lý Thuyết</th>
+                </tr>
+                <tr>
+                    <td>Điểm:</td>
+                    <td>{{resultData?.re_theory}}/{{resultData?.re_theoryTotal}}</td>
+                    <td>Kết quả:</td>
+                    <td>{{(resultData?.re_theoryResult==0)? 'Trượt': 'Đậu'}}</td>
+                </tr>
+                <tr>
+                    <th colspan="4" class="header">Phần thi Thực Hành</th>
+                </tr>
+                <tr>
+                    <td>Điểm:</td>
+                    <td>{{resultData?.re_practice}}/{{resultData?.re_practiceTotal}}</td>
+                    <td>Kết quả:</td>
+                    <td>{{(resultData?.re_practiceResult==0)? 'Trượt': 'Đậu'}}</td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align: right; font-weight: bold;">Tổng kết quả:</td>
+                    <td style="color: red; font-weight: bold;">{{(resultData?.re_result==0)? 'Trượt': 'Đậu'}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="notifi-none" *ngIf="resultData?.re_result == null">
+            Chưa có kết quả!
+        </div>
+    </div>
+</div>

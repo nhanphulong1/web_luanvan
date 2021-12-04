@@ -1,0 +1,99 @@
+// * {
+//     margin: 0;
+//     padding: 0;
+// }
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.snow.css';
+.body {
+    background-color: #ecf3fd;
+    padding-bottom: 25px;
+}
+
+.body .content {
+    width: 70%;
+    background-color: white;
+    padding: 10px 25px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.body .content h2 {
+    font-size: 24px;
+    border-bottom: 2px solid black;
+    color: #024888;
+    margin-bottom: 25px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+//Card
+.card {
+    width: 220px;
+    border: 1px solid lightgray;
+    font-family: 'Times New Roman', Times, serif;
+    float: left;
+    padding-bottom: 15px;
+}
+
+.card h4 {
+    font-size: 15px;
+    width: 100%;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    background-color: rgb(27, 96, 223);
+    padding: 2px 0px;
+    text-align: center;
+    margin-bottom: 2px;
+}
+
+.card-content a {
+    display: block;
+    text-decoration: none;
+    color: rgb(47, 47, 253);
+    padding: 5px 25px;
+    font-size: 15px;
+}
+
+.card-content a:hover {
+    color: rgb(47, 0, 255);
+    text-decoration: underline;
+}
+
+.nofitication {
+    // border: 1px solid lightgray;
+    float: right;
+    display: block;
+    overflow: hidden;
+    width: calc(100% - 235px);
+    padding: 10px 0px;
+    padding-bottom: 20px;
+    border: 1px solid lightgray;
+    background-color: #ecf3fd1e;
+}
+
+.nofitication h4 {
+    color: blue;
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.nofitication mat-form-field {
+    font-size: 13px;
+}
+
+.nofitication form {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.nofitication form .btn {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.nofitication form .btn button {
+    margin: 5px;
+}

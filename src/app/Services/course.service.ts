@@ -51,10 +51,67 @@ export class CourseService {
     ).pipe(catchError(this.handleError));
   }
 
+    //Get all course
+    public checkClassbyCourse(id): Observable<any>{
+      const url = this.REST_API_SERVER+'/course/check_class/'+id;
+      return this.httpClient.get<any>(url)
+      .pipe(
+        map((data)=>{
+          // console.log('data: ',data, this.httpOptions);
+          if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+            console.log('DataService: getCourse: error', data);
+          }
+          return data;
+        })
+      ).pipe(catchError(this.handleError));
+    }
+
   //Get all course
   public getStatistic(): Observable<any>{
     const url = this.REST_API_SERVER+'/course/statistic';
     return this.httpClient.get<any>(url)
+    .pipe(
+      map((data)=>{
+        // console.log('data: ',data, this.httpOptions);
+        if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+          console.log('DataService: getCourse: error', data);
+        }
+        return data;
+      })
+    ).pipe(catchError(this.handleError));
+  }
+
+  public getStatistic1(data): Observable<any>{
+    const url = this.REST_API_SERVER+'/course/statistic1';
+    return this.httpClient.post<any>(url,data)
+    .pipe(
+      map((data)=>{
+        // console.log('data: ',data, this.httpOptions);
+        if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+          console.log('DataService: getCourse: error', data);
+        }
+        return data;
+      })
+    ).pipe(catchError(this.handleError));
+  }
+
+  public getStatistic2(data): Observable<any>{
+    const url = this.REST_API_SERVER+'/course/statistic2';
+    return this.httpClient.post<any>(url,data)
+    .pipe(
+      map((data)=>{
+        // console.log('data: ',data, this.httpOptions);
+        if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+          console.log('DataService: getCourse: error', data);
+        }
+        return data;
+      })
+    ).pipe(catchError(this.handleError));
+  }
+
+  public getStatistic3(data): Observable<any>{
+    const url = this.REST_API_SERVER+'/course/statistic3';
+    return this.httpClient.post<any>(url,data)
     .pipe(
       map((data)=>{
         // console.log('data: ',data, this.httpOptions);

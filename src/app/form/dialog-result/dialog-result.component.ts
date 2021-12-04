@@ -21,12 +21,12 @@ export class DialogResultComponent implements OnInit {
     ) { }
 
     public formResult = this.fb.group({
-        de_id: [this.data['de_id'], Validators.required],
-        re_theory: ['', Validators.required],
-        re_theoryTotal: ['', Validators.required],
+        es_id: [this.data['es_id'], Validators.required],
+        re_theory: ['', [Validators.required, Validators.min(0)]],
+        re_theoryTotal: ['', [Validators.required, Validators.min(0)]],
         re_theoryResult: [1, Validators.required],
-        re_practice: ['', Validators.required],
-        re_practiceTotal: ['', Validators.required],
+        re_practice: ['', [Validators.required, Validators.min(0)]],
+        re_practiceTotal: ['',[Validators.required, Validators.min(0)]],
         re_practiceResult: [1, Validators.required],
         re_result: [1, Validators.required],
     });
@@ -35,7 +35,7 @@ export class DialogResultComponent implements OnInit {
     update = false;
 
     ngOnInit(): void {
-        this.service.getResultById(this.data['de_id']).subscribe((result) => {
+        this.service.getResultById(this.data['es_id']).subscribe((result) => {
             this.dataResult = result.data[0];
             if (result.data.length > 0) {
                 this.setValue();
@@ -56,7 +56,6 @@ export class DialogResultComponent implements OnInit {
 
 
     onSubmit() {
-        console.log("de_id",this.data['de_id']);
         if(this.formResult.valid)
             if (this.update == true) {
                 this.updateResult();
@@ -66,7 +65,7 @@ export class DialogResultComponent implements OnInit {
     }
 
     updateResult() {
-        this.service.updateResult(this.data['de_id'], this.formResult.value).subscribe((result)=>{
+        this.service.updateResult(this.data['es_id'], this.formResult.value).subscribe((result)=>{
             if(result.status == 1){
                 Swal.fire(
                     'Success!',

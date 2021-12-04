@@ -9,6 +9,21 @@
     width: 250px;
     height: 100vh;
     border: 1px solid black;
+    overflow: auto;
+}
+
+.sidenav::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* Hide scrollbar for IE, Edge and Firefox */
+
+.sidenav {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
 }
 
 .logo {
@@ -32,7 +47,8 @@
     text-align: center;
     text-transform: uppercase;
     padding: 2px 7px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    cursor: pointer;
 }
 
 .sidenav ul {

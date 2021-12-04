@@ -79,37 +79,5 @@ export class ListRegisComponent implements OnInit {
     })
     
   }
-  
-  // deleteTeacher(id) {
-  //   Swal.fire({
-  //     title: 'Xóa giáo viên?',
-  //     text: "Bạn có muốn xóa giáo viên này!",
-  //     icon: 'warning',
-  //     showCancelButton: true,
-  //     confirmButtonColor: '#3085d6',
-  //     cancelButtonColor: '#d33',
-  //     confirmButtonText: 'Xóa'
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       this.service.deleteTeacher(id).subscribe((result) => {
-  //         console.log(result);
-  //         if (result.status == 1) {
-  //           Swal.fire(
-  //             'Deleted!',
-  //             'Xóa giáo viên thành công!',
-  //             'success'
-  //           );
-  //           this.loadTable();
-  //         } else {
-  //           Swal.fire({
-  //             icon: 'error',
-  //             title: 'Lỗi!!!',
-  //             text: 'Xóa giáo viên thất bại.',
-  //           })
-  //         }
-  //       })
-  //     }
-  //   })
-  // }
 
 }

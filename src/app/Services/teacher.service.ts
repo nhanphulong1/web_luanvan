@@ -52,9 +52,39 @@ export class TeacherService {
     ).pipe(catchError(this.handleError));
   }
 
+    //Get all teacher
+    public getCountTeacher(): Observable<any>{
+      const url = this.REST_API_SERVER+'/count/1';
+      return this.httpClient.get<any>(url)
+      .pipe(
+        map((data)=>{
+          // console.log('data: ',data, this.httpOptions);
+          if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+            console.log('DataService: getTeacher: error', data);
+          }
+          return data;
+        })
+      ).pipe(catchError(this.handleError));
+    }
+
   //Get teacher by id
   public getTeacherById(id): Observable<any>{
     const url = this.REST_API_SERVER+'/'+id;
+    return this.httpClient.get<any>(url)
+    .pipe(
+      map((data)=>{
+        // console.log('data: ',data, this.httpOptions);
+        if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+          console.log('DataService: getTeacher: error', data);
+        }
+        return data;
+      })
+    ).pipe(catchError(this.handleError));
+  }
+
+   //check teacher valid
+   public checkTeacher(email,phone): Observable<any>{
+    const url = this.REST_API_SERVER+'/check/'+email+'/'+phone;
     return this.httpClient.get<any>(url)
     .pipe(
       map((data)=>{

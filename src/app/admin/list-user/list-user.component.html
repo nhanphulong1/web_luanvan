@@ -6,7 +6,7 @@
         <mat-grid-list cols="4" rowHeight="4:1">
             <mat-grid-tile>
                 <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Email</mat-label>
+                    <mat-label>Tên tài khoản</mat-label>
                     <input matInput name="email" [(ngModel)]="email">
                 </mat-form-field>
             </mat-grid-tile>
@@ -23,7 +23,6 @@
                         <mat-option value="3">Tất cả</mat-option>
                         <mat-option value="0">Học viên</mat-option>
                         <mat-option value="1">Giáo viên</mat-option>
-                        <mat-option value="2">Quản trị</mat-option>
                     </mat-select>
                 </mat-form-field>
             </mat-grid-tile>
@@ -40,9 +39,9 @@
                 <td mat-cell *matCellDef="let i= index"> {{i+1}} </td>
             </ng-container>
 
-            <ng-container matColumnDef="email">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-                <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+            <ng-container matColumnDef="user">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Tài khoản </th>
+                <td mat-cell *matCellDef="let element"> {{ element.user}} </td>
             </ng-container>
 
             <ng-container matColumnDef="name">
@@ -59,20 +58,30 @@
                 </td>
             </ng-container>
 
+            <ng-container matColumnDef="isDelete">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Trạng thái </th>
+                <td mat-cell *matCellDef="let element">
+                    <span *ngIf="element.isDelete == 0" style="font-weight: bold; color: green; font-family: Arial, Helvetica, sans-serif;">Hoạt động</span>
+                    <span *ngIf="element.isDelete == 1" style="font-weight: bold; color: red; font-family: Arial, Helvetica, sans-serif;">Đã khóa</span>
+                </td>
+            </ng-container>
+
             <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Hành động</th>
                 <td mat-cell *matCellDef="let element">
-                    <button mat-button [matMenuTriggerFor]="menu"><mat-icon>more_horiz</mat-icon></button>
+                    <button mat-button [matMenuTriggerFor]="menu" *ngIf="element.type != 2"><mat-icon>more_horiz</mat-icon></button>
                     <mat-menu #menu="matMenu">
-                        <a mat-menu-item [routerLink]="['/admin/user/edit/'+ element.id]" routerLinkActive="router-link-active">
-                            <mat-icon style="color: #024888;">border_color</mat-icon>Cập nhật</a>
-                        <a mat-menu-item>
+                        <!-- <a mat-menu-item [routerLink]="['/admin/user/edit/'+ element.id]" routerLinkActive="router-link-active">
+                            <mat-icon style="color: #024888;">border_color</mat-icon>Cập nhật</a> -->
+                        <a *ngIf="element.type == 1" mat-menu-item (click)="onPermission(element.user)">
                             <mat-icon style="color: #64C9CF;">dns</mat-icon>Phân quyền</a>
-                        <a mat-menu-item (click)="resetPassUser(element.id)">
+                        <a mat-menu-item (click)="resetPassUser(element.user)">
                             <!-- Cần test lại chức năng -->
                             <mat-icon style="color: #FFB319;">history</mat-icon>Đặt lại mật khẩu</a>
-                        <a mat-menu-item (click)="deleteUser(element.id)">
-                            <mat-icon style="color: red;">delete</mat-icon>Xóa tài khoản</a>
+                        <a mat-menu-item *ngIf="element.isDelete==0" (click)="clockUser(element.user)">
+                            <mat-icon style="color: red;">lock</mat-icon>Khóa tài khoản</a>
+                        <a mat-menu-item *ngIf="element.isDelete==1" (click)="unclockUser(element.user)">
+                            <mat-icon style="color: green;">lock_open</mat-icon>Mở khóa tài khoản</a>
                     </mat-menu>
                 </td>
             </ng-container>

@@ -1,0 +1,62 @@
+<app-breadcrumb name="DS học viên"></app-breadcrumb>
+<div class="body">
+    <div class="content">
+        <h2>Lớp {{cla_name}}</h2>
+        <app-card-class [type]="type" [cla_id]="cla_id"></app-card-class>
+        <div class="nofitication">
+            <h4>Thông tin buổi học</h4>
+            <div class="diary-content">
+                <p><b>Nội dung buổi học:</b> {{diaryData?.di_content}}</p>
+                <p><b>Loại:</b> {{(diaryData?.di_type==0)? 'Lý thuyết': 'Thực hành'}}</p>
+                <p><b>Ngày học:</b> {{diaryData?.di_date | date: 'dd/MM/yyyy'}}</p>
+                <p><b>Thời gian:</b> {{diaryData?.di_start}} - {{diaryData?.di_end}}</p>
+                <p><b>Địa điểm:</b> {{diaryData?.di_location}}</p>
+            </div>
+            <h6>Danh sách học sinh điểm danh:</h6>
+            <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> STT </th>
+                    <td mat-cell *matCellDef="let i= index"> {{i+1}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="stu_code">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Mã học viên </th>
+                    <td mat-cell *matCellDef="let element"> {{element.stu_code}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="stu_name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Tên học viên </th>
+                    <td mat-cell *matCellDef="let element"> {{element.stu_name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="stu_email">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                    <td mat-cell *matCellDef="let element"> {{element.stu_email}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="stu_gender">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Giới tính </th>
+                    <td mat-cell *matCellDef="let element"> {{(element.stu_gender == 1)? 'Nữ':'Nam'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="stu_birthday">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Ngày sinh </th>
+                    <td mat-cell *matCellDef="let element"> {{element.stu_birthday | date : 'dd/MM/yyyy'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="stu_phone">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Số điện thoại </th>
+                    <td mat-cell *matCellDef="let element"> {{element.stu_phone}} </td>
+                </ng-container>
+
+                <tr mat-row *matNoDataRow>
+                    <td mat-cell colspan="7">Không tìm thấy dữ liệu!!"</td>
+                </tr>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+    </div>
+</div>

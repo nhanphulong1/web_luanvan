@@ -1,7 +1,7 @@
 .content {
-    background-color: white;
+    // background-color: white;
     width: 98%;
-    box-shadow: 1px 1px 5px rgb(172, 172, 172);
+    // box-shadow: 1px 1px 5px rgb(172, 172, 172);
     margin: 10px auto;
     padding-top: 2px;
     padding-bottom: 20px;
@@ -21,7 +21,47 @@
     text-transform: uppercase;
 }
 
+.thongke {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.thongke .card {
+    width: 24%;
+    background-color: white;
+    box-shadow: 1px 1px 5px rgb(172, 172, 172);
+}
+
+.thongke .card p {
+    font-size: 35px;
+    font-family: 'Times New Roman', Times, serif;
+    margin-right: 20px;
+    font-weight: bold;
+    color: white;
+    text-align: right;
+}
+
+.thongke .card-student {
+    background-image: linear-gradient(#1bffff, #2E3192);
+}
+
+.thongke .card-class {
+    background-image: linear-gradient(#63e2ff, #491d77);
+}
+
+.thongke .card-teacher {
+    background-image: linear-gradient(#fcee21, #0e5a31);
+}
+
+.thongke .card-contact {
+    background-image: linear-gradient(#a3a1ff, #3a3897);
+}
+
 .statistic {
+    background-color: white;
+    box-shadow: 1px 1px 5px rgb(172, 172, 172);
     padding: 0 35px;
     margin-bottom: 50px;
 }
@@ -41,13 +81,9 @@
 
 #pieChart {
     display: flex;
+    justify-content: space-between;
 }
 
 #pieChart .statistic {
-    width: 50%;
+    width: 43%;
 }
-
-// #pieChart .statistic canvas {
-//     width: 150% !important;
-//     height: 150% !important;
-// }

@@ -1,0 +1,112 @@
+<!-- <div class="body">
+    <app-toolbar></app-toolbar> -->
+<div class="content">
+    <h2>Chi tiết học viên</h2>
+    <div class="btn_back">
+        <a [routerLink]="['/admin/student']" routerLinkActive="router-link-active">
+            <mat-icon>keyboard_backspace</mat-icon>Quay lại
+        </a>
+    </div>
+    <div class="btn-detail">
+        <a [routerLink]="['/admin/student/edit/'+id]" routerLinkActive="router-link-active" mat-raised-button color="primary">Cập nhật</a>
+        <button (click)="openPayment(id)" mat-raised-button color="primary">Cập nhật thanh toán</button>
+        <button (click)="deleteStudent(id)" mat-raised-button color="primary">Xóa học viên</button>
+    </div>
+    <div class="info">
+        <h4>Thông tin chi tiết:</h4>
+        <table class="table-info">
+            <tr>
+                <th style="width: 10%;">Mã học viên:</th>
+                <td class="bold border-right" style="width: 20%;">{{ data?.stu_code }}</td>
+
+                <th style="width: 10%;">Họ và tên:</th>
+                <td class="border-right" style="width: 20%;">{{ data?.stu_name }}</td>
+
+                <th style="width: 10%;">Địa chỉ:</th>
+                <td style="width: 30%;">{{ data?.stu_address }}</td>
+            </tr>
+            <tr>
+                <th>Email:</th>
+                <td class="border-right">{{ data?.stu_email }}</td>
+
+                <th>Giới tính:</th>
+                <td class="border-right">{{ (data?.stu_gender == 0)? 'Nam':'Nữ' }}</td>
+
+                <th>Ngày sinh:</th>
+                <td>{{ data?.stu_birthday | date : 'dd/MM/yyyy' }}</td>
+            </tr>
+            <tr>
+                <th>CMND:</th>
+                <td class="border-right">{{ data?.stu_cmnd }}</td>
+
+                <th>Quốc tịch:</th>
+                <td class="border-right">{{ data?.stu_national }}</td>
+
+                <th>Trạng thái:</th>
+                <td>
+                    <span *ngIf="data?.pay_type == null" style="color: red; font-weight: bold;"> Chưa đóng học phí</span>
+                    <span *ngIf="data?.pay_type != null" style="color: blue; font-weight: bold;"> Đã đóng học phí </span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                    <td colspan="4" style="text-align: center;">Thông tin lớp học</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="width: 100px;">Mã khóa học:</td>
+                    <td style="width: 35%;">{{data?.cla_code}}</td>
+                    <td style="width: 100px;">Tên lớp học:</td>
+                    <td>{{data?.cla_name}}</td>
+                </tr>
+                <tr>
+                    <td>Hạng mục:</td>
+                    <td>{{data?.cou_name}}</td>
+                    <td>Tên giáo viên:</td>
+                    <td>{{data?.tea_name}}</td>
+                </tr>
+                <tr>
+                    <td>Khoá:</td>
+                    <td>{{data?.cla_course}}</td>
+                    <td>Email giáo viên:</td>
+                    <td>{{data?.tea_email}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="info-result" *ngIf="dataResult?.re_result != null">
+        <h4>Chi tiết kết quả:</h4>
+        <table class="table-info" style="background-color: rgba(211, 211, 211, 0.603);">
+            <tr>
+                <th style="width: 13%;">Loại bằng lái:</th>
+                <td style="width: 15%;">{{ data?.cou_name }}</td>
+
+                <th style="width: 13%;">Địa điểm thi:</th>
+                <td style="width: 20%;">{{ data?.ex_location }}</td>
+
+                <th style="width: 10%;">Ngày thi:</th>
+                <td style="width: 30%;">{{ data?.ex_date | date: 'dd/MM/yyyy' }}</td>
+
+            </tr>
+            <tr>
+                <th>Phần thi lý thuyết:</th>
+                <td>{{dataResult?.re_theory}}/{{dataResult?.re_theoryTotal}} - {{(dataResult?.re_theoryResult==0)? 'Trượt': 'Đậu'}}</td>
+
+                <th>Phần thi thực hành:</th>
+                <td>{{dataResult?.re_practice}}/{{dataResult?.re_practiceTotal}} - {{(dataResult?.re_practiceResult==0)? 'Trượt': 'Đậu'}}</td>
+
+                <th>Tổng kết quả:</th>
+                <td style="font-weight: bold;">
+                    <span *ngIf="dataResult?.re_result==1" style="color: blue;">Đậu</span>
+                    <span *ngIf="dataResult?.re_result==0" style="color: red;">Trượt</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</div>
