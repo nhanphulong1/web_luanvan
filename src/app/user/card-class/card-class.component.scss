@@ -1,0 +1,33 @@
+//Card
+.card {
+    width: 220px;
+    border: 1px solid lightgray;
+    font-family: 'Times New Roman', Times, serif;
+    float: left;
+    padding-bottom: 15px;
+}
+
+.card h4 {
+    font-size: 15px;
+    width: 100%;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    background-color: rgb(27, 96, 223);
+    padding: 2px 0px;
+    text-align: center;
+    margin-bottom: 2px;
+}
+
+.card-content a {
+    display: block;
+    text-decoration: none;
+    color: rgb(47, 47, 253);
+    padding: 5px 25px;
+    font-size: 15px;
+}
+
+.card-content a:hover {
+    color: rgb(47, 0, 255);
+    text-decoration: underline;
+}

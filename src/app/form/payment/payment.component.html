@@ -1,0 +1,39 @@
+<h1 mat-dialog-title>Cập nhật thanh toán học phí</h1>
+<div mat-dialog-content class="content">
+    <div class="left-card">
+        <h4>Thông tin học viên:</h4>
+        <div class="student-info">
+            <p>Mã học viên: {{info?.stu_code}}</p>
+            <p>Họ và tên: {{info?.stu_name}}</p>
+            <p>SĐT: {{info?.stu_phone}}</p>
+            <p>Khóa học: {{info?.cou_name}}</p>
+            <p>Học phí: <span style="color: red;">{{info?.cla_fee | number}} VNĐ</span></p>
+        </div>
+    </div>
+    <div class="right-card">
+        <h4>Thông tin thanh toán:</h4>
+        <form [formGroup]="formPayment" (ngSubmit)="onSubmit()">
+            <mat-form-field class="form-left" appearance="outline">
+                <mat-label>Ngày thanh toán</mat-label>
+                <input type="datetime-local" formControlName="pay_date" matInput>
+                <mat-error *ngIf="formPayment.get('pay_date').hasError('required')">Vui lòng chọn ngày thanh toán!</mat-error>
+            </mat-form-field>
+            <div class="checkbox">
+                <span>Trạng thái thanh toán:</span><br>
+                <mat-radio-group aria-label="Select an option" formControlName="pay_type">
+                    <mat-radio-button [value]="-1" [checked]="formPayment.value.pay_type == '-1'">Chưa thanh toán</mat-radio-button>
+                    <mat-radio-button [value]="0" [checked]="formPayment.value.pay_type == 0">Tiền mặt</mat-radio-button>
+                    <mat-radio-button [value]="1" [checked]="formPayment.value.pay_type == 1">Chuyển khoản</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <mat-form-field *ngIf="formPayment.value.pay_type == 1" class="form-left" appearance="outline">
+                <mat-label>Mã thanh toán</mat-label>
+                <input type="text" formControlName="pay_id" matInput>
+            </mat-form-field>
+            <div class="btn" mat-dialog-actions>
+                <button type="button" mat-raised-button mat-dialog-close="false">Đóng</button>
+                <button type="submit" mat-raised-button color="primary">Cập nhật</button>
+            </div>
+        </form>
+    </div>
+</div>

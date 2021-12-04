@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./list-teacher.component.scss']
 })
 export class ListTeacherComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'tea_code','tea_name', 'tea_email','tea_image', 'tea_phone', 'cla_status', 'action'];
+  displayedColumns: string[] = ['id', 'tea_code','tea_name', 'tea_email','tea_image', 'tea_phone', 'action'];
   dataSource = new MatTableDataSource();
   email = "";
   name = "";
@@ -37,8 +37,8 @@ export class ListTeacherComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.getAllTeacher().subscribe((result) => {
-      this.dataSource = new MatTableDataSource(result.data);
-      console.log(result.data);
+      let data = result.data.filter( element => element.tea_isDelete != 1);
+      this.dataSource = new MatTableDataSource(data);
     });
   }
 
@@ -48,7 +48,8 @@ export class ListTeacherComponent implements OnInit {
 
   loadTable(){
     this.service.getAllTeacher().subscribe((result) => {
-      this.dataSource = new MatTableDataSource(result.data);
+      let data = result.data.filter( element => element.tea_isDelete != 1);
+      this.dataSource = new MatTableDataSource(data);
     });
   }
 

@@ -1,0 +1,63 @@
+<app-breadcrumb name="Nhật ký giảng dạy"></app-breadcrumb>
+<div class="body">
+    <div class="content">
+        <h2>Nhật ký giảng dạy</h2>
+        <app-card-class [type]="type" [cla_id]="id"></app-card-class>
+        <div class="nofitication">
+            <div class="btn">
+                <a [routerLink]="['/front/class/diaries/add/'+id]" routerLinkActive="router-link-active" mat-raised-button color="primary">
+                    <mat-icon>add</mat-icon> Thêm mới</a>
+            </div>
+            <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+                <ng-container matColumnDef="di_date">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Ngày học </th>
+                    <td mat-cell *matCellDef="let element"> {{element.di_date | date : 'dd/MM/yyyy'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="di_content">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nội dung </th>
+                    <td mat-cell *matCellDef="let element"> {{element.di_content}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="di_type">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Loại </th>
+                    <td mat-cell *matCellDef="let element"> {{(element.di_type == 0)? 'Lý thuyết':'Thực hành'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="di_location">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Địa điểm </th>
+                    <td mat-cell *matCellDef="let element"> {{element.di_location}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="di_status">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Trạng thái </th>
+                    <td mat-cell *matCellDef="let element">
+                        <span *ngIf="element.di_status == 0" class="badge-primary">Đang mở</span>
+                        <span *ngIf="element.di_status == 1" class="badge-secondary">Đã đóng</span>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Hành động</th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-button [matMenuTriggerFor]="menu"><mat-icon>more_horiz</mat-icon></button>
+                        <mat-menu #menu="matMenu">
+                            <a mat-menu-item [routerLink]="['/front/class/diaries/detail/'+element.di_id]" routerLinkActive="router-link-active">
+                                <mat-icon style="color: #024888;">visibility</mat-icon>Chi tiết</a>
+                            <a mat-menu-item *ngIf="element.di_status == 1" (click)="updateDiaries(element.di_id, element.di_status)">
+                                <mat-icon style="color: #64C9CF;">event</mat-icon>Mở điểm danh</a>
+                            <a mat-menu-item *ngIf="element.di_status == 0" (click)="updateDiaries(element.di_id, element.di_status)">
+                                <mat-icon style="color: #7c6637;">https</mat-icon>Khóa điểm danh</a>
+                            <a mat-menu-item (click)="deleteDiaries(element.di_id)">
+                                <mat-icon style="color: red;">delete</mat-icon>Xóa</a>
+                        </mat-menu>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+    </div>
+</div>

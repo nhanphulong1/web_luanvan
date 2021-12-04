@@ -5,13 +5,15 @@
             <h4>Phần thi lý thuyết:</h4>
             <mat-form-field class="form-left" appearance="outline">
                 <mat-label>Điểm đạt được</mat-label>
-                <input type="number" formControlName="re_theory" matInput type="text">
+                <input type="number" formControlName="re_theory" matInput>
                 <mat-error *ngIf="formResult.get('re_theory').hasError('required')">Vui lòng nhập điểm!</mat-error>
+                <mat-error *ngIf="!formResult.get('re_theory').hasError('required') && formResult.get('re_theory').hasError('min')">Vui lòng không nhập điểm âm!</mat-error>
             </mat-form-field>
             <mat-form-field class="form-right" appearance="outline">
                 <mat-label>Tổng điểm</mat-label>
-                <input type="number" formControlName="re_theoryTotal" matInput type="text">
+                <input type="number" formControlName="re_theoryTotal" matInput>
                 <mat-error *ngIf="formResult.get('re_theoryTotal').hasError('required')">Vui lòng nhập tổng điểm!</mat-error>
+                <mat-error *ngIf="!formResult.get('re_theoryTotal').hasError('required') && formResult.get('re_theoryTotal').hasError('min')">Vui lòng không nhập điểm âm!</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline" style="width: 100%">
                 <mat-label>Kết quả</mat-label>
@@ -25,13 +27,15 @@
             <h4>Phần thi thực hành:</h4>
             <mat-form-field class="form-left" appearance="outline">
                 <mat-label>Điểm đạt được</mat-label>
-                <input type="number" formControlName="re_practice" matInput type="text">
+                <input type="number" formControlName="re_practice" matInput>
                 <mat-error *ngIf="formResult.get('re_practice').hasError('required')">Vui lòng nhập điểm!</mat-error>
+                <mat-error *ngIf="!formResult.get('re_practice').hasError('required') && formResult.get('re_practice').hasError('min')">Vui lòng không nhập điểm âm!</mat-error>
             </mat-form-field>
             <mat-form-field class="form-right" appearance="outline">
                 <mat-label>Tổng điểm</mat-label>
-                <input type="number" formControlName="re_practiceTotal" matInput type="text">
+                <input type="number" formControlName="re_practiceTotal" matInput>
                 <mat-error *ngIf="formResult.get('re_practiceTotal').hasError('required')">Vui lòng nhập tổng điểm!</mat-error>
+                <mat-error *ngIf="!formResult.get('re_practiceTotal').hasError('required') && formResult.get('re_practiceTotal').hasError('min')">Vui lòng không nhập điểm âm!</mat-error>
             </mat-form-field>
             <mat-form-field style="width: 100%" appearance="outline">
                 <mat-label>Kết quả</mat-label>

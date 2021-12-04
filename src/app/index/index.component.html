@@ -15,6 +15,9 @@
                 <div>
                     <mat-icon>watch_later</mat-icon>Đào tạo ngắn hạn</div>
             </div>
+            <!-- <div class="button">
+                <a mat-raised-button color="accent" [routerLink]="['/front/regis']" routerLinkActive="router-link-active">Đăng ký</a>
+            </div> -->
         </div>
         <div class="image">
             <img src="../../assets/image/IMG_3886_thumb.jpg" alt="ảnh minh họa">
@@ -23,44 +26,19 @@
 </div>
 <div class="content-2">
     <h2>DANH SÁCH CÁC KHÓA HỌC</h2>
-    <div class="course">
-        <div class="course-image"><img src="../../assets/image/IMG_3886_thumb.jpg" alt="Ảnh đại diện khóa học"></div>
+    <div class="course" *ngFor="let element of data">
+        <div class="course-image"><img [src]="element.n_image" alt="Ảnh đại diện khóa học"></div>
         <div class="course-detail">
-            <h2 class="course-name">Học bằng lái xe B1</h2>
-            <p class="course-fee">Học phí: {{ b1?.cou_fee | number }}đ</p>
-            <p class="course-describe">Trung tâm dạy lái xe Hà An là đơn vị chuyên đào tạo học lái xe oto bằng B1 số tự động uy tín, giá cả hợp lý, giáo trình đầy đủ với hơn 90 giáo viên và 12 sân tập phủ khắp quận huyện mở lớp chiêu sinh thường xuyên.</p>
+            <h2 class="course-name">{{element.n_title}}</h2>
+            <p class="course-describe">{{element.n_summary}}</p>
         </div>
         <div class="button">
-            <a [routerLink]="['/front/course/b1']" routerLinkActive="router-link-active" mat-raised-button color="primary">Chi tiết</a>
-            <a href="#formdangky" mat-raised-button color="accent">Đăng ký</a>
-        </div>
-    </div>
-    <div class="course">
-        <div class="course-image"><img src="../../assets/image/IMG_3886_thumb.jpg" alt="Ảnh đại diện khóa học"></div>
-        <div class="course-detail">
-            <h2 class="course-name">Học bằng lái xe B2</h2>
-            <p class="course-fee">Học phí: {{ b2?.cou_fee | number }}đ</p>
-            <p class="course-describe">Trung tâm dạy lái xe Hà An là đơn vị chuyên đào tạo học lái xe oto bằng B1 số tự động uy tín, giá cả hợp lý, giáo trình đầy đủ với hơn 90 giáo viên và 12 sân tập phủ khắp quận huyện mở lớp chiêu sinh thường xuyên.</p>
-        </div>
-        <div class="button">
-            <a [routerLink]="['/front/course/b2']" routerLinkActive="router-link-active" mat-raised-button color="primary">Chi tiết</a>
-            <a href="#formdangky" mat-raised-button color="accent">Đăng ký</a>
-        </div>
-    </div>
-    <div class="course">
-        <div class="course-image"><img src="../../assets/image/IMG_3886_thumb.jpg" alt="Ảnh đại diện khóa học"></div>
-        <div class="course-detail">
-            <h2 class="course-name">Học bằng lái xe C1</h2>
-            <p class="course-fee">Học phí: {{ c1?.cou_fee | number }}đ</p>
-            <p class="course-describe">Trung tâm dạy lái xe Hà An là đơn vị chuyên đào tạo học lái xe oto bằng B1 số tự động uy tín, giá cả hợp lý, giáo trình đầy đủ với hơn 90 giáo viên và 12 sân tập phủ khắp quận huyện mở lớp chiêu sinh thường xuyên.</p>
-        </div>
-        <div class="button">
-            <a [routerLink]="['/front/course/b1']" routerLinkActive="router-link-active" mat-raised-button color="primary">Chi tiết</a>
-            <a href="#formdangky" mat-raised-button color="accent">Đăng ký</a>
+            <a [routerLink]="['/front/news/'+element.n_id]" routerLinkActive="router-link-active" mat-raised-button color="primary">Chi tiết</a>
+            <a [routerLink]="['/front/regis']" routerLinkActive="router-link-active" mat-raised-button color="accent">Đăng ký</a>
         </div>
     </div>
 </div>
-<div class="content-3" id="formdangky">
+<!-- <div class="content-3" id="formdangky">
     <div>
         <h2>Đăng ký khóa học tại</h2>
         <h2>Trung tâm</h2>
@@ -93,4 +71,4 @@
             <button mat-raised-button color="accent">Đăng ký</button>
         </form>
     </div>
-</div>
+</div> -->

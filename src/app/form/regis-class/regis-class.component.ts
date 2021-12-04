@@ -34,6 +34,7 @@ export class RegisClassComponent implements OnInit {
 	cla_id;
 	cou_id;
 	de_id;
+	back = '/admin/student';
 
 	ngOnInit(): void {
 		this.course.getAllCourse().subscribe((result) => {
@@ -61,6 +62,7 @@ export class RegisClassComponent implements OnInit {
 					this.classService.getAllClassByCourse(this.cou_id).subscribe((result) => {
 						this.classData = result.data;
 						this.setValue();
+						this.back = '/admin/class/detail/'+this.cla_id;
 					});
 				})
 			})

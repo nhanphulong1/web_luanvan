@@ -16,11 +16,18 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if(this.authService.isLoggedIn() && this.authService.canAccess(state.url)){
+      // alert(this.authService.canAccess(state.url));
+    if(this.authService.isLoggedIn() && this.authService.canAccess(state.url)==1){
       return true;
-    } else
-      this.router.navigate(['home']);
+    } else if(this.authService.canAccess(state.url)==2){
+      alert("Bạn không có quyền truy cập!");
       return false;
+    }
+    else{
+      alert("Vui lòng đăng nhập lại!");
+      this.router.navigate(['home']);
+    }
+    return false;
   }
   
 }

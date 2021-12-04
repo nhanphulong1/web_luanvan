@@ -1,0 +1,21 @@
+h1 {
+    text-align: center;
+    color: blue;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    text-transform: uppercase;
+}
+
+.content {
+    padding: 0 50px;
+}
+
+.btn {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn button {
+    padding: 0px 20px;
+}

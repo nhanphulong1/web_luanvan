@@ -48,11 +48,35 @@
 }
 
 .table table {
+    width: 1500px;
+}
+
+.example-container {
     width: 100%;
+    max-width: 100%;
+    overflow: auto;
 }
 
 .table table .mat-header-row {
     background-color: #024888;
+}
+
+td.mat-column-star {
+    width: 20px;
+    padding-right: 8px;
+}
+
+th.mat-column-position,
+td.mat-column-position {
+    padding-left: 8px;
+}
+
+.mat-table-sticky-border-elem-right {
+    border-left: 1px solid #e0e0e0;
+}
+
+.mat-table-sticky-border-elem-left {
+    border-right: 1px solid #e0e0e0;
 }
 
 ::ng-deep .table table .mat-sort-header-button {
@@ -76,8 +100,8 @@ th.mat-sort-header-sorted {
     width: 120px;
 }
 
-.badge-primary {
-    background-color: #0d6efd;
+.badge-success {
+    background-color: #198754;
     padding: .35em .65em;
     font-weight: 500;
     font-family: Arial, Helvetica, sans-serif;
@@ -86,8 +110,8 @@ th.mat-sort-header-sorted {
     font-size: 0.95em;
 }
 
-.badge-info {
-    background-color: #0dcaf0;
+.badge-danger {
+    background-color: #dc3545;
     padding: .35em .65em;
     font-weight: 500;
     font-family: Arial, Helvetica, sans-serif;

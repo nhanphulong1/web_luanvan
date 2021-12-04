@@ -2,7 +2,7 @@
 <div class="body">
     <app-toolbar></app-toolbar> -->
 <div class="content">
-    <h2>Thêm tài khoản mới</h2>
+    <h2>Thêm giáo viên mới</h2>
     <div class="btn_back">
         <a [routerLink]="['/admin/teacher']" routerLinkActive="router-link-active">
             <mat-icon>keyboard_backspace</mat-icon>Quay lại
@@ -32,10 +32,26 @@
 
                 <mat-grid-tile class="form_right">
                     <mat-form-field appearance="outline">
+                        <mat-label>Ngày sinh</mat-label>
+                        <input type="date" formControlName="tea_birthday" matInput>
+                        <mat-error *ngIf="formTeacher.get('tea_birthday').hasError('required')">Vui lòng chọn ngày sinh!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile class="form_left">
+                    <mat-form-field appearance="outline">
                         <mat-label>Số điện thoại</mat-label>
                         <input formControlName="tea_phone" matInput>
                         <mat-error *ngIf="formTeacher.get('tea_phone').hasError('required')">Vui lòng nhập số điện thoại!</mat-error>
-                        <mat-error *ngIf="!formTeacher.get('tea_phone').hasError('required') && formTeacher.get('tea_phone').hasError('pattern')">Vui lòng chỉ nhập số!</mat-error>
+                        <mat-error *ngIf="!formTeacher.get('tea_phone').hasError('required') && formTeacher.get('tea_phone').hasError('pattern')">Vui lòng nhập đúng số điện thoại!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile class="form_right">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Quốc tịch</mat-label>
+                        <input formControlName="tea_national" matInput>
+                        <mat-error *ngIf="formTeacher.get('tea_national').hasError('required')">Vui lòng nhập quốc tịch!</mat-error>
                     </mat-form-field>
                 </mat-grid-tile>
 
@@ -65,15 +81,21 @@
                     <mat-form-field appearance="outline">
                         <mat-label>Số CMND</mat-label>
                         <input type="number" formControlName="tea_cmnd" matInput>
-                        <mat-error *ngIf="formTeacher.get('tea_cmnd').hasError('required')">Vui lòng chọn loại tài khoản!</mat-error>
+                        <mat-error *ngIf="formTeacher.get('tea_cmnd').hasError('required')">Vui lòng nhập số CMND!</mat-error>
                     </mat-form-field>
                 </mat-grid-tile>
 
                 <mat-grid-tile class="form_right">
                     <mat-form-field appearance="outline">
-                        <mat-label>Ngày sinh</mat-label>
-                        <input type="date" formControlName="tea_birthday" matInput>
-                        <mat-error *ngIf="formTeacher.get('tea_birthday').hasError('required')">Vui lòng chọn chức vụ!</mat-error>
+                        <mat-label>Ngày cấp</mat-label>
+                        <input type="date" formControlName="tea_cardDate" matInput>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile class="form_left">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nơi cấp</mat-label>
+                        <input formControlName="tea_cardIssue" matInput>
                     </mat-form-field>
                 </mat-grid-tile>
 
@@ -85,11 +107,18 @@
                     </mat-form-field>
                 </mat-grid-tile>
 
+                <mat-grid-tile colspan="2">
+                    <mat-form-field style="width: 100%;" class="example-full-width" appearance="outline">
+                        <mat-label>Địa chỉ thường trú</mat-label>
+                        <input formControlName="tea_residence" matInput>
+                    </mat-form-field>
+                </mat-grid-tile>
+
             </mat-grid-list>
             <div class="form-btn">
+                <button type="reset" mat-raised-button color="secondary">Làm mới</button>
                 <button *ngIf="!isUpdate" type="submit" mat-raised-button color="primary">Thêm mới</button>
                 <button *ngIf="isUpdate" type="submit" mat-raised-button color="primary">Cập nhật</button>
-                <button type="reset" mat-raised-button color="secondary">Làm mới</button>
             </div>
         </form>
     </div>

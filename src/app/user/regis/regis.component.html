@@ -1,2 +1,161 @@
-<app-front-header></app-front-header>
-<app-front-footer></app-front-footer>
+<app-breadcrumb name="Đăng ký"></app-breadcrumb>
+<div class="body">
+    <div class="content">
+        <h2>Đăng ký khóa học</h2>
+        <div class="form-student">
+            <form [formGroup]="formStudent" (ngSubmit)="onSubmit()">
+                <h4>Thông tin học viên:</h4>
+                <mat-grid-list cols="2" rowHeight="5:1">
+
+                    <mat-grid-tile class="form_left">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Họ và tên</mat-label>
+                            <input formControlName="stu_name" matInput>
+                            <mat-error *ngIf="formStudent.get('stu_name').hasError('required')">Vui lòng nhập họ và tên!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile class="form_right">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Ngày sinh</mat-label>
+                            <input type="date" formControlName="stu_birthday" matInput>
+                            <mat-error *ngIf="formStudent.get('stu_birthday').hasError('required')">Vui lòng nhập họ và tên!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile colspan="2">
+                        <mat-form-field style="width: 100%;" appearance="outline">
+                            <mat-label>Email</mat-label>
+                            <input formControlName="stu_email" matInput>
+                            <mat-error *ngIf="formStudent.get('stu_email').hasError('required')">Vui lòng nhập email!</mat-error>
+                            <mat-error *ngIf="!formStudent.get('stu_email').hasError('required') && formStudent.get('stu_email').hasError('email')">Vui lòng nhập đúng định dạng!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile class="form_left issueType">
+                        <span>Giới tính:</span>
+                        <mat-radio-group aria-label="Select an option" formControlName="stu_gender">
+                            <mat-radio-button [value]="0" [checked]="formStudent.value.stu_gender == '0'">Nam</mat-radio-button>
+                            <mat-radio-button [value]="1" [checked]="formStudent.value.stu_gender == '1'">Nữ</mat-radio-button>
+                            <mat-radio-button [value]="2" [checked]="(formStudent.value.stu_gender != '0') && (formStudent.value.stu_gender != '1')">Khác</mat-radio-button>
+                        </mat-radio-group>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile class="form_left">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Số điện thoại</mat-label>
+                            <input formControlName="stu_phone" matInput>
+                            <mat-error *ngIf="formStudent.get('stu_phone').hasError('required')">Vui lòng nhập số điện thoại!</mat-error>
+                            <mat-error *ngIf="!formStudent.get('stu_phone').hasError('required') && formStudent.get('stu_phone').hasError('pattern')">Vui lòng chỉ nhập số!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile class="form_right">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Số CMND</mat-label>
+                            <input type="number" formControlName="stu_cmnd" matInput>
+                            <mat-error *ngIf="formStudent.get('stu_cmnd').hasError('required')">Vui lòng nhập số cmnd!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile colspan="2">
+                        <mat-form-field style="width: 100%;" class="example-full-width" appearance="outline">
+                            <mat-label>Địa chỉ</mat-label>
+                            <input formControlName="stu_address" matInput>
+                            <mat-error *ngIf="formStudent.get('stu_address').hasError('required')">Vui lòng nhập địa chỉ!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                </mat-grid-list>
+
+                <h4>Đăng ký khóa học:</h4>
+                <mat-grid-list cols="2" rowHeight="5:1">
+                    <mat-grid-tile colspan="2">
+                        <mat-form-field style="width: 100%;" class="example-full-width" appearance="outline">
+                            <mat-label>Khóa học</mat-label>
+                            <mat-select formControlName="cou_id">
+                                <mat-option *ngFor="let item of courseData" [value]="item.cou_id" (click)="loadClass(item.cou_id)">{{item.cou_name}}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="formStudent.get('cou_id').hasError('required')">Vui lòng chọn khóa học!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile colspan="2">
+                        <mat-form-field style="width: 100%;" class="example-full-width" appearance="outline">
+                            <mat-label>Khóa học</mat-label>
+                            <mat-select formControlName="cla_id">
+                                <mat-option *ngFor="let item of classData" [value]="item.cla_id" (click)="loadInfoClass()">{{item.cla_code}}-{{item.cla_name}}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="formStudent.get('stu_address').hasError('required')">Vui lòng chọn lớp!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                </mat-grid-list>
+
+                <div id="class-info">
+                    <h4>Thông tin lớp học:</h4>
+                    <table width="90%" style="font-size: 13px; margin: auto;">
+                        <tr>
+                            <td style="width: 50%;">Mã lớp học:&nbsp; {{dataClass?.cla_code}}</td>
+                            <td>Tên lớp:&nbsp; {{dataClass?.cla_name}}</td>
+                        </tr>
+                        <tr>
+                            <td>Khóa học:&nbsp; {{dataClass?.cla_course}}</td>
+                            <td>Ngày khai giảng:&nbsp; <b>{{dataClass?.cla_start | date: 'dd-MM-yyyy'}}</b></td>
+                        </tr>
+                        <tr>
+                            <td>Học phí:&nbsp; <span style="color: red; font-weight: bold;">{{dataClass?.cla_fee | number}} VNĐ</span></td>
+                            <td>Số lượng học viên:&nbsp; {{dataClass?.cla_number}}/{{dataClass?.cla_quantity}}</td>
+                        </tr>
+                        <tr>
+                            <td>TKB:&nbsp; {{scheduleClass}}</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <mat-grid-list cols="2" rowHeight="5:1">
+                    <mat-grid-tile colspan="2" class="form_left issueType">
+                        <span>Phương thức thanh toán:</span>
+                        <mat-radio-group aria-label="Select an option" formControlName="pay_type">
+                            <mat-radio-button [value]="0" [checked]="formStudent.value.pay_type == '0'">Thanh toán sau</mat-radio-button>
+                            <mat-radio-button [value]="1" [checked]="formStudent.value.pay_type == '1'">Chuyển khoản</mat-radio-button>
+                        </mat-radio-group>
+                    </mat-grid-tile>
+                </mat-grid-list>
+
+                <div class="form-btn">
+                    <button type="reset" mat-raised-button color="secondary">Làm mới</button>
+                    <button type="submit" mat-raised-button color="accent">Đăng ký</button>
+                </div>
+            </form>
+
+        </div>
+        <div class="card card-location">
+            <h4 class="card-header">Thông tin liên hệ</h4>
+            <div class="card-content">
+                <h6>+ Phòng tuyển sinh:</h6>
+                <p>Tòa nhà số 35 đường số 11, Phường 13, Quận 6. TP HCM</p>
+                <p>Email: trungtam@hoclaixenhandv.com </p>
+                <p>Phone: 0399584884</p>
+                <h6>+ Văn phòng số 1:</h6>
+                <p>CEO Tower, Mễ Trì Hạ, Phạm Hùng, Nam Từ Liêm</p>
+                <p>Email: trungtam@hoclaixenhandv.com </p>
+                <p>Phone: 0399584884</p>
+                <h6>+ Văn phòng số 2:</h6>
+                <p>CEO Tower, Mễ Trì Hạ, Phạm Hùng, Nam Từ Liêm</p>
+                <p>Email: trungtam@hoclaixenhandv.com </p>
+                <p>Phone: 0399584884</p>
+            </div>
+        </div>
+        <div class="card card-course">
+            <h4 class="card-header">Các khóa đào tạo</h4>
+            <div class="card-content">
+                <a href="">+ Khóa học lái xe bằng B1</a>
+                <a href="">+ Khóa học lái xe bằng B2</a>
+                <a href="">+ Khóa học lái xe bằng C1</a>
+            </div>
+        </div>
+    </div>
+</div>

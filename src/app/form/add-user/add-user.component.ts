@@ -78,7 +78,7 @@ export class AddUserComponent implements OnInit {
     if(this.formUser.valid){
       this.service.checkEmail(this.formUser.value.email).subscribe((result)=>{
         if(result.status == 1){
-          this.service.createUser(this.formUser.value).subscribe((data) => {
+          this.service.createUserStudent(this.formUser.value).subscribe((data) => {
             if(data.status == 1){
               Swal.fire(
                 'Success!',
@@ -104,25 +104,25 @@ export class AddUserComponent implements OnInit {
 
   onUpdate(){
     this.imageInvalid = true;
-    if(this.formUser.valid){
-      this.service.updateUser(this.id, this.formUser.value).subscribe((data) => {
-        if(data.status == 1){
-          Swal.fire(
-            'Success!',
-            'Bạn đã cập nhật tài khoản mới thành công!',
-            'success'
-          ).then(() =>
-            this.router.navigate(['admin/user'])
-          )
-        }else{
-          Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'Có lỗi đã xảy ra!',
-          })
-        }
-      })
-    }
+    // if(this.formUser.valid){
+    //   this.service.updateUser(this.id, this.formUser.value).subscribe((data) => {
+    //     if(data.status == 1){
+    //       Swal.fire(
+    //         'Success!',
+    //         'Bạn đã cập nhật tài khoản mới thành công!',
+    //         'success'
+    //       ).then(() =>
+    //         this.router.navigate(['admin/user'])
+    //       )
+    //     }else{
+    //       Swal.fire({
+    //         icon: 'error',
+    //         title: 'Error',
+    //         text: 'Có lỗi đã xảy ra!',
+    //       })
+    //     }
+    //   })
+    // }
   }
 
 }

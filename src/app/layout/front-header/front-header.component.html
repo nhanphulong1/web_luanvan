@@ -1,5 +1,7 @@
 <div class="header">
-    <div class="name_logo"><img src="../../../assets/image/logo.png" alt="logo">Trung Tâm Đào Tạo NhanDV</div>
+    <div class="name_logo">
+        <a [routerLink]="['/home']" routerLinkActive="router-link-active"><img src="../../../assets/image/logo.png" alt="logo">Trung Tâm Đào Tạo NhanDV</a>
+    </div>
     <div class="menu">
         <div><a [routerLink]="['/home']" routerLinkActive="router-link-active">Trang chủ</a></div>
         <div id="course">
@@ -10,17 +12,27 @@
                 <li><a [routerLink]="['/front/course/c1']" routerLinkActive="router-link-active">Khóa học C1</a></li>
             </ul>
         </div>
+        <div><a [routerLink]="['/front/regis']" routerLinkActive="router-link-active">Đăng ký</a></div>
         <div><a [routerLink]="['/front/introduce']" routerLinkActive="router-link-active">Giới thiệu</a></div>
-        <div><a [routerLink]="['/front/contact']" routerLinkActive="router-link-active">Liên hệ</a></div>
+        <div><a [routerLink]="['/front/contact']" routerLinkActive="router-link-active">Góp ý</a></div>
         <div><a [routerLink]="['/front/question']" routerLinkActive="router-link-active">Câu hỏi thường gặp?</a></div>
         <div class="btn_login">
             <a *ngIf="!isLogin" id="btn-login" (click)="Login()" mat-raised-button color="primary">Đăng nhập</a>
-            <button *ngIf="isLogin" mat-button [matMenuTriggerFor]="menu"><img [src]="data?.image"> {{data?.name}}<mat-icon>expand_more</mat-icon></button>
+            <button *ngIf="isLogin && data?.type!=2" mat-button [matMenuTriggerFor]="menu"><img [src]="data?.image"> {{data?.name}}<mat-icon>expand_more</mat-icon></button>
+            <button *ngIf="isLogin && data?.type==2" mat-button [matMenuTriggerFor]="menu" class="btn_login" style="width: 130px"><mat-icon>people</mat-icon> Admin<mat-icon>expand_more</mat-icon></button>
             <mat-menu #menu="matMenu">
-                <button mat-menu-item>Item 1</button>
-                <button (click)="logOut()" mat-menu-item><mat-icon>logout</mat-icon> Đăng xuất</button>
+                <a [routerLink]="['/front/detail/']" routerLinkActive="router-link-active" mat-menu-item>
+                    <mat-icon style="color: #193498;">account_circle</mat-icon>thông tin cá nhân</a>
+                <a [routerLink]="['/front/change/']" routerLinkActive="router-link-active" mat-menu-item>
+                    <mat-icon style="color: #D98C00;">vpn_key</mat-icon>Thay đổi mật khẩu</a>
+                <a *ngIf="data?.type==1" [routerLink]="['/front/class/manage']" routerLinkActive="router-link-active" mat-menu-item>
+                    <mat-icon style="color: #0CECDD;">school</mat-icon>Quản lý lớp học</a>
+                <a *ngIf="data?.type==0" [routerLink]="['/front/class/'+dataClass?.cla_id]" routerLinkActive="router-link-active" mat-menu-item>
+                    <mat-icon style="color: #0CECDD;">school</mat-icon>Lớp học</a>
+                <button (click)="logOut()" mat-menu-item><mat-icon  style="color: red;">logout</mat-icon> Đăng xuất</button>
             </mat-menu>
         </div>
     </div>
-    <div class="clear"></div>
+    <!-- <div class="clear"></div> -->
+    <!-- //clear float -->
 </div>

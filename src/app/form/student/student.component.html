@@ -2,14 +2,14 @@
 <div class="body">
     <app-toolbar></app-toolbar> -->
 <div class="content">
-    <h2>Thêm tài khoản mới</h2>
+    <h2>Thêm học viên mới</h2>
     <div class="btn_back">
         <a [routerLink]="['/admin/student']" routerLinkActive="router-link-active">
             <mat-icon>keyboard_backspace</mat-icon>Quay lại
         </a>
     </div>
     <div class="form_user">
-        <h4>Thông tin tài khoản:</h4>
+        <h4>Thông tin học viên:</h4>
         <form [formGroup]="formStudent" (ngSubmit)="(!isUpdate) ? onSubmit() : onUpdate()">
             <mat-grid-list cols="2" rowHeight="9:1">
 
@@ -24,8 +24,9 @@
                 <mat-grid-tile class="form_right">
                     <mat-form-field appearance="outline">
                         <mat-label>Ngày sinh</mat-label>
-                        <input type="date" formControlName="stu_birthday" matInput>
-                        <mat-error *ngIf="formStudent.get('stu_birthday').hasError('required')">Vui lòng nhập họ và tên!</mat-error>
+                        <input type="date" [max]="now" formControlName="stu_birthday" matInput>
+                        <mat-error *ngIf="formStudent.get('stu_birthday').hasError('required')">Vui lòng nhập ngày sinh!</mat-error>
+                        <mat-error *ngIf="formStudent.get('stu_birthday').hasError('date-minimum')">Ngày sinh không hợp lệ!</mat-error>
                     </mat-form-field>
                 </mat-grid-tile>
 
@@ -41,9 +42,9 @@
                 <mat-grid-tile class="form_left issueType">
                     <span>Giới tính:</span>
                     <mat-radio-group aria-label="Select an option" formControlName="stu_gender">
-                        <mat-radio-button value="0" [checked]="formStudent.value.stu_gender == '0'">Nam</mat-radio-button>
-                        <mat-radio-button value="1" [checked]="formStudent.value.stu_gender == '1'">Nữ</mat-radio-button>
-                        <mat-radio-button value="2" [checked]="(formStudent.value.stu_gender != '0') && (formStudent.value.stu_gender != '1')">Khác</mat-radio-button>
+                        <mat-radio-button [value]="0" [checked]="formStudent.value.stu_gender == '0'">Nam</mat-radio-button>
+                        <mat-radio-button [value]="1" [checked]="formStudent.value.stu_gender == '1'">Nữ</mat-radio-button>
+                        <mat-radio-button [value]="2" [checked]="(formStudent.value.stu_gender != '0') && (formStudent.value.stu_gender != '1')">Khác</mat-radio-button>
                     </mat-radio-group>
                 </mat-grid-tile>
 
@@ -88,6 +89,7 @@
                     <mat-form-field appearance="outline">
                         <mat-label>Ngày cấp</mat-label>
                         <input type="date" formControlName="stu_cardDate" matInput>
+                        <mat-error *ngIf="formStudent.get('stu_cardDate').hasError('date-minimum')">Ngày cấp giấy không hợp lệ!</mat-error>
                     </mat-form-field>
                 </mat-grid-tile>
 
@@ -115,15 +117,53 @@
                         <mat-error *ngIf="formStudent.get('stu_residence').hasError('required')">Vui lòng nhập nơi ở thường trú!</mat-error>
                     </mat-form-field>
                 </mat-grid-tile>
-
             </mat-grid-list>
-            <div class="form-btn">
-                <button *ngIf="!isUpdate" type="submit" mat-raised-button color="primary">Thêm mới</button>
-                <button *ngIf="isUpdate" type="submit" mat-raised-button color="primary">Cập nhật</button>
-                <button type="reset" mat-raised-button color="secondary">Làm mới</button>
-            </div>
         </form>
+        <h4 *ngIf="!isUpdate">Thông tin lớp học:</h4>
+        <form [formGroup]="formRegisClass" *ngIf="!isUpdate">
+            <mat-grid-list cols="2" rowHeight="9:1">
+                <mat-grid-tile colspan="2">
+                    <mat-form-field style="width: 100%;" class="example-full-width" appearance="outline">
+                        <mat-label>Mã khóa học</mat-label>
+                        <mat-select formControlName="cou_id">
+                            <mat-option *ngFor="let item of courseData" [value]="item.cou_id" (click)="getClass(item.cou_id)">{{item.cou_name}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="formRegisClass.get('cou_id').hasError('required')">Vui lòng chọn khóa học</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="2">
+                    <mat-form-field style="width: 100%;" class="example-full-width" appearance="outline">
+                        <mat-label>Tên lớp học</mat-label>
+                        <mat-select formControlName="cla_id">
+                            <mat-option *ngFor="let item of classData" [value]="item.cla_id">{{item.cla_code}} - {{item.cla_name}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="formRegisClass.get('cla_id').hasError('required')">Vui lòng chọn tên lớp</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="2" class="form_left issueType">
+                    <span>Trạng thái thanh toán:</span>
+                    <mat-radio-group aria-label="Select an option" formControlName="de_paidFee">
+                        <mat-radio-button [value]="-1" [checked]="true">Chưa thanh toán</mat-radio-button>
+                        <mat-radio-button [value]="0">Tiền mặt</mat-radio-button>
+                        <mat-radio-button [value]="1">Chuyển khoản</mat-radio-button>
+                    </mat-radio-group>
+                    <mat-error *ngIf="formRegisClass.get('de_paidFee').hasError('required')">Vui lòng chọn trạng thái</mat-error>
+                </mat-grid-tile>
+                <mat-grid-tile *ngIf="formRegisClass.value.de_paidFee == '1'" colspan="2" class="form_left issueType">
+                    <mat-form-field style="width: 100%;" class="example-full-width" appearance="outline">
+                        <mat-label>Mã giao dịch</mat-label>
+                        <input formControlName="pay_id" matInput>
+                        <mat-error *ngIf="formRegisClass.get('pay_id').hasError('required')">Vui lòng nhập mã giao dịch!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </form>
+
+        <div class="form-btn">
+            <button type="reset" mat-raised-button color="secondary">Làm mới</button>
+            <button *ngIf="!isUpdate" type="submit" (click)="onSubmit()" mat-raised-button color="primary">Thêm mới</button>
+            <button *ngIf="isUpdate" type="submit" (click)="onUpdate()" mat-raised-button color="primary">Cập nhật</button>
+        </div>
+
     </div>
 </div>
-<!-- <app-back-footer></app-back-footer>
-        </div> -->

@@ -43,6 +43,20 @@ export class ClassService {
     ).pipe(catchError(this.handleError));
   }
 
+  public getCountClass(): Observable<any>{
+    const url = this.REST_API_SERVER+'/count/1';
+    return this.httpClient.get<any>(url)
+    .pipe(
+      map((data)=>{
+        // console.log('data: ',data, this.httpOptions);
+        if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+          console.log('DataService: getClass: error', data);
+        }
+        return data;
+      })
+    ).pipe(catchError(this.handleError));
+  }
+
   //Get all Class
   public getAllClassByTeacherNull(): Observable<any>{
     const url = this.REST_API_SERVER+'/teacher/null';
@@ -72,6 +86,21 @@ export class ClassService {
       })
     ).pipe(catchError(this.handleError));
   }
+
+    //Get all Class for teacher
+    public getAllClassByStudent(id): Observable<any>{
+      const url = this.REST_API_SERVER+'/stu/'+id;
+      return this.httpClient.get<any>(url)
+      .pipe(
+        map((data)=>{
+          // console.log('data: ',data, this.httpOptions);
+          if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+            console.log('DataService: getClass: error', data);
+          }
+          return data;
+        })
+      ).pipe(catchError(this.handleError));
+    }
 
     //Get all Class for course
     public getAllClassByCourse(id): Observable<any>{
@@ -181,6 +210,21 @@ export class ClassService {
     //update status class
     public updateStatus(id,data): Observable<any>{
       const url = this.REST_API_SERVER+'/complete/'+id;
+      return this.httpClient.put<any>(url,data)
+      .pipe(
+        map((data)=>{
+          // console.log('data: ',data, this.httpOptions);
+          if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+            console.log('DataService: getClass: error', data);
+          }
+          return data;
+        })
+      ).pipe(catchError(this.handleError));
+    }
+
+    //update status class
+    public completeClass(id,data): Observable<any>{
+      const url = this.REST_API_SERVER+'/com/'+id;
       return this.httpClient.put<any>(url,data)
       .pipe(
         map((data)=>{

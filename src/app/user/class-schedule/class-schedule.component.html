@@ -1,0 +1,43 @@
+<app-breadcrumb name="TKB"></app-breadcrumb>
+<div class="body">
+    <div class="content">
+        <h2>Thời khóa biểu</h2>
+        <!-- <div class="card card-location">
+            <h4 class="card-header">Quản lý lớp học</h4>
+            <div class="card-content">
+                <a [routerLink]="['/front/class/'+id]" routerLinkActive="router-link-active">Lớp học</a>
+                <a *ngIf="type != 0" [routerLink]="['/front/class/student/'+id]" routerLinkActive="router-link-active">Danh sách học viên</a>
+                <a *ngIf="type != 0" [routerLink]="['/front/class/add/'+id]" routerLinkActive="router-link-active">Tạo thông báo mới</a>
+                <a [routerLink]="['/front/class/schedule/'+id]" routerLinkActive="router-link-active">Thời khóa biểu</a>
+                <a *ngIf="type == 0" [routerLink]="['/front/class/result/'+id]" routerLinkActive="router-link-active">Xem kết quả</a>
+            </div>
+        </div> -->
+        <app-card-class [type]="type" [cla_id]="id"></app-card-class>
+        <div class="nofitication">
+            <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+                <ng-container matColumnDef="day_id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Thứ </th>
+                    <td mat-cell *matCellDef="let element"> {{element.day_name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="shi_id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Tiết bắt đầu </th>
+                    <td mat-cell *matCellDef="let element"> {{element.shi_id}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="sche_quantity">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Số tiết học </th>
+                    <td mat-cell *matCellDef="let element"> {{element.sche_quantity}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="loc_name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Địa điểm </th>
+                    <td mat-cell *matCellDef="let element">{{element.loc_name}} <span *ngIf="element.shi_id != ''">-</span> {{element.loc_address}}</td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+    </div>
+</div>

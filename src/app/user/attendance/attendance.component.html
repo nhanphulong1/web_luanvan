@@ -1,0 +1,21 @@
+<app-breadcrumb name="Lớp học"></app-breadcrumb>
+<div class="body">
+    <div class="content">
+        <h2>Lớp {{cla_name}}</h2>
+        <app-card-class [type]="type" [cla_id]="cla_id"></app-card-class>
+        <div class="nofitication">
+            <div class="card-notifi">
+                <h4>Điểm danh</h4>
+                <p><b>Nội dung buổi học:</b> {{data?.di_content}}</p>
+                <p><b>Loại:</b> {{(data?.di_type==0)? 'Lý thuyết': 'Thực hành'}}</p>
+                <p><b>Ngày học:</b> {{data?.di_date | date: 'dd/MM/yyyy'}}</p>
+                <p><b>Thời gian:</b> {{data?.di_start}} - {{data?.di_end}}</p>
+                <p><b>Địa điểm:</b> {{data?.di_location}}</p>
+                <div class="btn">
+                    <button *ngIf="status == 0" mat-raised-button color="primary" (click)="createAttendance()">Điểm danh</button>
+                    <button *ngIf="status == 1" mat-raised-button disabled>Đã điểm danh</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

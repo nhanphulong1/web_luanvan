@@ -1,0 +1,99 @@
+<app-breadcrumb name="Thông tin cá nhân"></app-breadcrumb>
+<div class="body">
+    <div class="content">
+        <h2>Thông tin cá nhân</h2>
+        <div class="info-Account">
+            <div class="avatar"><img [src]="(data?.type==0)? data?.stu_image : data?.tea_image" alt="Ảnh đại diện"></div>
+            <div class="noidung">
+                <h4>Thông tin cá nhân</h4>
+                <table>
+                    <tr>
+                        <td style="width: 120px;">{{(data?.type==0)? 'Mã học viên':'Mã giáo viên'}}:</td>
+                        <td><b>{{(data?.type==0)? data?.stu_code:data?.tea_code}}</b></td>
+                    </tr>
+                    <tr>
+                        <td>Họ và tên:</td>
+                        <td>{{(data?.type==0)? data?.stu_name:data?.tea_name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Năm sinh:</td>
+                        <td>{{(data?.type==0)? (data?.stu_birthday|date : 'dd/MM/yyyy') : (data?.tea_birthday |date : 'dd/MM/yyyy')}}</td>
+                    </tr>
+                    <tr>
+                        <td>Giới tính:</td>
+                        <td>{{(data?.stu_gender==0 || data?.tea_gender==0)? 'Nam':'Nữ'}}</td>
+                    </tr>
+                    <tr>
+                        <td>Email:</td>
+                        <td>{{(data?.type==0)? data?.stu_email:data?.tea_email}}</td>
+                    </tr>
+                    <tr>
+                        <td>Số điện thoại:</td>
+                        <td>{{(data?.type==0)? data?.stu_phone:data?.tea_phone}}</td>
+                    </tr>
+                    <tr>
+                        <td>Số CMND:</td>
+                        <td>{{(data?.type==0)? data?.stu_cmnd:data?.tea_cmnd}}</td>
+                    </tr>
+                    <tr>
+                        <td>Địa chỉ:</td>
+                        <td>{{(data?.type==0)? data?.stu_address:data?.tea_address}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="update"><a [routerLink]="['/front/update']" routerLinkActive="router-link-active">Cập nhật thông tin chi tiết</a></div>
+        </div>
+        <div class="info-Class">
+            <table *ngIf="data?.type==0">
+                <thead>
+                    <tr>
+                        <td colspan="4" style="text-align: center;">Thông tin lớp học</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="width: 100px;">Mã khóa học:</td>
+                        <td style="width: 35%;">{{dataClass?.cla_code}}</td>
+                        <td style="width: 100px;">Tên lớp học:</td>
+                        <td>{{dataClass?.cla_name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Hạng mục:</td>
+                        <td>{{dataClass?.cou_name}}</td>
+                        <td>Tên giáo viên:</td>
+                        <td>{{dataClass?.tea_name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Khoá:</td>
+                        <td>{{dataClass?.cla_course}}</td>
+                        <td>Email giáo viên:</td>
+                        <td>{{dataClass?.tea_email}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="info-Schedule">
+            <h4 *ngIf="data?.type==1">Thời khóa biểu</h4>
+            <table *ngIf="data?.type==1">
+                <thead>
+                    <tr>
+                        <th>Thứ</th>
+                        <th>Tiết</th>
+                        <th>Số tiết</th>
+                        <th>Lớp học</th>
+                        <th>Địa điểm</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of dataSchedule">
+                        <td>{{item.day_name}}</td>
+                        <td>{{item.shi_id}}</td>
+                        <td>{{item.sche_quantity}}</td>
+                        <td>{{item.cla_code}}</td>
+                        <td>{{item.loc_name}} - {{item.loc_address}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

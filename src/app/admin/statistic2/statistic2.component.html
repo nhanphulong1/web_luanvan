@@ -1,0 +1,205 @@
+<div class="content">
+    <h2>Thống kê báo cáo theo lớp học</h2>
+    <div class="search">
+        <div style="width: 97%;margin: auto;">
+            <mat-form-field class="example-chip-list">
+                <mat-chip-list #chipList aria-label="Fruit selection">
+                    <mat-chip style="font-size: 12px; min-height: 24px !important;" *ngFor="let fruit of fruits" [selectable]="selectable" [removable]="removable" (removed)="remove(fruit)">
+                        {{fruit}}
+                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                    </mat-chip>
+                    <input placeholder="Tên giáo viên" #fruitInput [formControl]="fruitCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)">
+                </mat-chip-list>
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                    <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+                        {{fruit}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </div>
+        <mat-grid-list cols="4" rowHeight="4:1">
+            <mat-grid-tile>
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Từ ngày</mat-label>
+                    <input matInput type="date" name="formDate" [(ngModel)]="formDate">
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Đến ngày</mat-label>
+                    <input matInput type="date" name="toDate" [(ngModel)]="toDate">
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Hạng bằng lái</mat-label>
+                    <mat-select name="cou_id" [(ngModel)]="cou_id" (selectionChange)="loadClass()">
+                        <mat-option value="0">Tất cả</mat-option>
+                        <mat-option *ngFor="let item of courseData" [value]="item.cou_id">{{item.cou_name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Khóa học</mat-label>
+                    <input (change)="loadClass()" matInput type="text" name="cla_course" [(ngModel)]="cla_course">
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Lớp học</mat-label>
+                    <mat-select name="cla_id" [(ngModel)]="cla_id">
+                        <mat-option value="0">Tất cả</mat-option>
+                        <mat-option *ngFor="let item of classData" [value]="item.cla_id">{{item.cla_code}}-{{item.cla_name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Trạng thái lớp học</mat-label>
+                    <mat-select name="status_class" [(ngModel)]="status_class">
+                        <mat-option value="0">Tất cả</mat-option>
+                        <mat-option value="1">Đang mở</mat-option>
+                        <mat-option value="2">Đã hoàn thành</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile class="search_btn">
+                <button mat-raised-button color="primary" (click)="onSearch()">Tìm kiếm</button>
+                <button mat-raised-button color="primary" (click)="export()"><img src="../../../assets/image/excel.png" alt="Excel"> Xuất file</button>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+    <div class="statistic">
+        <h4>Chi tiết thống kê:</h4>
+        <div>
+            <table style="width: 100%;">
+                <tr>
+                    <td>Tổng số học viên: <b>{{ data?.length}}</b></td>
+                    <td>Tổng danh thu: <span style="color: green; font-weight: bold;">{{totalPrice | number}} VNĐ</span></td>
+                    <!-- <td>Tổng số lớp học: 0</td> -->
+                </tr>
+                <tr>
+                    <td>Số học viên đậu: {{totalPass}}</td>
+                    <td>Số học viên chưa đóng: {{totalPayFail}}</td>
+                    <!-- <td></td> -->
+                </tr>
+                <tr>
+                    <td>Số học viên trượt: {{totalFail}}</td>
+                    <td>Số học viên đã đóng: {{totalPay}}</td>
+                    <!-- <td></td> -->
+                </tr>
+                <tr>
+                    <td>Số học viên chưa thi: {{data?.length - totalPass - totalFail}}</td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="table">
+        <h4>Danh sách học viên:</h4>
+        <div class="example-container">
+            <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+                <ng-container matColumnDef="stu_code" sticky>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Mã học viên </th>
+                    <td mat-cell *matCellDef="let element"> {{element.stu_code}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="stu_name" sticky>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Họ và tên </th>
+                    <td mat-cell *matCellDef="let element"> {{element.stu_name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="stu_email">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                    <td mat-cell *matCellDef="let element"> {{element.stu_email}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="stu_gender">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Giới tính </th>
+                    <td mat-cell *matCellDef="let element"> {{(element.stu_gender==0)? 'Nam': 'Nữ'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="stu_birthday">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Ngày sinh </th>
+                    <td mat-cell *matCellDef="let element"> {{element.stu_birthday | date: "dd/MM/yyyy"}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="stu_phone">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Số điện thoại </th>
+                    <td mat-cell *matCellDef="let element"> {{element.stu_phone}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="cou_name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Loại </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.cou_name}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="cla_course">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Khóa học </th>
+                    <td mat-cell *matCellDef="let element">
+                        Khóa {{element.cla_course}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="cla_code">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Mã lớp </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.cla_code}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="tea_name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Tên giáo viên </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.tea_name}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="cla_start">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Ngày khai giảng </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.cla_start | date: 'dd/MM/yyyy'}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="cla_status">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Trạng thái </th>
+                    <td mat-cell *matCellDef="let element">
+                        <span *ngIf="element.cla_status == 0">Đang học</span>
+                        <span *ngIf="element.cla_status == 1">Đã hoàn thành</span>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="pay_type">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Học phí </th>
+                    <td mat-cell *matCellDef="let element">
+                        <span class="badge-danger" *ngIf="element.pay_type == null">Chưa đóng học phí</span>
+                        <span class="badge-success" *ngIf="element.pay_type != null">Đã đóng học phí</span>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="re_result">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Kết quả </th>
+                    <td mat-cell *matCellDef="let element">
+                        <span style="color: darkgray;" *ngIf="element.re_result == null">Chưa thi</span>
+                        <span style="color: red; font-weight: bold;" *ngIf="element.re_result == 0">Trượt</span>
+                        <span style="color: blue; font-weight: bold;" *ngIf="element.re_result == 1">Đậu</span>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+        </mat-paginator>
+    </div>
+</div>

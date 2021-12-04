@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { AuthService } from 'src/app/Services/auth.service';
 import { AuthdataService } from 'src/app/Services/authdata.service';
+import Swal from 'sweetalert2';
 
 @Component({
     selector: 'app-login-admin',
@@ -38,9 +39,14 @@ export class LoginAdminComponent implements OnInit {
                             this.dangnhap = false;
                         } else if(data?.status == 1){
                             this.auth.setToken(data.token);
-                            this.router.navigate(['/admin/user']);
+                            this.router.navigate(['/admin/trangchu']);
+                        }else if(data?.status == 2){
+                            Swal.fire({
+                                text: 'Tài khoản của bạn đã bị khóa!',
+                                icon: 'warning'
+                            })
                         }else{
-                            this.dangnhap=false;
+                            this.dangnhap = false;
                         }
                     }
                 },

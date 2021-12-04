@@ -1,0 +1,18 @@
+<app-breadcrumb name="xác thực"></app-breadcrumb>
+<div class="body">
+    <div class="content">
+        <h2>Xác thực tài khoản</h2>
+        <div>
+            <p>Xác thực tài khoản thông qua số điện thoại. Vui lòng kiểm tra tin nhắn để lấy mã. <a (click)="getOTP()">Gửi mã OTP</a></p>
+            <form [formGroup]="form">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Mã xác nhận</mat-label>
+                    <input formControlName="code" matInput>
+                    <mat-error *ngIf="!form.get('code').hasError('valid')">Mã xác thực không chính xác</mat-error>
+                </mat-form-field>
+            </form>
+            <div id="recaptcha-container"></div>
+            <button mat-raised-button color="primary" (click)="handleClick()">Xác thực</button>
+        </div>
+    </div>
+</div>

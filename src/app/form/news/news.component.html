@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>Thêm tin tức</h1>
+<form [formGroup]="formNews" (ngSubmit)="onSubmit()">
+    <div mat-dialog-content>
+        <mat-form-field appearance="outline">
+            <mat-label>Tiêu đề tin tức</mat-label>
+            <input type="text" formControlName="n_title" matInput>
+            <mat-error *ngIf="formNews.get('n_title').hasError('required')">Vui lòng nội dung!</mat-error>
+        </mat-form-field>
+        <div class="form_image">
+            <span class="input_file">Ảnh minh họa:</span><input type="file" (change)="onSelectFile($event)" accept="image/*"><br>
+            <img [src]="url_image" height="200px">
+            <mat-error *ngIf="checkImage && formNews.get('n_image').hasError('required')">Vui lòng chọn ảnh minh họa!</mat-error>
+        </div>
+        <mat-form-field style="margin-top: 15px;" class="example-full-width" appearance="outline">
+            <mat-label>Tóm tắt</mat-label>
+            <textarea matInput formControlName="n_summary" style="min-height: 150px;"></textarea>
+        </mat-form-field>
+        <div>
+            <label>Nội dung:</label>
+            <quill-editor class="content-editor" [placeholder]="''" [styles]="{'min-height': '420px'}" formControlName="n_content"></quill-editor>
+            <mat-error *ngIf="formNews.get('n_content').hasError('required')">Vui lòng nhập nội dung!</mat-error>
+        </div>
+        <mat-form-field appearance="outline" *ngIf="update">
+            <mat-label>Trạng thái</mat-label>
+            <mat-select formControlName="n_status">
+                <mat-option [value]="0">Mở tin tức</mat-option>
+                <mat-option [value]="1">Khóa tin tức</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="btn" mat-dialog-actions>
+        <button type="button" mat-raised-button mat-dialog-close="false">Đóng</button>
+        <button type="submit" mat-raised-button color="primary">Cập nhật</button>
+    </div>
+</form>

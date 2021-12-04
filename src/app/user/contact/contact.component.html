@@ -1,7 +1,7 @@
-<app-breadcrumb name="Liên hệ"></app-breadcrumb>
+<app-breadcrumb name="Góp ý"></app-breadcrumb>
 <div class="body">
     <div class="content">
-        <h2>Liên hệ</h2>
+        <h2>Góp ý</h2>
         <div class="form-contact">
             <form [formGroup]="formContact" (ngSubmit)="onSubmit()">
                 <mat-grid-list cols="2" rowHeight="70px">
@@ -38,7 +38,7 @@
                     <mat-error *ngIf="formContact.get('con_title').hasError('required')">Vui lòng điền nội dung!</mat-error>
                 </mat-form-field>
                 <div class="btn">
-                    <button type="submit" mat-raised-button color="primary">Gửi yêu cầu</button>
+                    <button type="submit" mat-raised-button color="primary">Gửi góp ý</button>
                 </div>
             </form>
         </div>

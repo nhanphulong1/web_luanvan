@@ -23,19 +23,30 @@
 
                 <mat-grid-tile class="form_left">
                     <mat-form-field appearance="outline">
-                        <mat-label>Khóa học</mat-label>
+                        <mat-label>khóa học</mat-label>
+                        <input type="number" formControlName="cla_course" matInput>
+                        <mat-error *ngIf="formClass.get('cla_course').hasError('required')">Vui lòng chọn khóa học!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile></mat-grid-tile>
+
+                <mat-grid-tile class="form_left">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Loại khóa học</mat-label>
                         <mat-select formControlName="cou_id">
                             <mat-option *ngFor="let item of courseData" [value]="item.cou_id" (click)="setFee(item)">{{item.cou_name}}</mat-option>
                         </mat-select>
-                        <mat-error *ngIf="formClass.get('cou_id').hasError('required')">Vui lòng chọn khóa học!</mat-error>
+                        <mat-error *ngIf="formClass.get('cou_id').hasError('required')">Vui lòng chọn loại khóa học!</mat-error>
                     </mat-form-field>
                 </mat-grid-tile>
 
                 <mat-grid-tile class="form_right">
                     <mat-form-field appearance="outline">
-                        <mat-label>Ngày bắt đầu</mat-label>
+                        <mat-label>Ngày khai giảng</mat-label>
                         <input type="date" formControlName="cla_start" matInput>
                         <mat-error *ngIf="formClass.get('cla_start').hasError('required')">Vui lòng chọn ngày!</mat-error>
+                        <mat-error *ngIf="formClass.get('cla_start').hasError('min')">Vui lòng không chọn ngày trong quá khứ!</mat-error>
                     </mat-form-field>
                 </mat-grid-tile>
 
@@ -63,11 +74,22 @@
                     </mat-form-field>
                 </mat-grid-tile>
 
+                <mat-grid-tile colspan="2">
+                    <mat-form-field style="width: 100%;" appearance="outline">
+                        <mat-label>Trạng thái tuyển sinh</mat-label>
+                        <mat-select formControlName="cla_admission">
+                            <mat-option [value]="0">Mở tuyển sinh</mat-option>
+                            <mat-option [value]="1">Đóng tuyển sinh</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="formClass.get('cla_admission').hasError('required')">Vui lòng chọn trạng thái!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+
             </mat-grid-list>
             <div class="form-btn">
+                <button type="reset" mat-raised-button color="secondary">Làm mới</button>
                 <button *ngIf="!isUpdate" type="submit" mat-raised-button color="primary">Thêm mới</button>
                 <button *ngIf="isUpdate" type="submit" mat-raised-button color="primary">Cập nhật</button>
-                <button type="reset" mat-raised-button color="secondary">Làm mới</button>
             </div>
         </form>
     </div>

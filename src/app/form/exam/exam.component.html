@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>Thêm mới kỳ thi lái xe</h1>
+<form [formGroup]="formExam" (ngSubmit)="onSubmit()">
+    <div mat-dialog-content>
+        <div>
+            <mat-form-field style="width: 100%" appearance="outline">
+                <mat-label>Loại bằng lái</mat-label>
+                <mat-select formControlName="cou_id">
+                    <mat-option *ngFor="let item of dataCourse" [value]="item.cou_id">{{item.cou_name}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="formExam.get('cou_id').hasError('required')">Vui lòng chọn loại bằng lái!</mat-error>
+            </mat-form-field>
+            <mat-form-field style="width: 100%" appearance="outline">
+                <mat-label>Ngày thi</mat-label>
+                <input type="date" formControlName="ex_date" matInput>
+                <mat-error *ngIf="formExam.get('ex_date').hasError('required')">Vui lòng chọn ngày thi!</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="width: 100%">
+                <mat-label>Địa điểm thi</mat-label>
+                <input type="text" formControlName="ex_location" matInput>
+                <mat-error *ngIf="formExam.get('ex_location').hasError('required')">Vui lòng nhập địa chỉ thi!</mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="btn" mat-dialog-actions>
+        <button type="button" mat-raised-button mat-dialog-close="false">Đóng</button>
+        <button type="submit" mat-raised-button color="primary">Cập nhật</button>
+    </div>
+</form>

@@ -2,23 +2,28 @@
     <!-- <div class="logo py-4">
         <img src="../../../assets/image/logo.png" alt="logo">
     </div> -->
-    <h2 id="ctName">Hệ thống quản lý đăng ký và học lái xe</h2>
+    <h2 id="ctName" [routerLink]="['/admin/trangchu']" routerLinkActive="router-link-active">Hệ thống quản lý đăng ký và học lái xe</h2>
     <ul>
         <li>
-            <a (click)="showNav(1)">
+            <a routerLink="/admin/trangchu" routerLinkActive="router-link-active">
+                <mat-icon>dashboard</mat-icon>Dashboard</a>
+        </li>
+        <li *ngIf="checkPermission(1)">
+            <a routerLink="/admin/user" routerLinkActive="router-link-active">
+                <mat-icon>people</mat-icon>Quản lý tài khoản</a>
+            <!-- <a (click)="showNav(1)">
                 <mat-icon>manage_accounts</mat-icon>Quản lý tài khoản
                 <mat-icon class="{{ (show==1) ? 'expand  expand_active': 'expand' }}">expand_more</mat-icon>
-            </a>
-            <ul *ngIf="(show==1)">
+            </a> -->
+            <!-- <ul *ngIf="(show==1)">
                 <li>
                     <a routerLink="/admin/user/add" routerLinkActive="router-link-active">
                         <mat-icon>person_add</mat-icon>Thêm mới tài khoản</a>
-                    <a routerLink="/admin/user" routerLinkActive="router-link-active">
-                        <mat-icon>people</mat-icon>Danh sách tài khoản</a>
+                    
                 </li>
-            </ul>
+            </ul> -->
         </li>
-        <li>
+        <li *ngIf="checkPermission(3)">
             <a (click)="showNav(2)">
                 <mat-icon>school</mat-icon>Quản lý học viên
                 <mat-icon class="{{ (show==2) ? 'expand  expand_active': 'expand' }}">expand_more</mat-icon>
@@ -27,28 +32,28 @@
                 <li>
                     <a routerLink="/admin/student/add" routerLinkActive="router-link-active">
                         <mat-icon>person_add_alt</mat-icon>Thêm mới học viên</a>
-                    <a routerLink="/admin/student/regist" routerLinkActive="router-link-active">
-                        <mat-icon>list_alt</mat-icon>Học viên đăng ký</a>
+                    <!-- <a routerLink="/admin/student/regist" routerLinkActive="router-link-active">
+                        <mat-icon>list_alt</mat-icon>Học viên đăng ký</a> -->
                     <a routerLink="/admin/student" routerLinkActive="router-link-active">
                         <mat-icon>view_list</mat-icon>Danh sách học viên</a>
                 </li>
             </ul>
         </li>
-        <li>
+        <li *ngIf="checkPermission(2)">
             <a (click)="showNav(3)">
-                <mat-icon>assignment</mat-icon>Quản lý khóa học
+                <mat-icon>assignment</mat-icon>Quản lý danh mục
                 <mat-icon class="{{ (show==3) ? 'expand  expand_active': 'expand' }}">expand_more</mat-icon>
             </a>
             <ul *ngIf="(show==3)">
                 <li>
                     <a routerLink="/admin/course/add" routerLinkActive="router-link-active">
-                        <mat-icon>post_add</mat-icon>Thêm mới khóa học</a>
+                        <mat-icon>post_add</mat-icon>Thêm mới</a>
                     <a routerLink="/admin/course" routerLinkActive="router-link-active">
-                        <mat-icon>view_list</mat-icon>Danh mục khóa học</a>
+                        <mat-icon>view_list</mat-icon>Danh sách danh mục</a>
                 </li>
             </ul>
         </li>
-        <li>
+        <li *ngIf="checkPermission(4)">
             <a (click)="showNav(4)">
                 <mat-icon>store</mat-icon>Quản lý lớp học
                 <mat-icon class="{{ (show==4) ? 'expand  expand_active': 'expand' }}">expand_more</mat-icon>
@@ -56,13 +61,15 @@
             <ul *ngIf="(show==4)">
                 <li>
                     <a routerLink="/admin/class/add" routerLinkActive="router-link-active">
-                        <mat-icon>list_alt</mat-icon>Thêm lớp học mới</a>
+                        <mat-icon>class</mat-icon>Thêm lớp học mới</a>
                     <a routerLink="/admin/class" routerLinkActive="router-link-active">
-                        <mat-icon>class</mat-icon>Danh sách lớp học</a>
+                        <mat-icon>list_alt</mat-icon>Danh sách lớp học</a>
+                    <a routerLink="/admin/class/complete" routerLinkActive="router-link-active">
+                        <mat-icon>domain_verification</mat-icon>Danh sách lớp học đăng ký hoàn thành</a>
                 </li>
             </ul>
         </li>
-        <li>
+        <li *ngIf="checkPermission(5)">
             <a (click)="showNav(5)">
                 <mat-icon>accessibility_new</mat-icon>Quản lý giáo viên
                 <mat-icon class="{{ (show==5) ? 'expand  expand_active': 'expand' }}">expand_more</mat-icon>
@@ -76,29 +83,43 @@
                 </li>
             </ul>
         </li>
-        <li>
+        <li *ngIf="checkPermission(10)">
+            <a [routerLink]="['/admin/news']" routerLinkActive="router-link-active">
+                <mat-icon>newspaper</mat-icon>Quản lý tin tức</a>
+        </li>
+        <li *ngIf="checkPermission(6)">
             <a [routerLink]="['/admin/assignment']" routerLinkActive="router-link-active">
                 <mat-icon>date_range</mat-icon>Phân công giảng dạy</a>
         </li>
-        <li>
-            <a href="">
+        <li *ngIf="checkPermission(9)">
+            <a [routerLink]="['/admin/exam']" routerLinkActive="router-link-active">
+                <mat-icon>directions_car</mat-icon>Quản lý lịch thi bằng lái</a>
+        </li>
+        <li *ngIf="checkPermission(7)">
+            <a [routerLink]="['/admin/contact']" routerLinkActive="router-link-active">
                 <mat-icon>contact_phone</mat-icon>Liên hệ</a>
         </li>
-        <li>
+        <li *ngIf="checkPermission(8)">
+            <!-- <a routerLink="admin/statistic1" routerLinkActive="router-link-active">
+                <mat-icon>insert_chart</mat-icon>Thống kê báo cáo</a> -->
             <a (click)="showNav(6)">
                 <mat-icon>dashboard</mat-icon>Thống kê báo cáo
                 <mat-icon class="{{ (show==6) ? 'expand  expand_active': 'expand' }}">expand_more</mat-icon>
             </a>
             <ul *ngIf="(show==6)">
                 <li>
-                    <a routerLink="admin/statistic" routerLinkActive="router-link-active">
-                        <mat-icon>leaderboard</mat-icon>Thống kê tổng quát</a>
-                    <a routerLink="admin/statistic/course" routerLinkActive="router-link-active">
-                        <mat-icon>pie_chart</mat-icon>Thống kê theo khóa học</a>
-                    <a routerLink="admin/statistic" routerLinkActive="router-link-active">
-                        <mat-icon>insert_chart</mat-icon>Thống kê theo giáo viên</a>
+                    <a routerLink="admin/statistic1" routerLinkActive="router-link-active">
+                        <mat-icon>leaderboard</mat-icon>Thống kê theo học viên</a>
+                    <a routerLink="admin/statistic2" routerLinkActive="router-link-active">
+                        <mat-icon>pie_chart</mat-icon>Thống kê theo lớp học</a>
+                    <a routerLink="admin/statistic3" routerLinkActive="router-link-active">
+                        <mat-icon>insert_chart</mat-icon>Thống kê theo kỳ thi</a>
                 </li>
             </ul>
+        </li>
+        <li *ngIf="checkPermission(0)">
+            <a [routerLink]="['/admin/config']" routerLinkActive="router-link-active">
+                <mat-icon>settings_suggest</mat-icon>Cấu hình hệ thống</a>
         </li>
     </ul>
 </nav>

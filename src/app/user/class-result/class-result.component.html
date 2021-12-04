@@ -1,0 +1,78 @@
+<app-breadcrumb name="Lớp học"></app-breadcrumb>
+<div class="body">
+    <div class="content">
+        <h2>Kết quả</h2>
+        <!-- <div class="card card-location">
+            <h4 class="card-header">Quản lý lớp học</h4>
+            <div class="card-content">
+                <a [routerLink]="['/front/class/'+id]" routerLinkActive="router-link-active">Lớp học</a>
+                <a [routerLink]="['/front/class/schedule/'+id]" routerLinkActive="router-link-active">Thời khóa biểu</a>
+                <a [routerLink]="['/front/class/result/'+id]" routerLinkActive="router-link-active">Xem kết quả</a>
+            </div>
+        </div> -->
+        <app-card-class [type]="type" [cla_id]="id"></app-card-class>
+        <div class="nofitication">
+            <h4>Kết quả thi bằng lái xe</h4>
+            <div>
+                <h6>Thông tin học viên:</h6>
+                <table style="width: 90%; margin: auto;">
+                    <tr>
+                        <td colspan="2" style="width: 50%;"></td>
+                        <td colspan="2" style="width: 50%;"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 25px;">Mã HV:</td>
+                        <td>{{data?.stu_code}}</td>
+                        <td style="width: 25px;">Họ và tên:</td>
+                        <td>{{data?.stu_name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Ngày sinh:</td>
+                        <td>{{data?.stu_birthday | date: 'dd/MM/yyyy'}}</td>
+                        <td>Giới tính:</td>
+                        <td>{{(data?.stu_gender==0) ? 'Nam' : 'Nữ'}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div *ngIf="dataResult?.es_id != null">
+                <h6>Thông tin kỳ thi:</h6>
+                <div style="width: 90%; margin: auto;">
+                    <p>Hạng mục thi: <b>{{dataClass?.cou_name}}</b></p>
+                    <p>Ngày thi: {{dataResult?.ex_date | date: "dd/MM/yyyy"}}</p>
+                    <p>Địa điểm thi: {{dataResult?.ex_location}}</p>
+                </div>
+                <h6>Chi tiết kết quả:</h6>
+                <div *ngIf="dataResult?.re_result != null">
+                    <table class="result" border="1" style="width: 100%;">
+                        <tr>
+                            <th colspan="4" class="header">Phần thi Lý Thuyết</th>
+                        </tr>
+                        <tr>
+                            <td>Điểm:</td>
+                            <td>{{dataResult?.re_theory}}/{{dataResult?.re_theoryTotal}}</td>
+                            <td>Kết quả:</td>
+                            <td>{{(dataResult?.re_theoryResult==0)? 'Trượt': 'Đậu'}}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="4" class="header">Phần thi Thực Hành</th>
+                        </tr>
+                        <tr>
+                            <td>Điểm:</td>
+                            <td>{{dataResult?.re_practice}}/{{dataResult?.re_practiceTotal}}</td>
+                            <td>Kết quả:</td>
+                            <td>{{(dataResult?.re_theoryResult==0)? 'Trượt': 'Đậu'}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="text-align: right; font-weight: bold;">Tổng kết quả:</td>
+                            <td style="color: red; font-weight: bold;">{{(dataResult?.re_result==0)? 'Trượt': 'Đậu'}}</td>
+                        </tr>
+                    </table>
+                    <p style="font-size: 10px; color: red;">*Các thắc mắc vui lòng liên hệ với trung tâm để giải quyết vấn đề!</p>
+                </div>
+                <div class="notifi-none" *ngIf="dataResult?.re_result == null">
+                    Chưa có kết quả!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<app-breadcrumb name="Lớp học"></app-breadcrumb>
+<div class="body">
+    <div class="content">
+        <h2>Lớp {{classData?.cla_name}}</h2>
+        <app-card-class [type]="type" [cla_id]="id"></app-card-class>
+        <div class="nofitication">
+            <div class="btn" *ngIf="type!=0">
+                <a [routerLink]="['/front/class/add/'+id]" routerLinkActive="router-link-active" mat-raised-button color="primary">
+                    <mat-icon>add</mat-icon> Thêm mới</a>
+            </div>
+            <div class="card-notifi" *ngFor="let element of data">
+                <h4>{{element?.no_title}}</h4>
+                <p class="card-date">Ngày đăng: {{element?.created_at | date: 'dd/MM/yyyy HH:ss'}}</p>
+                <hr>
+                <p [innerHTML]="element?.no_content"></p>
+                <div class="btn-card" *ngIf="type == 1">
+                    <mat-icon (click)="onUpdate(element?.no_id)" style="color: blue;">border_color</mat-icon>
+                    <mat-icon (click)="onDelete(element?.no_id)" style="color: red;">delete</mat-icon>
+                </div>
+            </div>
+
+            <div class="notifi-none card-notifi" *ngIf="data?.length == 0">
+                <p>Chưa có thông báo.</p>
+            </div>
+        </div>
+    </div>
+</div>

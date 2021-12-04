@@ -1,0 +1,146 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.body {
+    background-color: #ecf3fd;
+    padding-bottom: 25px;
+}
+
+.body .content {
+    width: 70%;
+    background-color: white;
+    padding: 10px 25px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.body .content h2 {
+    font-size: 24px;
+    border-bottom: 2px solid black;
+    color: #024888;
+    margin-bottom: 25px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.info-Account {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding: 2px 30px;
+}
+
+.avatar {
+    width: 35%;
+    text-align: center;
+}
+
+.avatar img {
+    width: 300px;
+    height: 350px;
+}
+
+.noidung {
+    width: 64%;
+}
+
+.noidung h4 {
+    color: rgb(34, 34, 255);
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.noidung table {
+    width: 90%;
+    margin: 0 auto;
+    // border: 1px solid black;
+}
+
+.noidung table tr {
+    height: 40px;
+}
+
+.update {
+    text-align: center;
+    width: 100%;
+    font-size: 16px;
+}
+
+.update a {
+    text-decoration: none;
+}
+
+.info-Class {
+    margin-top: 20px;
+}
+
+.info-Class table {
+    width: 90%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    // border: 1px solid black;
+}
+
+.info-Class table thead {
+    background-color: #1B75BB;
+    font-size: 15px;
+    color: white;
+    font-weight: bold;
+    height: 40px;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+.info-Class table tbody tr {
+    height: 35px;
+}
+
+.info-Class table tbody tr td {
+    font-size: 13px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-left: 35px;
+}
+
+.info-Schedule {
+    margin-top: 30px;
+}
+
+.info-Schedule h4 {
+    text-align: center;
+    color: rgb(34, 34, 255);
+    font-weight: bold;
+    font-size: 17px;
+    margin-bottom: 2px;
+}
+
+.info-Schedule table {
+    width: 90%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    // border: 1px solid black;
+}
+
+.info-Schedule table thead th {
+    background-color: #1B75BB;
+    font-size: 15px;
+    color: white;
+    font-weight: normal;
+    height: 40px;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+.info-Schedule table tbody tr {
+    height: 35px;
+}
+
+.info-Schedule table tbody tr td {
+    font-size: 13px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+.text-danger {
+    color: red;
+}

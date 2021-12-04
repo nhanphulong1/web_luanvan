@@ -1,0 +1,28 @@
+<app-breadcrumb name="Tin tức"></app-breadcrumb>
+<div class="body">
+    <div class="content">
+        <h2>{{data?.n_title}}</h2>
+        <div class="content-detail" [innerHTML]="data?.n_content">
+        </div>
+        <div class="card card-info">
+            <h4 class="card-header">Thông tin khoá học</h4>
+            <div class="card-content">
+                <p>Tên khóa học: <span><b>{{data?.cou_name}}</b></span></p>
+                <p>Học phí: <span class="text-danger">{{ data?.cou_fee | number }}vnđ</span></p>
+                <p>Thời gian đào tạo: <span class="text-info">{{data?.cou_training}}</span></p>
+                <p>Số tiết học: 3 buổi/tuần</p>
+                <p>Hình thức: <b>Lý thuyết + thực hành(hướng dẫn trực tiếp)</b></p>
+                <div class="btn"><a mat-raised-button [routerLink]="['/front/regis']" routerLinkActive="router-link-active">Đăng ký khóa học</a></div>
+            </div>
+        </div>
+        <div class="card card-course">
+            <h4 class="card-header">Các khóa đào tạo</h4>
+            <div class="card-content">
+                <a [routerLink]="['/front/course/b1']" routerLinkActive="router-link-active">+ Khóa học lái xe bằng B1</a>
+                <a [routerLink]="['/front/course/b2']" routerLinkActive="router-link-active">+ Khóa học lái xe bằng B2</a>
+                <a [routerLink]="['/front/course/c1']" routerLinkActive="router-link-active">+ Khóa học lái xe bằng C1</a>
+            </div>
+        </div>
+    </div>
+
+</div>
