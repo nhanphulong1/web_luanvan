@@ -38,6 +38,17 @@
                     </mat-form-field>
                 </mat-grid-tile>
             </mat-grid-list>
+            <div class="form_image">
+                <span class="input_file">Ảnh đại diện:</span><input type="file" (change)="onSelectFile($event)" accept="image/*"><br>
+                <!--  -->
+                <img [src]="url_image" height="200px">
+                <mat-error *ngIf="formCourse.get('cou_image').hasError('required') && imageInvalid">Vui lòng chọn ảnh đại diện!</mat-error>
+            </div>
+            <div class="text-area">
+                <label>Giới thiệu khóa học:</label>
+                <quill-editor class="content-editor" [placeholder]="''" [styles]="{'min-height': '220px'}" formControlName="cou_content"></quill-editor>
+                <mat-error *ngIf="formCourse.get('cou_content').hasError('required') && checkContent">Vui lòng nhập nội dung!</mat-error>
+            </div>
             <div class="form-btn">
                 <button *ngIf="!isUpdate" type="submit" mat-raised-button color="primary">Thêm mới</button>
                 <button *ngIf="isUpdate" type="submit" mat-raised-button color="primary">Cập nhật</button>

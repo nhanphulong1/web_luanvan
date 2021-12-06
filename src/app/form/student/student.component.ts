@@ -93,7 +93,7 @@ export class StudentComponent implements OnInit {
 	getClass(id) { //Gọi ra ds các lớp thuộc loại khóa học đã chọn trong form
 		this.classService.getAllClassByCourse(id).subscribe((result) => {
 			this.classData = result.data;
-			this.classData = this.classData.filter(element => moment(element.cla_start).format('YYYY-MM-DD') >= this.now);
+			this.classData = this.classData.filter(element => element.cla_admission == 0);
 		});
 	}
 

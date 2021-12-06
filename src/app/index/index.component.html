@@ -26,6 +26,28 @@
 </div>
 <div class="content-2">
     <h2>DANH SÁCH CÁC KHÓA HỌC</h2>
+    <div>
+        <div class="course" *ngFor="let element of dataCourse">
+            <div class="course-image"><img [src]="element.cou_image" alt="Ảnh đại diện khóa học"></div>
+            <div class="course-detail">
+                <h2 class="course-name">Khóa đào tạo Hạng {{element.cou_name}}</h2>
+                <p>Phí đăng ký: &nbsp;&nbsp;<span style="color: red; font-weight: bold;">{{element.cou_fee | number}} VNĐ</span></p>
+                <p>Thời gian đào tạo: &nbsp;&nbsp;{{element.cou_training}}</p>
+            </div>
+            <div class="button">
+                <a [routerLink]="['/front/course/'+element.cou_name]" routerLinkActive="router-link-active" mat-raised-button color="primary">Xem chi tiết</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-3">
+    <h2>TIN TỨC</h2>
+    <div class="search">
+        <form (ngSubmit)="onSearch()">
+            <input type="text" name="search" [(ngModel)]="search">
+            <button><mat-icon>search</mat-icon></button>
+        </form>
+    </div>
     <div class="course" *ngFor="let element of data">
         <div class="course-image"><img [src]="element.n_image" alt="Ảnh đại diện khóa học"></div>
         <div class="course-detail">
@@ -34,41 +56,6 @@
         </div>
         <div class="button">
             <a [routerLink]="['/front/news/'+element.n_id]" routerLinkActive="router-link-active" mat-raised-button color="primary">Chi tiết</a>
-            <a [routerLink]="['/front/regis']" routerLinkActive="router-link-active" mat-raised-button color="accent">Đăng ký</a>
         </div>
     </div>
 </div>
-<!-- <div class="content-3" id="formdangky">
-    <div>
-        <h2>Đăng ký khóa học tại</h2>
-        <h2>Trung tâm</h2>
-        <hr>
-        <form (ngSubmit)="onSubmit()" [formGroup]="formRegis">
-            <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Email</mat-label>
-                <input formControlName="res_email" matInput type="text">
-                <mat-error *ngIf="formRegis.get('res_email').hasError('required')">Vui lòng nhập email!</mat-error>
-            </mat-form-field>
-            <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Họ và tên</mat-label>
-                <input formControlName="res_name" matInput type="text">
-                <mat-error *ngIf="formRegis.get('res_name').hasError('required')">Vui lòng nhập tên!</mat-error>
-            </mat-form-field>
-            <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Số điện thoại</mat-label>
-                <input formControlName="res_phone" matInput type="text">
-                <mat-error *ngIf="formRegis.get('res_phone').hasError('required')">Vui lòng nhập số điện thoại!</mat-error>
-                <mat-error *ngIf="!formRegis.get('res_phone').hasError('required') && formRegis.get('res_phone').hasError('pattern')">Vui lòng nhập đúng định dạng!</mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label>Loại bằng lái</mat-label>
-                <mat-select formControlName="res_type">
-                    <mat-option value="B1">B1</mat-option>
-                    <mat-option value="B2">B2</mat-option>
-                    <mat-option value="C1">C1</mat-option>
-                </mat-select>
-            </mat-form-field>
-            <button mat-raised-button color="accent">Đăng ký</button>
-        </form>
-    </div>
-</div> -->

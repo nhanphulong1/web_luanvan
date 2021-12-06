@@ -42,8 +42,8 @@ export class AttendanceService {
     }
 
     //Get Attendance By Diaries
-    public getAttendanceByDiaries(di_id): Observable<any> {
-        const url = this.REST_API_SERVER + '/' + di_id;
+    public getAttendanceByDiaries(di_id, cla_id): Observable<any> {
+        const url = this.REST_API_SERVER + '/' + di_id + '/'+ cla_id;
         return this.httpClient.get<any>(url)
             .pipe(
                 map((data) => {

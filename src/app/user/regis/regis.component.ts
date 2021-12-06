@@ -88,12 +88,11 @@ export class RegisComponent implements OnInit {
 		this.dataClass = data[0];
 		let tag = document.getElementById('class-info');
 		tag.classList.add('show');
-		alert(this.dataClass.cla_id);
 		let sch = await this.schedule.getScheduleByClass(this.dataClass.cla_id).toPromise();
 		this.scheduleClass = '';
 		if(sch.data.length > 0){
 			sch.data.forEach(element => {
-				this.scheduleClass += element.day_name + ' ';
+				this.scheduleClass += element.day_name + '  ';
 			});
 		}else{
 			this.scheduleClass= 'Chưa có thời khóa biểu!'

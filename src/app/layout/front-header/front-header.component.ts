@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { element } from 'protractor';
 import { AuthService } from 'src/app/Services/auth.service';
 import { ClassService } from 'src/app/Services/class.service';
+import { ConfigService } from 'src/app/Services/config.service';
+import { CourseService } from 'src/app/Services/course.service';
 import { ServeHttpService } from 'src/app/Services/serve-http.service';
 
 @Component({
@@ -13,7 +15,9 @@ export class FrontHeaderComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
-    private service: ServeHttpService,  
+    private service: ServeHttpService,
+    private course: CourseService,
+    private config: ConfigService,
     private classService: ClassService,
   ) {
     // if(this.auth.isLoggedIn()){
@@ -27,8 +31,16 @@ export class FrontHeaderComponent implements OnInit {
   data;
   user;
   dataClass;
+  configData;
+  dataCourse;
 
   ngOnInit(): void {
+    this.config.getConfig().subscribe((kq)=>{
+      this.configData = kq.data;
+    });
+    this.course.getAllCourse().subscribe((kq)=>{
+      this.dataCourse = kq.data;
+    })
     this.isLogin = this.auth.isLoggedIn();
     this.auth.getLoggedInName.subscribe(() => this.setLogin());
     if(this.isLogin){
@@ -39,7 +51,6 @@ export class FrontHeaderComponent implements OnInit {
           this.getClass(this.data.stu_id);
         }
       });
-      
     }
   }
 

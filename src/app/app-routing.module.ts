@@ -61,6 +61,7 @@ import { VerifyComponent } from './user/verify/verify.component';
 import { Statistic2Component } from './admin/statistic2/statistic2.component';
 import { Statistic3Component } from './admin/statistic3/statistic3.component';
 import { ConfigComponent } from './admin/config/config.component';
+import { SearchNewComponent } from './user/search-new/search-new.component';
 
 
 
@@ -71,9 +72,10 @@ const routes: Routes = [
   {path: 'front/regis', component: RegisComponent},
   {path: 'front/contact', component: ContactComponent},
   {path: 'front/question', component: QuestionComponent},
-  {path: 'front/course/b1', component: CourseB1Component},
-  {path: 'front/course/b2', component: CourseB2Component},
-  {path: 'front/course/c1', component: CourseC1Component},
+  {path: 'front/search/:search', component: SearchNewComponent},
+  // {path: 'front/course/b1', component: CourseB1Component},
+  // {path: 'front/course/b2', component: CourseB2Component},
+  {path: 'front/course/:name', component: CourseC1Component},
   {path: 'front/detail', component: InfoAccountComponent},
   {path: 'front/authen', component: VerifyComponent},
   {path: 'front/change', component: ChangPassComponent},
@@ -114,6 +116,7 @@ const routes: Routes = [
   {path: 'admin/class/add', component: ClassComponent, canActivate: [AuthGuard]},
   {path: 'admin/class/complete', component: ClassCompleteComponent, canActivate: [AuthGuard]},
   {path: 'admin/class/complete/:id', component: DetailClassCompleteComponent, canActivate: [AuthGuard]},
+  {path: 'admin/class/diaries/:id', component: DetailClassCompleteComponent, canActivate: [AuthGuard]},
   {path: 'admin/class/edit/:id', component: ClassComponent, canActivate: [AuthGuard]},
   {path: 'admin/class/detail/:id', component: DetailClassComponent, canActivate: [AuthGuard]},
   {path: 'admin/class/student/:id', component: DetailResultComponent, canActivate: [AuthGuard]},
@@ -139,6 +142,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes, {
       onSameUrlNavigation: 'reload',
+      scrollPositionRestoration: 'enabled',
     }),
     CommonModule
   ],

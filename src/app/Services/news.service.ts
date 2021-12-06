@@ -59,7 +59,7 @@ export class NewsService {
 
   //Get search by title
   public searchNews(n_title): Observable<any> {
-    const url = this.REST_API_SERVER + '/title/'+n_title;
+    const url = this.REST_API_SERVER + '/search/'+n_title;
     return this.httpClient.get<any>(url)
         .pipe(
             map((data) => {

@@ -62,9 +62,10 @@
         <div class="card card-course">
             <h4 class="card-header">Các khóa đào tạo</h4>
             <div class="card-content">
-                <a href="">+ Khóa học lái xe bằng B1</a>
-                <a href="">+ Khóa học lái xe bằng B2</a>
-                <a href="">+ Khóa học lái xe bằng C1</a>
+                <a [routerLink]="['/front/course/b1']" routerLinkActive="router-link-active">+ Khóa học lái xe bằng B1</a>
+                <a [routerLink]="['/front/course/b2']" routerLinkActive="router-link-active">+ Khóa học lái xe bằng B2</a>
+                <a [routerLink]="['/front/course/C']" routerLinkActive="router-link-active">+ Khóa học lái xe bằng C</a>
+                <a [routerLink]="['/front/course/D']" routerLinkActive="router-link-active">+ Khóa học lái xe bằng D</a>
             </div>
         </div>
     </div>

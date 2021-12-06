@@ -5,20 +5,20 @@
             <table>
                 <tr>
                     <td style="width: 70px;">Địa chỉ:</td>
-                    <td>Tòa nhà số 35 đường số 11, Phường 13, Quận 6. TP HCM</td>
+                    <td>{{data?.c_address}}</td>
                 </tr>
                 <tr>
                     <td>Liên hệ:</td>
-                    <td>0399584884 (thầy Tân)</td>
+                    <td>{{data?.c_phone}}</td>
                 </tr>
                 <tr>
                     <td>Email:</td>
-                    <td>trungtam@hoclaixenhandv.com</td>
+                    <td>{{data?.c_email}}</td>
                 </tr>
             </table>
             <div class="footer-contact">
-                <a href=""><img src="../../../assets/image/facebook.png" alt="facebook"></a>
-                <a href=""><img src="../../../assets/image/gmail.png" alt="gmail"></a>
+                <a [href]="data?.c_facebook"><img src="../../../assets/image/facebook.png" alt="facebook"></a>
+                <a [href]="'mailto:'+data?.c_email"><img src="../../../assets/image/gmail.png" alt="gmail"></a>
                 <a href=""><img src="../../../assets/image/zalo.webp" alt="zalo"></a>
             </div>
         </div>

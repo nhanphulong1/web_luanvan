@@ -15,11 +15,18 @@
             <mat-label>Tóm tắt</mat-label>
             <textarea matInput formControlName="n_summary" style="min-height: 150px;"></textarea>
         </mat-form-field>
-        <div>
+        <div class="text-area">
             <label>Nội dung:</label>
             <quill-editor class="content-editor" [placeholder]="''" [styles]="{'min-height': '420px'}" formControlName="n_content"></quill-editor>
-            <mat-error *ngIf="formNews.get('n_content').hasError('required')">Vui lòng nhập nội dung!</mat-error>
+            <mat-error *ngIf="formNews.get('n_content').hasError('required') && checkContent">Vui lòng nhập nội dung!</mat-error>
         </div>
+        <mat-form-field appearance="outline">
+            <mat-label>Tên lớp học</mat-label>
+            <mat-select formControlName="cla_id">
+                <mat-option value=''>Không</mat-option>
+                <mat-option *ngFor="let item of classData" [value]="item.cla_id">{{item.cla_code}} - {{item.cla_name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
         <mat-form-field appearance="outline" *ngIf="update">
             <mat-label>Trạng thái</mat-label>
             <mat-select formControlName="n_status">

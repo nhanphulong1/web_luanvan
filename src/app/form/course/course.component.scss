@@ -83,6 +83,18 @@
     font-size: 11px;
 }
 
+.form_image {
+    padding-bottom: 15px;
+}
+
+.form_image mat-error {
+    font-size: 10px;
+}
+
+.text-area {
+    margin-bottom: 15px;
+}
+
 .form_left> ::ng-deep figure {
     justify-content: flex-start !important;
 }

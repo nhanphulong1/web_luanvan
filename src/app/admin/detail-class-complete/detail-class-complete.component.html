@@ -5,7 +5,7 @@
             <mat-icon>keyboard_backspace</mat-icon>Quay lại
         </a>
     </div>
-    <div class="btn-detail">
+    <div class="btn-detail" *ngIf="data?.cla_complete == 1">
         <button mat-raised-button color="primary" (click)="updateStatus(id)">Hoàn thành lớp học</button>
     </div>
     <div class="info">

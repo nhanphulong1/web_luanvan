@@ -14,12 +14,12 @@ import Swal from 'sweetalert2';
   styleUrls: ['./list-student.component.scss']
 })
 export class ListStudentComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'stu_code', 'stu_name', 'stu_email', 'stu_gender', 'stu_phone', 'stu_birthday', 'cou_name', 'pay_type', 're_result', 'action'];
+  displayedColumns: string[] = ['id', 'stu_code', 'stu_name', 'stu_email', 'stu_gender', 'stu_phone', 'stu_birthday', 'cou_name', 'cla_code', 'cla_name', 'cla_course', 'pay_type', 're_result', 'action'];
   dataSource = new MatTableDataSource();
   courseData;
   name = "";
   cou_id = "";
-  type = "";
+  type = "-1";
 
   constructor(
     private service: StudentService,

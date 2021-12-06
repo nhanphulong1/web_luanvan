@@ -32,6 +32,9 @@ export class CourseComponent implements OnInit {
   }
 
   isUpdate = false;
+  checkContent = false;
+  imageInvalid = false;
+  url_image = "../../../assets/image/default-image.jpg";
   id;
 
   public formCourse = this.fb.group({
@@ -39,6 +42,8 @@ export class CourseComponent implements OnInit {
     cou_fee: ['', [Validators.required]],
     cou_training: ['', [Validators.required]],
     cou_quantity: ['', Validators.required],
+    cou_content: ['', Validators.required],
+    cou_image: ['', Validators.required],
   });
 
   setValueForm(data) {
@@ -46,9 +51,29 @@ export class CourseComponent implements OnInit {
     this.formCourse.controls['cou_fee'].setValue(data.cou_fee);
     this.formCourse.controls['cou_training'].setValue(data.cou_training);
     this.formCourse.controls['cou_quantity'].setValue(data.cou_quantity);
+    this.formCourse.controls['cou_content'].setValue(data.cou_content);
+    this.formCourse.controls['cou_image'].setValue(data.cou_image);
+    this.url_image = data.cou_image;
   }
 
+  onSelectFile(e) {
+		let file = e.target.files[0];
+		if (file) {
+			let reader = new FileReader();
+			reader.onload = this.handleReaderLoaded.bind(this);
+			reader.readAsBinaryString(file);
+		}
+	}
+
+	handleReaderLoaded(e) {
+		this.url_image = ('data:image/png;base64,' + btoa(e.target.result));
+		this.formCourse.controls['cou_image'].setValue(this.url_image);
+	}
+
+
   onSubmit() {
+    this.checkContent = true;
+    this.imageInvalid = true;
     if (this.formCourse.valid) {
       this.service.createCourse(this.formCourse.value).subscribe((data) => {
         if (data.status == 1) {
@@ -71,6 +96,8 @@ export class CourseComponent implements OnInit {
   }
 
   onUpdate() {
+    this.checkContent = true;
+    this.imageInvalid = true;
     if (this.formCourse.valid) {
       this.service.updateCourse(this.id, this.formCourse.value).subscribe((data) => {
         if (data.status == 1) {
