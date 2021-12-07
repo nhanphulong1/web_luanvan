@@ -109,6 +109,7 @@ import { DetailNewsComponent } from './user/detail-news/detail-news.component';
 import { Statistic3Component } from './admin/statistic3/statistic3.component';
 import { ConfigComponent } from './admin/config/config.component';
 import { SearchNewComponent } from './user/search-new/search-new.component';
+import { AddExamsComponent } from './form/add-exams/add-exams.component';
 
 @NgModule({
   declarations: [
@@ -186,6 +187,7 @@ import { SearchNewComponent } from './user/search-new/search-new.component';
     Statistic3Component,
     ConfigComponent,
     SearchNewComponent,
+    AddExamsComponent,
   ],
   imports: [
     BrowserModule,

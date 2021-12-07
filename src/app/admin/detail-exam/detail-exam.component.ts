@@ -5,9 +5,11 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { DialogResultComponent } from 'src/app/form/dialog-result/dialog-result.component';
+import { AddExamsComponent } from 'src/app/form/add-exams/add-exams.component';
 import { ExamStudentService } from 'src/app/Services/exam-student.service';
 import { ExamService } from 'src/app/Services/exam.service';
 import Swal from 'sweetalert2';
+import { ClassService } from 'src/app/Services/class.service';
 
 @Component({
     selector: 'app-detail-exam',
@@ -20,7 +22,7 @@ export class DetailExamComponent implements OnInit {
     dataSource = new MatTableDataSource();
     id;
     data;
-    dataStudent;
+    dataStudent=[];
     newStudent = [];
     check: Boolean=false;
     check1: Boolean=true;
@@ -29,7 +31,8 @@ export class DetailExamComponent implements OnInit {
         private router: Router,
         private route: ActivatedRoute,
         private exam: ExamService,
-        private student: ExamStudentService,
+        private studentExam: ExamStudentService,
+        private classService: ClassService,
         private dialog: MatDialog,
     ) { }
 
@@ -56,25 +59,44 @@ export class DetailExamComponent implements OnInit {
                 this.check = true;
             }
         });
-        this.student.getStudentByExams(this.id).subscribe((result) => {
+        this.studentExam.getStudentByExams(this.id).subscribe((result) => {
             this.dataStudent = result.data;
             this.dataSource = new MatTableDataSource(this.dataStudent);
         });
     }
 
     async getStudent(id) {
-        let kq = await this.student.getStudentByCourse(id).toPromise();
-        let arr = kq.data;
-        if(arr.length >0){
-            kq.data.forEach(element => {
-                if(this.check1){
-                    this.dataStudent.push(element);
-                    this.newStudent.push(element);
+        // let kq = await this.student.getStudentByCourse(id).toPromise();
+        // let arr = kq.data;
+        // if(arr.length >0){
+        //     kq.data.forEach(element => {
+        //         if(this.check1){
+        //             this.dataStudent.push(element);
+        //             this.newStudent.push(element);
+        //         }
+        //     });
+        //     this.check1 = false;
+        // }
+        // this.dataSource = new MatTableDataSource(this.dataStudent);
+        const dialogRef = this.dialog.open(AddExamsComponent, {
+            width: '600px',
+            data: {cou_id: id}
+        })
+
+        dialogRef.afterClosed().subscribe((result)=>{
+            this.classService.getStudentInClass(result).subscribe((kq)=>{
+                kq.data.forEach(element => {
+                    if(!this.dataStudent.some(el => el.stu_code == element.stu_code)){
+                        this.dataStudent.push(element);
+                        this.newStudent.push(element);
+                    }
+                });
+                if(this.newStudent.length>0){
+                    this.check1 = false;
                 }
-            });
-            this.check1 = false;
-        }
-        this.dataSource = new MatTableDataSource(this.dataStudent);
+                this.dataSource = new MatTableDataSource(this.dataStudent);
+            })
+        })
     }
 
     async createStudentExam(id) {
@@ -93,7 +115,7 @@ export class DetailExamComponent implements OnInit {
             confirmButtonText: 'Xác nhận'
         }).then(async (result) => {
             if (result.isConfirmed) {
-                let kq = await this.student.createExamStudent(data).toPromise();
+                let kq = await this.studentExam.createExamStudent(data).toPromise();
                 if (kq.status == 1) {
                     Swal.fire({
                         icon: 'success',
@@ -116,6 +138,12 @@ export class DetailExamComponent implements OnInit {
             width: '550px',
             data: {es_id: id}
         });
+        dialogRef.afterClosed().subscribe(()=>{
+            this.studentExam.getStudentByExams(this.id).subscribe((result) => {
+                this.dataStudent = result.data;
+                this.dataSource = new MatTableDataSource(this.dataStudent);
+            });
+        })
     }
 
 }

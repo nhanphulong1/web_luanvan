@@ -12,7 +12,6 @@ import Swal from 'sweetalert2';
 })
 export class DialogResultComponent implements OnInit {
 
-
     constructor(
         private fb: FormBuilder,
         private service: ResultService,
@@ -41,6 +40,8 @@ export class DialogResultComponent implements OnInit {
                 this.setValue();
                 this.update = true;
             }
+            console.log(result, this.update);
+            
         })
     }
 
@@ -56,6 +57,7 @@ export class DialogResultComponent implements OnInit {
 
 
     onSubmit() {
+        console.log(this.formResult.valid);
         if(this.formResult.valid)
             if (this.update == true) {
                 this.updateResult();
