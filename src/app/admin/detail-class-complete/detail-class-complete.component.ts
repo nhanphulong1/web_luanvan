@@ -82,7 +82,7 @@ export class DetailClassCompleteComponent implements OnInit {
                             'Hoàn thành lớp học thành công!',
                             'success'
                         ).then((result)=>{
-                            this.router.navigate(['/admin/class/complete']);
+                            this.router.navigate(['/admin/class/detail/'+id]);
                         });
                     } else {
                         Swal.fire({

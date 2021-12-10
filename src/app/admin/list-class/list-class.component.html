@@ -100,8 +100,8 @@
                             <mat-icon style="color: #024888;">visibility</mat-icon>Chi tiết</a>
                         <a *ngIf="element.cla_status == 0" mat-menu-item [routerLink]="['/admin/class/edit/'+ element.cla_id]" routerLinkActive="router-link-active">
                             <mat-icon style="color: #024888;">border_color</mat-icon>Cập nhật</a>
-                        <!-- <a *ngIf="element.cla_status == 0" mat-menu-item (click)="updateStatus(element.cla_id)">
-                            <mat-icon style="color: #F78812;">check_circle_outline</mat-icon>Hoàn thành</a> -->
+                        <a *ngIf="element.cla_status == 0" mat-menu-item (click)="updateStatus(element.cla_id)">
+                            <mat-icon style="color: #F78812;">check_circle_outline</mat-icon>Hoàn thành</a>
                         <a mat-menu-item (click)="deleteClass(element.cla_id)">
                             <mat-icon style="color: red;">delete</mat-icon>Xóa lớp học</a>
                     </mat-menu>

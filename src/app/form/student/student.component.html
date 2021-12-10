@@ -135,7 +135,7 @@
                     <mat-form-field style="width: 100%;" class="example-full-width" appearance="outline">
                         <mat-label>Tên lớp học</mat-label>
                         <mat-select formControlName="cla_id">
-                            <mat-option *ngFor="let item of classData" [value]="item.cla_id">{{item.cla_code}} - {{item.cla_name}}</mat-option>
+                            <mat-option *ngFor="let item of classData" [value]="item.cla_id">{{item.cla_code}} - {{item.cla_name}} - Khóa {{item.cla_course}}</mat-option>
                         </mat-select>
                         <mat-error *ngIf="formRegisClass.get('cla_id').hasError('required')">Vui lòng chọn tên lớp</mat-error>
                     </mat-form-field>

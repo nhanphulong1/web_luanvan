@@ -19,7 +19,7 @@ export class SearchNewComponent implements OnInit {
     data;
     search='';
     page:number = 1;
-    countNews = 2;
+    countNews = 3; //số tin tức trong 1 trang
     countPage;
 
     ngOnInit(): void {

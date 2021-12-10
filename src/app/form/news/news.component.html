@@ -24,7 +24,7 @@
             <mat-label>Tên lớp học</mat-label>
             <mat-select formControlName="cla_id">
                 <mat-option value=''>Không</mat-option>
-                <mat-option *ngFor="let item of classData" [value]="item.cla_id">{{item.cla_code}} - {{item.cla_name}}</mat-option>
+                <mat-option *ngFor="let item of classData" [value]="item.cla_id">{{item.cla_code}} - {{item.cla_name}} - Khóa {{item.cla_course}}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="outline" *ngIf="update">

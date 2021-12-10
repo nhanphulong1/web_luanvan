@@ -22,16 +22,17 @@ export class ListTeacherComponent implements OnInit {
   ) { }
 
 
-  @ViewChild(MatSort) set matSort(sort: MatSort) {
-    if (!this.dataSource.sort) {
-      this.dataSource.sort = sort;
-    }
-  }
-
   @ViewChild(MatPaginator, {static: false})
   set paginator(value: MatPaginator) {
     if (this.dataSource){
       this.dataSource.paginator = value;
+    }
+  }  
+  
+  @ViewChild(MatSort, {static: false})
+  set sort(value: MatSort) {
+    if (this.dataSource){
+      this.dataSource.sort = value;
     }
   }
 

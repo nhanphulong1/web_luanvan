@@ -187,7 +187,7 @@ export class StudentComponent implements OnInit {
 					})
 					let classData = await this.classService.getClassById(this.formRegisClass.value.cla_id).toPromise();
 					let dataEmail = classData.data[0];
-					dataEmail.pay_type = this.formRegisClass.value.de_paidFee;
+					dataEmail.pay_type = parseInt(this.formRegisClass.value.de_paidFee) + 1;
 					dataEmail.name = this.formStudent.value.stu_name;
 					dataEmail.code = user.data[0].stu_code;
 					dataEmail.email = this.formStudent.value.stu_email;
