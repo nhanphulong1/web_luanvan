@@ -65,7 +65,7 @@ export class ListRegisComponent implements OnInit {
       this.loadTable();
       if(result.status == 1){
         Swal.fire(
-          'Success!',
+          'Thành công!',
           'cập nhật thành công!',
           'success'
         );

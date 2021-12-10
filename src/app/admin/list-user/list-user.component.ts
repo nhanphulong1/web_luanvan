@@ -81,14 +81,15 @@ export class ListUserComponent implements OnInit {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Đặt lại'
+            confirmButtonText: 'Đặt lại',
+            cancelButtonText: 'Hủy'
         }).then((result) => {
             if (result.isConfirmed) {
                 this.service.resetPassUser(id).subscribe((result) => {
                     console.log(result);
                     if (result.status == 1) {
                         Swal.fire(
-                            'Success!',
+                            'Thành công!',
                             'Đặt lại mật khẩu tài khoản thành công!',
                             'success'
                         );
@@ -113,7 +114,8 @@ export class ListUserComponent implements OnInit {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Khóa tài khoản'
+            confirmButtonText: 'Khóa tài khoản',
+            cancelButtonText: 'Hủy'
         }).then((result) => {
             if (result.isConfirmed) {
                 this.service.deleteUser(id).subscribe((result) => {
@@ -144,7 +146,8 @@ export class ListUserComponent implements OnInit {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Mở khóa'
+            confirmButtonText: 'Mở khóa',
+            cancelButtonText: 'Hủy'
         }).then((result) => {
             if (result.isConfirmed) {
                 this.service.undeleteUser(id).subscribe((result) => {

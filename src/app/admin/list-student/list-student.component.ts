@@ -85,14 +85,15 @@ export class ListStudentComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Xóa'
+      confirmButtonText: 'Xóa',
+      cancelButtonText: 'Hủy'
     }).then((result) => {
       if (result.isConfirmed) {
         this.service.deleteStudent(id).subscribe((result) => {
           console.log(result);
           if (result.status == 1) {
             Swal.fire(
-              'Deleted!',
+              'Thành công!',
               'Xóa học viên thành công!',
               'success'
             );

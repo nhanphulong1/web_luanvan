@@ -89,7 +89,7 @@ export class AssignmentComponent implements OnInit {
 				if(result.status == 1){
 					this.mail.sendMailAssign(dataClass).subscribe(result => {
 						Swal.fire(
-							'Success!',
+							'Thành công!',
 							'Phân công giảng dạy thành công!',
 							'success'
 						  ).then(()=>{

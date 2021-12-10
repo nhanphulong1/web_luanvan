@@ -72,7 +72,7 @@ const routes: Routes = [
   {path: 'front/regis', component: RegisComponent},
   {path: 'front/contact', component: ContactComponent},
   {path: 'front/question', component: QuestionComponent},
-  {path: 'front/search/:search', component: SearchNewComponent},
+  {path: 'front/search/:page/:search', component: SearchNewComponent},
   // {path: 'front/course/b1', component: CourseB1Component},
   // {path: 'front/course/b2', component: CourseB2Component},
   {path: 'front/course/:name', component: CourseC1Component},

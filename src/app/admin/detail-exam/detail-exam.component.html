@@ -10,6 +10,9 @@
     <div class="btn-detail">
         <button (click)="getStudent(data?.cou_id)" mat-raised-button color="primary" [disabled]="check">Cập nhật học viên</button>
         <button (click)="createStudentExam(data?.ex_id)" mat-raised-button color="primary" [disabled]="check1">Xác nhận</button>
+        <button mat-raised-button color="primary" (click)="export()"><img src="../../../assets/image/excel.png" alt="Excel"> Xuất file</button>
+        <button mat-raised-button color="primary" (click)="importFile()">Import file kết quả</button>
+        <input id="input-file" (change)="onFileChange($event)" type="file" hidden>
     </div>
     <div class="info">
         <h4>Thông tin kỳ thi:</h4>

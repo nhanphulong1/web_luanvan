@@ -68,7 +68,7 @@ export class ExamComponent implements OnInit {
         this.exam.updateExams(this.data['ex_id'], this.formExam.value).subscribe((result)=>{
             if(result.status == 1){
                 Swal.fire(
-                    'Success!',
+                    'Thành công!',
                     'Cập nhật kết quả thành công!',
                     'success'
                 ).then(()=>{
@@ -77,7 +77,7 @@ export class ExamComponent implements OnInit {
             }else{
                 Swal.fire({
                     icon: 'error',
-                    title: 'Error!',
+                    title: 'Lỗi!',
                     text: 'Cập nhật kết quả thất bại.',
                 }).then(()=>{
                     this.onNoClick();
@@ -86,11 +86,20 @@ export class ExamComponent implements OnInit {
         })
     }
 
+    checkDate(){
+        let date1 = new Date(this.formExam.value.ex_date+ ' 23:59:59');
+        let date2 = new Date();
+        if(date1<date2 && !this.update){
+            this.formExam.controls['ex_date'].setErrors({min: true});
+        }
+    }
+
     createResult() {
+        this.checkDate();
         this.exam.createExams(this.formExam.value).subscribe((result)=>{
             if(result.status == 1){
                 Swal.fire(
-                    'Success!',
+                    'Thành công!',
                     'Cập nhật kết quả thành công!',
                     'success'
                 ).then(()=>{
@@ -99,7 +108,7 @@ export class ExamComponent implements OnInit {
             }else{
                 Swal.fire({
                     icon: 'error',
-                    title: 'Error!',
+                    title: 'Lỗi!',
                     text: 'Cập nhật kết quả thất bại.',
                 }).then(()=>{
                     this.onNoClick();

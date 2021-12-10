@@ -40,7 +40,6 @@ export class DialogResultComponent implements OnInit {
                 this.setValue();
                 this.update = true;
             }
-            console.log(result, this.update);
             
         })
     }
@@ -57,7 +56,6 @@ export class DialogResultComponent implements OnInit {
 
 
     onSubmit() {
-        console.log(this.formResult.valid);
         if(this.formResult.valid)
             if (this.update == true) {
                 this.updateResult();
@@ -70,7 +68,7 @@ export class DialogResultComponent implements OnInit {
         this.service.updateResult(this.data['es_id'], this.formResult.value).subscribe((result)=>{
             if(result.status == 1){
                 Swal.fire(
-                    'Success!',
+                    'Thành công!',
                     'Cập nhật kết quả thành công!',
                     'success'
                 ).then(()=>{
@@ -79,7 +77,6 @@ export class DialogResultComponent implements OnInit {
             }else{
                 Swal.fire({
                     icon: 'error',
-                    title: 'Error!',
                     text: 'Cập nhật kết quả thất bại.',
                 }).then(()=>{
                     this.onNoClick();
@@ -92,7 +89,7 @@ export class DialogResultComponent implements OnInit {
         this.service.createResult(this.formResult.value).subscribe((result)=>{
             if(result.status == 1){
                 Swal.fire(
-                    'Success!',
+                    'Thành công!',
                     'Cập nhật kết quả thành công!',
                     'success'
                 ).then(()=>{
@@ -101,7 +98,6 @@ export class DialogResultComponent implements OnInit {
             }else{
                 Swal.fire({
                     icon: 'error',
-                    title: 'Error!',
                     text: 'Cập nhật kết quả thất bại.',
                 }).then(()=>{
                     this.onNoClick();

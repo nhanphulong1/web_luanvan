@@ -99,7 +99,16 @@ export class RegisComponent implements OnInit {
 		}
 	}
 
+	checkBirthDay(){
+		let year = new Date(this.formStudent.value.stu_birthday).getFullYear();
+		let yearNow = new Date().getFullYear();
+		if(yearNow - year < 18){
+			this.formStudent.controls['stu_birthday'].setErrors({age: true});
+		}
+	}
+
 	async onSubmit() {
+		this.checkBirthDay();
 		if (this.formStudent.valid) {
 			this.paidFee = this.formStudent.value.pay_type;
 			// let checkCourse = await this.course.checkClassbyCourse(this.formStudent.value.cou_id).toPromise(); // chọn ra các lớp đang tuyển sinh theo hạng bằng lái
@@ -169,7 +178,7 @@ export class RegisComponent implements OnInit {
 		dataEmail.email = this.formStudent.value.stu_email;
 		this.mailService.sendMailUser(dataEmail).toPromise();
 		Swal.fire(
-			'Success!',
+			'Thành công!',
 			'Bạn đã đăng ký khóa học thành công! Vui lòng xem email để biết thêm thông tin',
 			'success'
 		)

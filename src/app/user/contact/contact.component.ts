@@ -41,10 +41,9 @@ export class ContactComponent implements OnInit {
       let data = this.getData();
       console.log(data);
       this.service.postContact(data).subscribe((result)=>{
-        console.log('result: ');
         if(result.status == 1){
           Swal.fire(
-            'Success!',
+            'Thành công',
             'Gửi yêu cầu thành công!',
             'success'
           ).then((result)=>{
@@ -52,7 +51,7 @@ export class ContactComponent implements OnInit {
         }else{
           Swal.fire({
             icon: 'error',
-            title: 'Oops...',
+            title: 'Lỗi',
             text: 'Gửi yêu cầu thất bại, Vui lòng thử lại sau!',
           })
         }

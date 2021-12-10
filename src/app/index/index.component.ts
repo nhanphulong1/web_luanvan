@@ -42,7 +42,7 @@ export class IndexComponent implements OnInit {
         if(this.search == ''){
             this.search = 'all';
         }
-        this.router.navigate(['/front/search/'+this.search]);
+        this.router.navigate(['/front/search/1/'+this.search]);
     }
 
 

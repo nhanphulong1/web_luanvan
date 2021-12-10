@@ -78,7 +78,7 @@ export class CourseComponent implements OnInit {
       this.service.createCourse(this.formCourse.value).subscribe((data) => {
         if (data.status == 1) {
           Swal.fire(
-            'Success!',
+            'Thành công!',
             'Bạn đã thêm khóa học mới thành công!',
             'success'
           ).then(() =>
@@ -87,7 +87,6 @@ export class CourseComponent implements OnInit {
         } else {
           Swal.fire({
             icon: 'error',
-            title: 'Error',
             text: 'Có lỗi đã xảy ra!',
           })
         }
@@ -102,7 +101,7 @@ export class CourseComponent implements OnInit {
       this.service.updateCourse(this.id, this.formCourse.value).subscribe((data) => {
         if (data.status == 1) {
           Swal.fire(
-            'Success!',
+            'Thành công!',
             'Bạn đã cập nhật khóa học mới thành công!',
             'success'
           ).then(() =>
@@ -111,7 +110,6 @@ export class CourseComponent implements OnInit {
         } else {
           Swal.fire({
             icon: 'error',
-            title: 'Error',
             text: 'Có lỗi đã xảy ra!',
           })
         }

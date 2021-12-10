@@ -34,6 +34,7 @@ export class Statistic3Component implements OnInit {
     ex_location='';
     cla_id = '0';
     cou_id = '0';
+    re_result = '';
 
     totalPrice = 0;
     totalPass = 0;
@@ -142,7 +143,8 @@ export class Statistic3Component implements OnInit {
             ex_location: this.ex_location,
             teacher: this.fruits,
             cla_course: this.cla_course,
-            cla_id: this.cla_id
+            cla_id: this.cla_id,
+            re_result: this.re_result
         };
         let kq = await this.course.getStatistic3(data).toPromise();
         this.loadTable(kq.data);

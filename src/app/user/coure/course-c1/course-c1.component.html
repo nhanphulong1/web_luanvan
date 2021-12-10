@@ -8,7 +8,7 @@
             <h4 class="card-header">Thông tin khoá học</h4>
             <div class="card-content">
                 <div *ngFor="let element of dataClass">
-                    <p>Lớp học: <span class="class_name">{{element.cla_name}}</span></p>
+                    <p>Lớp học: <span class="class_name">{{element.cla_name}} Khóa {{element.cla_course}}</span></p>
                     <p>Học phí: <span class="class_fee">{{element.cla_fee |number}} VNĐ</span></p>
                     <p>Ngày khai giảng: {{element.cla_start | date: 'dd/MM/yyyy'}}</p>
                     <p>Số lượng: {{element.cla_number}}/{{element.cla_quantity}}</p>

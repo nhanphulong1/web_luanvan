@@ -6,6 +6,8 @@ import { DiariesService } from 'src/app/Services/diaries.service';
 import { ClassService } from 'src/app/Services/class.service';
 import { ServeHttpService } from 'src/app/Services/serve-http.service';
 import Swal from 'sweetalert2';
+import { MatDialog } from '@angular/material/dialog';
+import { CommentComponent } from '../comment/comment.component';
 
 @Component({
     selector: 'app-attendance',
@@ -22,6 +24,7 @@ export class AttendanceComponent implements OnInit {
         private classService: ClassService,
         private attendance: AttendanceService,
         private router: Router,
+        private dialog: MatDialog,
     ) { }
 
     di_id;
@@ -50,7 +53,6 @@ export class AttendanceComponent implements OnInit {
         let classData = await this.classService.getClassById(this.cla_id).toPromise();
         this.cla_name = classData.data[0].cla_name;
         let atten = await this.attendance.getDiariesByStudent(this.studentId,this.di_id).toPromise();
-        console.log(atten);
         if(atten.data.length > 0){
             this.status = 1;
         }else{
@@ -58,13 +60,25 @@ export class AttendanceComponent implements OnInit {
         }
     }
 
-    async createAttendance(){
-        let data = {
-            stu_id: this.studentId,
-            di_id: this.di_id
-        };
+    onSubmit(){
+        const dialogRef = this.dialog.open(CommentComponent,{
+            width: '550px'
+        })
+
+        dialogRef.afterClosed().subscribe((result)=>{
+            if(result != 'false'){
+                let data = {
+                    stu_id: this.studentId,
+                    di_id: this.di_id,
+                    att_comment: result.comment,
+                };
+                this.createAttendance(data);
+            }
+        });
+    }
+
+    async createAttendance(data){
         let result = await this.attendance.createAttendance(data).toPromise();
-        console.log(result);
         if(result.status == 1){
             Swal.fire({
                 icon: 'success',

@@ -110,6 +110,7 @@ import { Statistic3Component } from './admin/statistic3/statistic3.component';
 import { ConfigComponent } from './admin/config/config.component';
 import { SearchNewComponent } from './user/search-new/search-new.component';
 import { AddExamsComponent } from './form/add-exams/add-exams.component';
+import { CommentComponent } from './user/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -188,6 +189,7 @@ import { AddExamsComponent } from './form/add-exams/add-exams.component';
     ConfigComponent,
     SearchNewComponent,
     AddExamsComponent,
+    CommentComponent,
   ],
   imports: [
     BrowserModule,

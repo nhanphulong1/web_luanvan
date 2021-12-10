@@ -24,9 +24,9 @@
                 <mat-grid-tile class="form_right">
                     <mat-form-field appearance="outline">
                         <mat-label>Ngày sinh</mat-label>
-                        <input type="date" [max]="now" formControlName="stu_birthday" matInput>
+                        <input type="date" (change)="checkBirthDay()" formControlName="stu_birthday" matInput>
                         <mat-error *ngIf="formStudent.get('stu_birthday').hasError('required')">Vui lòng nhập ngày sinh!</mat-error>
-                        <mat-error *ngIf="formStudent.get('stu_birthday').hasError('date-minimum')">Ngày sinh không hợp lệ!</mat-error>
+                        <mat-error *ngIf="!formStudent.get('stu_birthday').hasError('required') && formStudent.get('stu_birthday').hasError('age')">Học viên chưa đủ 18 tuổi!</mat-error>
                     </mat-form-field>
                 </mat-grid-tile>
 

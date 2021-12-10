@@ -39,7 +39,8 @@ export class AddExamsComponent implements OnInit {
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Xác nhận'
+                confirmButtonText: 'Xác nhận',
+                cancelButtonText: 'Hủy'
               }).then((result) => {
                 if (result.isConfirmed) {
                         this.dialogRef.close(this.formExam.value.cla_id);

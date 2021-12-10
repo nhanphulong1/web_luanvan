@@ -20,5 +20,13 @@
                 </div>
             </div>
         </div>
+        <div class="btn">
+            <button (click)="loadPage(0)" [disabled]='page == 1'>
+                <mat-icon>arrow_back</mat-icon><span>Trang trước</span></button>
+            <button (click)="loadPage(1)" [disabled]='page == countPage'>
+                <span>Trang sau</span>
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </div>
     </div>
 </div>

@@ -83,7 +83,7 @@ export class ListExamComponent implements OnInit {
               this.exam.deleteExams(id).subscribe((result) => {
                 if (result.status == 1) {
                   Swal.fire(
-                    'Success!',
+                    'Thành công!',
                     'Xóa lịch thi thành công!',
                     'success'
                   );

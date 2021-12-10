@@ -82,7 +82,7 @@ export class ClassComponent implements OnInit {
       this.service.createClass(this.formClass.value).subscribe((data) => {
         if(data.status == 1){
           Swal.fire(
-            'Success!',
+            'Thành công!',
             'Bạn đã thêm lớp học mới thành công!',
             'success'
           ).then(() =>
@@ -92,7 +92,7 @@ export class ClassComponent implements OnInit {
           console.error(data.message);
           Swal.fire({
             icon: 'error',
-            title: 'Error',
+            title: 'Lỗi!',
             text: 'Có lỗi đã xảy ra!',
           })
         }
@@ -105,7 +105,7 @@ export class ClassComponent implements OnInit {
       this.service.updateClass(this.id, this.formClass.value).subscribe((data) => {
         if(data.status == 1){
           Swal.fire(
-            'Success!',
+            'Thành công!',
             'Bạn đã cập nhật lớp học mới thành công!',
             'success'
           ).then(() =>
@@ -114,7 +114,7 @@ export class ClassComponent implements OnInit {
         }else{
           Swal.fire({
             icon: 'error',
-            title: 'Error',
+            title: 'Lỗi!',
             text: 'Có lỗi đã xảy ra!',
           })
         }

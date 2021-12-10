@@ -54,21 +54,22 @@
                     <mat-label>Lớp học</mat-label>
                     <mat-select name="cla_id" [(ngModel)]="cla_id">
                         <mat-option value="0">Tất cả</mat-option>
-                        <mat-option *ngFor="let item of classData" [value]="item.cla_id">{{item.cla_code}}-{{item.cla_name}}</mat-option>
+                        <mat-option *ngFor="let item of classData" [value]="item.cla_id">{{item.cla_code}}-{{item.cla_name}}-Khóa {{item.cla_course}}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </mat-grid-tile>
 
-            <!-- <mat-grid-tile>
+            <mat-grid-tile>
                 <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Trạng thái lớp học</mat-label>
-                    <mat-select name="status_class" [(ngModel)]="status_class">
-                        <mat-option value="0">Tất cả</mat-option>
-                        <mat-option value="1">Đang mở</mat-option>
-                        <mat-option value="2">Đã hoàn thành</mat-option>
+                    <mat-label>Kết quả</mat-label>
+                    <mat-select name="re_result" [(ngModel)]="re_result">
+                        <mat-option value="">Tất cả</mat-option>
+                        <mat-option value="-1">Chưa có</mat-option>
+                        <mat-option value="0">Rớt</mat-option>
+                        <mat-option value="1">Đậu</mat-option>
                     </mat-select>
                 </mat-form-field>
-            </mat-grid-tile> -->
+            </mat-grid-tile>
             <mat-grid-tile class="search_btn">
                 <button mat-raised-button color="primary" (click)="onSearch()">Tìm kiếm</button>
                 <button mat-raised-button color="primary" (click)="export()"><img src="../../../assets/image/excel.png" alt="Excel"> Xuất file</button>

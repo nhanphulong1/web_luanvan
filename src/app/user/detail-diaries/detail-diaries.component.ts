@@ -19,6 +19,7 @@ export class DetailDiariesComponent implements OnInit {
     cla_id;
     cla_name;
     diaryData;
+    data;
     type;
 
     constructor(
@@ -45,6 +46,8 @@ export class DetailDiariesComponent implements OnInit {
         this.cla_name = classData.data[0].cla_name;
         let atten = await this.attendance.getAttendanceByDiaries(this.diaryData.di_id, this.cla_id).toPromise();
         this.dataSource = new MatTableDataSource(atten.data);
+        this.data = atten.data.filter(element => element.att_comment != null);
+        console.log(this.data);
     }
 
 }

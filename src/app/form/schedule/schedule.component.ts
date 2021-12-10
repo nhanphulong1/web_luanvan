@@ -74,7 +74,7 @@ export class ScheduleComponent implements OnInit {
           this.schedule.createSchedule(this.formSchedule.value).subscribe((data) => {
             if(data.status == 1){
               Swal.fire(
-                'Success!',
+                'Thành công!',
                 'Bạn đã thêm thời khóa biểu thành công!',
                 'success'
               ).then(() =>
@@ -83,7 +83,6 @@ export class ScheduleComponent implements OnInit {
             }else{
               Swal.fire({
                 icon: 'error',
-                title: 'Error',
                 text: 'Có lỗi đã xảy ra!',
               })
             }

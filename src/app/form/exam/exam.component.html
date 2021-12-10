@@ -11,8 +11,9 @@
             </mat-form-field>
             <mat-form-field style="width: 100%" appearance="outline">
                 <mat-label>Ngày thi</mat-label>
-                <input type="date" formControlName="ex_date" matInput>
+                <input type="date" formControlName="ex_date" (change)="checkDate()" matInput>
                 <mat-error *ngIf="formExam.get('ex_date').hasError('required')">Vui lòng chọn ngày thi!</mat-error>
+                <mat-error *ngIf="!formExam.get('ex_date').hasError('required') && formExam.get('ex_date').hasError('min')">Ngày thi không hợp lệ!</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline" style="width: 100%">
                 <mat-label>Địa điểm thi</mat-label>
