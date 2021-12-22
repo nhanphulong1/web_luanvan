@@ -88,19 +88,27 @@ export class RegisComponent implements OnInit {
 		this.dataClass = data[0];
 		let tag = document.getElementById('class-info');
 		tag.classList.add('show');
-		alert(this.dataClass.cla_id);
 		let sch = await this.schedule.getScheduleByClass(this.dataClass.cla_id).toPromise();
 		this.scheduleClass = '';
 		if(sch.data.length > 0){
 			sch.data.forEach(element => {
-				this.scheduleClass += element.day_name + ' ';
+				this.scheduleClass += element.day_name + '  ';
 			});
 		}else{
 			this.scheduleClass= 'Chưa có thời khóa biểu!'
 		}
 	}
 
+	checkBirthDay(){
+		let year = new Date(this.formStudent.value.stu_birthday).getFullYear();
+		let yearNow = new Date().getFullYear();
+		if(yearNow - year < 18){
+			this.formStudent.controls['stu_birthday'].setErrors({age: true});
+		}
+	}
+
 	async onSubmit() {
+		this.checkBirthDay();
 		if (this.formStudent.valid) {
 			this.paidFee = this.formStudent.value.pay_type;
 			// let checkCourse = await this.course.checkClassbyCourse(this.formStudent.value.cou_id).toPromise(); // chọn ra các lớp đang tuyển sinh theo hạng bằng lái
@@ -170,7 +178,7 @@ export class RegisComponent implements OnInit {
 		dataEmail.email = this.formStudent.value.stu_email;
 		this.mailService.sendMailUser(dataEmail).toPromise();
 		Swal.fire(
-			'Success!',
+			'Thành công!',
 			'Bạn đã đăng ký khóa học thành công! Vui lòng xem email để biết thêm thông tin',
 			'success'
 		)

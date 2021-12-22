@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { NewsComponent } from 'src/app/form/news/news.component';
 import { NewsService } from 'src/app/Services/news.service';
+import Swal from 'sweetalert2';
 
 @Component({
     selector: 'app-list-news',
@@ -53,6 +54,39 @@ export class ListNewsComponent implements OnInit {
         dialogRef.afterClosed().subscribe((result)=>{
             this.loadTable();
         })
+    }
+
+    deleteNews(id){
+        Swal.fire({
+            title: 'Xóa tin tức?',
+            text: "Bạn có muốn xóa tin tức này!",
+            icon: 'warning',
+            showCancelButton: true,
+            reverseButtons: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#9A948',
+            cancelButtonText: 'Hủy',
+            confirmButtonText: 'Xóa'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.news.deleteNews(id).subscribe((result) => {
+                if (result.status == 1) {
+                  Swal.fire(
+                    'Thành công!',
+                    'Xóa tin tức thành công!',
+                    'success'
+                  );
+                  this.loadTable();
+                } else {
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi!!!',
+                    text: 'Xóa tin tức thất bại.',
+                  })
+                }
+              })
+            }
+          })
     }
 
 }

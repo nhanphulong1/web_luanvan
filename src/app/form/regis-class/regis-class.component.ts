@@ -103,7 +103,7 @@ export class RegisClassComponent implements OnInit {
 				this.detail.createDetail(this.formRegisClass.value).subscribe((result) => {
 					if (result.status == 1) {
 						Swal.fire(
-							'Success!',
+							'Thành công!',
 							'Bạn đã thêm học viên mới thành công!',
 							'success'
 						).then(() =>
@@ -148,7 +148,7 @@ export class RegisClassComponent implements OnInit {
 				this.detail.updateDetail(this.de_id,this.formRegisClass.value).subscribe((result) => {
 					if (result.status == 1) {
 						Swal.fire(
-							'Success!',
+							'Thành công!',
 							'Bạn đã cập nhật thành công!',
 							'success'
 						).then(() =>

@@ -57,9 +57,24 @@ export class NewsService {
         ).pipe(catchError(this.handleError));
   }
 
+  //get count page News
+  public getCountPageNews(title): Observable<any> {
+    const url = this.REST_API_SERVER + '/count/'+title;
+    return this.httpClient.get<any>(url)
+        .pipe(
+            map((data) => {
+                // console.log('data: ',data, this.httpOptions);
+                if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+                    console.log('DataService: getNews: error', data);
+                }
+                return data;
+            })
+        ).pipe(catchError(this.handleError));
+  }
+
   //Get search by title
-  public searchNews(n_title): Observable<any> {
-    const url = this.REST_API_SERVER + '/title/'+n_title;
+  public searchNews(n_title,number): Observable<any> {
+    const url = this.REST_API_SERVER + '/search/'+n_title+'/'+number;
     return this.httpClient.get<any>(url)
         .pipe(
             map((data) => {

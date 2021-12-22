@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ClassService } from 'src/app/Services/class.service';
 import { CourseService } from 'src/app/Services/course.service';
 
 @Component({
@@ -9,15 +11,28 @@ import { CourseService } from 'src/app/Services/course.service';
 export class CourseC1Component implements OnInit {
 
 	constructor(
-		public course: CourseService
+		private course: CourseService,
+		private route: ActivatedRoute,
 	) { }
 
 	public data;
+	dataClass=[];
+	name;
+	length;
 
 	ngOnInit(): void {
-		this.course.getCourseByName('C1').subscribe((data) => {
-			this.data = data.data;
-		})
+		this.route.paramMap.subscribe((params: ParamMap) => {
+			this.name = params.get('name');
+			this.loadData();
+		});
+	}
+
+	async loadData(){
+		let kq = await this.course.getCourseByName(this.name).toPromise();
+		this.data = kq.data;
+		let kq1 = await  this.course.checkClassbyCourse(this.data.cou_id).toPromise();
+		this.dataClass = kq1.data;
+		this.length = this.dataClass == null;	
 	}
 
 }

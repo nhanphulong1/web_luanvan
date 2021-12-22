@@ -19,6 +19,7 @@ export class DetailClassComponent implements OnInit {
     dataSource = new MatTableDataSource();
     id;
     data;
+    dataStudent;
 
     constructor(
         private classService: ClassService,
@@ -50,6 +51,7 @@ export class DetailClassComponent implements OnInit {
             this.data = result.data[0];
         });
         this.classService.getStudentInClass(this.id).subscribe((result) => {
+            this.dataStudent = result.data;
             this.dataSource = new MatTableDataSource(result.data);
         })
     }
@@ -79,14 +81,15 @@ export class DetailClassComponent implements OnInit {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Xóa'
+            confirmButtonText: 'Xóa',
+            cancelButtonText: 'Hủy'
         }).then((result) => {
             if (result.isConfirmed) {
                 this.classService.deleteClass(id).subscribe((result) => {
                     console.log(result);
                     if (result.status == 1) {
                         Swal.fire(
-                            'Deleted!',
+                            'Thành công!',
                             'Xóa lớp học thành công!',
                             'success'
                         );
@@ -111,7 +114,8 @@ export class DetailClassComponent implements OnInit {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Xóa'
+            confirmButtonText: 'Xóa',
+            cancelButtonText: 'Hủy'
         }).then((result) => {
             if (result.isConfirmed) {
                 this.detail.deleteDetail(de_id).toPromise()

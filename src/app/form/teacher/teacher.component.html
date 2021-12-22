@@ -33,8 +33,9 @@
                 <mat-grid-tile class="form_right">
                     <mat-form-field appearance="outline">
                         <mat-label>Ngày sinh</mat-label>
-                        <input type="date" formControlName="tea_birthday" matInput>
+                        <input type="date" (change)="checkBirthDay()" formControlName="tea_birthday" matInput>
                         <mat-error *ngIf="formTeacher.get('tea_birthday').hasError('required')">Vui lòng chọn ngày sinh!</mat-error>
+                        <mat-error *ngIf="!formTeacher.get('tea_birthday').hasError('required') && formTeacher.get('tea_birthday').hasError('age')">Giáo viên chưa đủ 18 tuổi!</mat-error>
                     </mat-form-field>
                 </mat-grid-tile>
 
@@ -89,6 +90,7 @@
                     <mat-form-field appearance="outline">
                         <mat-label>Ngày cấp</mat-label>
                         <input type="date" formControlName="tea_cardDate" matInput>
+                        <mat-error *ngIf="formTeacher.get('tea_cardDate').hasError('date-minimum')">Ngày cấp giấy không hợp lệ!</mat-error>
                     </mat-form-field>
                 </mat-grid-tile>
 

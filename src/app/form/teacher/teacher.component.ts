@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import { MailService } from 'src/app/Services/mail.service';
 import { ServeHttpService } from 'src/app/Services/serve-http.service';
 import { TeacherService } from 'src/app/Services/teacher.service';
+import { CustomValidators } from 'src/app/user/change-info/change-info.component';
 import Swal from 'sweetalert2';
 
 
@@ -41,6 +42,7 @@ export class TeacherComponent implements OnInit {
 	imageInvalid = false;
 	isUpdate = false;
 	id;
+	now = moment(new Date()).format('YYYY-MM-DD');
 
 	public formTeacher = this.fb.group({
 		tea_email: ['', [Validators.required, Validators.email]],
@@ -51,7 +53,7 @@ export class TeacherComponent implements OnInit {
 		tea_gender: ['0', [Validators.required]],
 		tea_cmnd: ['', [Validators.required]],
 		tea_cardIssue: [''],
-		tea_cardDate: [null],
+		tea_cardDate: [null, CustomValidators.dateMinimum(this.now)],
 		tea_address: ['', [Validators.required]],
 		tea_residence: [''],
 		tea_birthday: [null, [Validators.required]],
@@ -87,8 +89,17 @@ export class TeacherComponent implements OnInit {
 		this.formTeacher.controls['tea_image'].setValue(this.url_image);
 	}
 
+	checkBirthDay(){
+		let year = new Date(this.formTeacher.value.tea_birthday).getFullYear();
+		let yearNow = new Date().getFullYear();
+		if(yearNow - year < 18){
+			this.formTeacher.controls['tea_birthday'].setErrors({age: true});
+		}
+	}
+
 	async onSubmit() {
 		this.imageInvalid = true;
+		this.checkBirthDay();
 		if (this.formTeacher.valid) {
 			let check = await this.service.checkTeacher(this.formTeacher.value.tea_email, this.formTeacher.value.tea_phone).toPromise();
 			if (check.valid == 1){
@@ -105,7 +116,7 @@ export class TeacherComponent implements OnInit {
 					let sendMail = await this.mail.sendMailTeacher(dataMail).toPromise();
 					console.log(dataMail,sendMail);
 					Swal.fire(
-						'Success!',
+						'Thành công!',
 						'Bạn đã thêm giáo viên mới thành công!',
 						'success'
 					).then(() =>
@@ -114,7 +125,6 @@ export class TeacherComponent implements OnInit {
 				} else {
 					Swal.fire({
 						icon: 'error',
-						title: 'Error',
 						text: 'Có lỗi đã xảy ra!',
 					})
 				}
@@ -122,7 +132,6 @@ export class TeacherComponent implements OnInit {
 			else if(check.valid == 0){
 				Swal.fire({
 					icon: 'error',
-					title: 'Error',
 					text: 'Email hoặc số điện thoại đã đăng ký!',
 				})
 			}
@@ -131,11 +140,12 @@ export class TeacherComponent implements OnInit {
 
 	onUpdate() {
 		this.imageInvalid = true;
+		this.checkBirthDay();
 		if (this.formTeacher.valid) {
 			this.service.updateTeacher(this.id, this.formTeacher.value).subscribe((data) => {
 				if (data.status == 1) {
 					Swal.fire(
-						'Success!',
+						'Thành công!',
 						'Bạn đã cập nhật giáo viên mới thành công!',
 						'success'
 					).then(() =>
@@ -144,7 +154,6 @@ export class TeacherComponent implements OnInit {
 				} else {
 					Swal.fire({
 						icon: 'error',
-						title: 'Error',
 						text: 'Có lỗi đã xảy ra!',
 					})
 				}

@@ -11,27 +11,28 @@ import Swal from 'sweetalert2';
   styleUrls: ['./list-teacher.component.scss']
 })
 export class ListTeacherComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'tea_code','tea_name', 'tea_email','tea_image', 'tea_phone', 'action'];
+  displayedColumns: string[] = ['id', 'tea_code','tea_name', 'tea_email', 'tea_phone', 'tea_gender', 'tea_birthday', 'action'];
   dataSource = new MatTableDataSource();
   email = "";
   name = "";
-  type = 3;
+  tea_code;
 
   constructor(
     private service: TeacherService
   ) { }
 
 
-  @ViewChild(MatSort) set matSort(sort: MatSort) {
-    if (!this.dataSource.sort) {
-      this.dataSource.sort = sort;
-    }
-  }
-
   @ViewChild(MatPaginator, {static: false})
   set paginator(value: MatPaginator) {
     if (this.dataSource){
       this.dataSource.paginator = value;
+    }
+  }  
+  
+  @ViewChild(MatSort, {static: false})
+  set sort(value: MatSort) {
+    if (this.dataSource){
+      this.dataSource.sort = value;
     }
   }
 
@@ -57,7 +58,7 @@ export class ListTeacherComponent implements OnInit {
     var data = {
       'email': this.email,
       'name': this.name,
-      'type': this.type
+      'tea_code': this.tea_code
     };
     this.service.searchTeacher(data).subscribe((result) => {
       this.dataSource = new MatTableDataSource(result.data);
@@ -74,14 +75,15 @@ export class ListTeacherComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Xóa'
+      confirmButtonText: 'Xóa',
+      cancelButtonText: 'Hủy'
     }).then((result) => {
       if (result.isConfirmed) {
         this.service.deleteTeacher(id).subscribe((result) => {
           console.log(result);
           if (result.status == 1) {
             Swal.fire(
-              'Deleted!',
+              'Thành công!',
               'Xóa giáo viên thành công!',
               'success'
             );

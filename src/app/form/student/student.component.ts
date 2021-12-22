@@ -78,7 +78,7 @@ export class StudentComponent implements OnInit {
 		stu_national: ['Việt Nam', Validators.required],
 		stu_address: ['', [Validators.required]],
 		stu_residence: [''],
-		stu_birthday: ['', [Validators.required, CustomValidators.dateMinimum(this.now)]],
+		stu_birthday: ['', [Validators.required]],
 	});
 
 	public formRegisClass = this.fb.group({
@@ -93,7 +93,7 @@ export class StudentComponent implements OnInit {
 	getClass(id) { //Gọi ra ds các lớp thuộc loại khóa học đã chọn trong form
 		this.classService.getAllClassByCourse(id).subscribe((result) => {
 			this.classData = result.data;
-			this.classData = this.classData.filter(element => moment(element.cla_start).format('YYYY-MM-DD') >= this.now);
+			this.classData = this.classData.filter(element => element.cla_admission == 0);
 		});
 	}
 
@@ -123,6 +123,14 @@ export class StudentComponent implements OnInit {
 		}
 	}
 
+	checkBirthDay(){
+		let year = new Date(this.formStudent.value.stu_birthday).getFullYear();
+		let yearNow = new Date().getFullYear();
+		if(yearNow - year < 18){
+			this.formStudent.controls['stu_birthday'].setErrors({age: true});
+		}
+	}
+
 	handleReaderLoaded(e) {
 		this.url_image = ('data:image/png;base64,' + btoa(e.target.result));
 		this.formStudent.controls['stu_image'].setValue(this.url_image);
@@ -130,6 +138,7 @@ export class StudentComponent implements OnInit {
 
 	async onSubmit() {
 		this.imageInvalid = true;
+		this.checkBirthDay();
 		this.formStudent.markAllAsTouched();
 		this.formRegisClass.markAllAsTouched();
 		if (this.formRegisClass.value.de_paidFee == '2' && this.formRegisClass.value.pay_id == '')
@@ -162,7 +171,7 @@ export class StudentComponent implements OnInit {
 								this.payment.createPayment(dataPayment).subscribe();
 							}
 							Swal.fire(
-								'Success!',
+								'Thành công!',
 								'Bạn đã thêm học viên mới thành công!',
 								'success'
 							).then(() =>
@@ -178,7 +187,7 @@ export class StudentComponent implements OnInit {
 					})
 					let classData = await this.classService.getClassById(this.formRegisClass.value.cla_id).toPromise();
 					let dataEmail = classData.data[0];
-					dataEmail.pay_type = this.formRegisClass.value.de_paidFee;
+					dataEmail.pay_type = parseInt(this.formRegisClass.value.de_paidFee) + 1;
 					dataEmail.name = this.formStudent.value.stu_name;
 					dataEmail.code = user.data[0].stu_code;
 					dataEmail.email = this.formStudent.value.stu_email;
@@ -208,12 +217,13 @@ export class StudentComponent implements OnInit {
 
 	onUpdate() {
 		this.imageInvalid = true;
+		this.checkBirthDay();
 		this.formStudent.markAllAsTouched();
 		if (this.formStudent.valid) {
 			this.student.updateStudent(this.id, this.formStudent.value).subscribe((data) => {
 				if (data.status == 1) {
 					Swal.fire(
-						'Success!',
+						'Thành công!',
 						'Bạn đã cập nhật học viên mới thành công!',
 						'success'
 					).then(() =>
@@ -222,7 +232,6 @@ export class StudentComponent implements OnInit {
 				} else {
 					Swal.fire({
 						icon: 'error',
-						title: 'Error',
 						text: 'Có lỗi đã xảy ra!',
 					})
 				}

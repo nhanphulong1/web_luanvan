@@ -21,6 +21,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
+import { NgxPrintModule } from 'ngx-print';
 
 // Firebase services + enviorment module
 import { AngularFireModule } from '@angular/fire';
@@ -108,6 +109,11 @@ import { NewsComponent } from './form/news/news.component';
 import { DetailNewsComponent } from './user/detail-news/detail-news.component';
 import { Statistic3Component } from './admin/statistic3/statistic3.component';
 import { ConfigComponent } from './admin/config/config.component';
+import { SearchNewComponent } from './user/search-new/search-new.component';
+import { AddExamsComponent } from './form/add-exams/add-exams.component';
+import { CommentComponent } from './user/comment/comment.component';
+import { TeacherStatisticComponent } from './admin/teacher-statistic/teacher-statistic.component';
+import { BillComponent } from './admin/bill/bill.component';
 
 @NgModule({
   declarations: [
@@ -184,6 +190,11 @@ import { ConfigComponent } from './admin/config/config.component';
     DetailNewsComponent,
     Statistic3Component,
     ConfigComponent,
+    SearchNewComponent,
+    AddExamsComponent,
+    CommentComponent,
+    TeacherStatisticComponent,
+    BillComponent,
   ],
   imports: [
     BrowserModule,
@@ -215,6 +226,7 @@ import { ConfigComponent } from './admin/config/config.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    NgxPrintModule,
   ],
   exports:[
     FrontHeaderComponent,

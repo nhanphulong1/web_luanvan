@@ -15,18 +15,35 @@ export class IndexComponent implements OnInit {
 
     constructor(
         private news: NewsService,
-        private route: Router
+        private course: CourseService,
+        private router: Router
     ) { }
 
-    data;
+    data=[];
+    dataCourse;
+    search = '';
 
     ngOnInit(): void {
         this.news.getAllNews().subscribe((result)=>{
-            this.data = result.data;
-        })
+            if(result.data.length > 3){
+                for (let index = 0; index < 3; index++) {
+                    this.data.push(result.data[index]);
+                }
+            }else{
+                this.data=result.data;
+            }
+        });
+        this.course.getAllCourse().subscribe((kq)=>{
+            this.dataCourse = kq.data;
+        });
     }
 
-
+    onSearch(){
+        if(this.search == ''){
+            this.search = 'all';
+        }
+        this.router.navigate(['/front/search/1/'+this.search]);
+    }
 
 
 }

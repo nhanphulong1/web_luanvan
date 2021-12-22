@@ -76,7 +76,8 @@ export class ListClassComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Cập nhật'
+      confirmButtonText: 'Cập nhật',
+      cancelButtonText: 'Hủy'
     }).then((result) => {
       if (result.isConfirmed) {
         var data = { 'cla_status': 1 };
@@ -84,7 +85,7 @@ export class ListClassComponent implements OnInit {
           console.log(result);
           if (result.status == 1) {
             Swal.fire(
-              'Success!',
+              'Thành công!',
               'Cập nhật trạng thái lớp học thành công!',
               'success'
             );
@@ -109,7 +110,8 @@ export class ListClassComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Xóa'
+      confirmButtonText: 'Xóa',
+      cancelButtonText: 'Hủy'
     }).then((result) => {
       if (result.isConfirmed) {
         console.log(id);
@@ -117,7 +119,7 @@ export class ListClassComponent implements OnInit {
           console.log(result);
           if (result.status == 1) {
             Swal.fire(
-              'Deleted!',
+              'Thành công!',
               'Xóa lớp học thành công!',
               'success'
             );

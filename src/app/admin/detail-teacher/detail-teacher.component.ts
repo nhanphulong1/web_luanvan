@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./detail-teacher.component.scss']
 })
 export class DetailTeacherComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'cla_name', 'cou_name', 'cla_start', 'cla_status', 'action'];
+  displayedColumns: string[] = ['id', 'cla_name', 'cou_name', 'cla_course', 'cla_start', 'cla_number', 'cla_status', 'action'];
   dataSource = new MatTableDataSource();
   id;
   data;
@@ -47,7 +47,6 @@ export class DetailTeacherComponent implements OnInit {
       this.data = result.data[0];
     });
     this.classService.getAllClassByTeacher(this.id).subscribe((result) =>{
-      console.log(result.data);
       this.dataSource = new MatTableDataSource(result.data);
     })
   }

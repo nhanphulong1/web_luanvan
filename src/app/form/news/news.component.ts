@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NewsService } from 'src/app/Services/news.service';
+import { ClassService } from 'src/app/Services/class.service';
 import { DialogData } from 'src/app/user/login/login.component';
 import Swal from 'sweetalert2';
 
@@ -14,6 +15,7 @@ export class NewsComponent implements OnInit {
 
     constructor(
         private fb: FormBuilder,
+        private classService: ClassService,
         private news: NewsService,
         public dialogRef: MatDialogRef<NewsComponent>,
         @Inject(MAT_DIALOG_DATA) public data: DialogData
@@ -24,14 +26,20 @@ export class NewsComponent implements OnInit {
         n_summary: ['', Validators.required],
         n_image: ['', Validators.required],
         n_content: ['', Validators.required],
-        n_status: [0]
+        n_status: [0],
+        cla_id: [''],
     });
     update = false;
     dataNews;
+    classData;
     url_image = "../../../assets/image/default-image.jpg";
     checkImage =false;
+    checkContent =false;
 
     ngOnInit(): void {
+        this.classService.getAllClass().subscribe((result)=>{
+            this.classData = result.data.filter(element => element.cla_admission == 0);
+        });
         if(this.data['n_id']){
             this.news.getNewsById(this.data['n_id']).subscribe((result)=>{
                 if(result.data.length > 0){
@@ -64,10 +72,12 @@ export class NewsComponent implements OnInit {
         this.url_image = this.dataNews.n_image;
         this.formNews.controls['n_content'].setValue(this.dataNews.n_content);
         this.formNews.controls['n_status'].setValue(this.dataNews.n_status);
+        this.formNews.controls['cla_id'].setValue(this.dataNews.cla_id);
     }
 
     onSubmit() {
         this.checkImage= true;
+        this.checkContent= true;
         if(this.update){
             this.updateNews();
         }else{

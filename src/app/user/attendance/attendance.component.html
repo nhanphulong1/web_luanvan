@@ -12,7 +12,7 @@
                 <p><b>Thời gian:</b> {{data?.di_start}} - {{data?.di_end}}</p>
                 <p><b>Địa điểm:</b> {{data?.di_location}}</p>
                 <div class="btn">
-                    <button *ngIf="status == 0" mat-raised-button color="primary" (click)="createAttendance()">Điểm danh</button>
+                    <button *ngIf="status == 0" mat-raised-button color="primary" (click)="onSubmit()">Điểm danh</button>
                     <button *ngIf="status == 1" mat-raised-button disabled>Đã điểm danh</button>
                 </div>
             </div>

@@ -27,7 +27,7 @@ export class DiariesComponent implements OnInit {
     formDiaries = this.fb.group({
         di_location: ['', Validators.required],
         di_content: ['', Validators.required],
-        di_type: ['1', Validators.required],
+        di_type: ['0', Validators.required],
         di_start: [null, Validators.required],
         di_end: [null, Validators.required],
         di_status: [0, Validators.required],

@@ -1,11 +1,14 @@
 <div class="content">
     <h2>Chi tiết Lớp học</h2>
     <div class="btn_back">
-        <a [routerLink]="['/admin/class/complete']" routerLinkActive="router-link-active">
+        <a *ngIf="data?.cla_complete != 1" [routerLink]="['/admin/class/detail/'+id]" routerLinkActive="router-link-active">
+            <mat-icon>keyboard_backspace</mat-icon>Quay lại
+        </a>
+        <a *ngIf="data?.cla_complete == 1" [routerLink]="['/admin/class/complete']" routerLinkActive="router-link-active">
             <mat-icon>keyboard_backspace</mat-icon>Quay lại
         </a>
     </div>
-    <div class="btn-detail">
+    <div class="btn-detail" *ngIf="data?.cla_complete == 1">
         <button mat-raised-button color="primary" (click)="updateStatus(id)">Hoàn thành lớp học</button>
     </div>
     <div class="info">

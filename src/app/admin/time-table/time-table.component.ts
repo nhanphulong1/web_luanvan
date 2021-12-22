@@ -16,7 +16,7 @@ export class TimeTableComponent implements OnInit {
   dataSource = new MatTableDataSource();
   id;
   data;
-  dataSchedule;
+  // dataSchedule;
 
   constructor(
     private classService: ClassService,
@@ -40,37 +40,37 @@ export class TimeTableComponent implements OnInit {
       this.data = result.data[0];
     });
     this.scheduleService.getScheduleByClass(this.id).subscribe((result)=>{
-      this.createData();
-      this.loadData(result.data);
-      this.dataSource = new MatTableDataSource(this.dataSchedule);
+      // this.createData();
+      // this.loadData(result.data);
+      this.dataSource = new MatTableDataSource(result.data);
     })
   }
 
   loadTable(){
     this.scheduleService.getScheduleByClass(this.id).subscribe((result)=>{
-      this.createData();
-      this.loadData(result.data);
-      this.dataSource = new MatTableDataSource(this.dataSchedule);
+      // this.createData();
+      // this.loadData(result.data);
+      this.dataSource = new MatTableDataSource(result.data);
     })
   }
 
-  createData(){
-    this.dataSchedule = [
-      {'day_name':'Thứ 2', 'shi_id':'', 'sche_quantity':'', 'loc_name':''},
-      {'day_name':'Thứ 3', 'shi_id':'', 'sche_quantity':'', 'loc_name':''},
-      {'day_name':'Thứ 4', 'shi_id':'', 'sche_quantity':'', 'loc_name':''},
-      {'day_name':'Thứ 5', 'shi_id':'', 'sche_quantity':'', 'loc_name':''},
-      {'day_name':'Thứ 6', 'shi_id':'', 'sche_quantity':'', 'loc_name':''},
-      {'day_name':'Thứ 7', 'shi_id':'', 'sche_quantity':'', 'loc_name':''},
-      {'day_name':'Chủ nhật', 'shi_id':'', 'sche_quantity':'', 'loc_name':''}
-    ];
-  }
+  // createData(){
+  //   this.dataSchedule = [
+  //     {'day_name':'Thứ 2', 'shi_id':'', 'sche_quantity':'', 'loc_name':''},
+  //     {'day_name':'Thứ 3', 'shi_id':'', 'sche_quantity':'', 'loc_name':''},
+  //     {'day_name':'Thứ 4', 'shi_id':'', 'sche_quantity':'', 'loc_name':''},
+  //     {'day_name':'Thứ 5', 'shi_id':'', 'sche_quantity':'', 'loc_name':''},
+  //     {'day_name':'Thứ 6', 'shi_id':'', 'sche_quantity':'', 'loc_name':''},
+  //     {'day_name':'Thứ 7', 'shi_id':'', 'sche_quantity':'', 'loc_name':''},
+  //     {'day_name':'Chủ nhật', 'shi_id':'', 'sche_quantity':'', 'loc_name':''}
+  //   ];
+  // }
 
-  loadData(data){
-    data.forEach(element => {
-      this.dataSchedule[element.day_id-1]=element;
-    });
-  }
+  // loadData(data){
+  //   data.forEach(element => {
+  //     this.dataSchedule[element.day_id-1]=element;
+  //   });
+  // }
 
   deleteSchedule(id) {
     Swal.fire({
@@ -80,14 +80,15 @@ export class TimeTableComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Xóa'
+      confirmButtonText: 'Xóa',
+      cancelButtonText: 'Hủy'
     }).then((result) => {
       if (result.isConfirmed) {
         console.log(id);
         this.scheduleService.deleteSchedule(id).subscribe((result) => {
           if (result.status == 1) {
             Swal.fire(
-              'Deleted!',
+              'Thành công!',
               'Xóa lịch học thành công!',
               'success'
             );

@@ -21,7 +21,6 @@ import { ListStudentComponent } from './admin/list-student/list-student.componen
 import { ListTeacherComponent } from './admin/list-teacher/list-teacher.component';
 import { ListUserComponent } from './admin/list-user/list-user.component';
 import { LoginAdminComponent } from './admin/login-admin/login-admin.component';
-// import { StatisticCourseComponent } from './admin/statistic-course/statistic-course.component';
 import { StatisticComponent } from './admin/statistic/statistic.component';
 import { Statistic1Component } from './admin/statistic1/statistic1.component';
 import { TimeTableComponent } from './admin/time-table/time-table.component';
@@ -61,6 +60,8 @@ import { VerifyComponent } from './user/verify/verify.component';
 import { Statistic2Component } from './admin/statistic2/statistic2.component';
 import { Statistic3Component } from './admin/statistic3/statistic3.component';
 import { ConfigComponent } from './admin/config/config.component';
+import { SearchNewComponent } from './user/search-new/search-new.component';
+import { TeacherStatisticComponent } from './admin/teacher-statistic/teacher-statistic.component';
 
 
 
@@ -71,9 +72,10 @@ const routes: Routes = [
   {path: 'front/regis', component: RegisComponent},
   {path: 'front/contact', component: ContactComponent},
   {path: 'front/question', component: QuestionComponent},
-  {path: 'front/course/b1', component: CourseB1Component},
-  {path: 'front/course/b2', component: CourseB2Component},
-  {path: 'front/course/c1', component: CourseC1Component},
+  {path: 'front/search/:page/:search', component: SearchNewComponent},
+  // {path: 'front/course/b1', component: CourseB1Component},
+  // {path: 'front/course/b2', component: CourseB2Component},
+  {path: 'front/course/:name', component: CourseC1Component},
   {path: 'front/detail', component: InfoAccountComponent},
   {path: 'front/authen', component: VerifyComponent},
   {path: 'front/change', component: ChangPassComponent},
@@ -114,6 +116,7 @@ const routes: Routes = [
   {path: 'admin/class/add', component: ClassComponent, canActivate: [AuthGuard]},
   {path: 'admin/class/complete', component: ClassCompleteComponent, canActivate: [AuthGuard]},
   {path: 'admin/class/complete/:id', component: DetailClassCompleteComponent, canActivate: [AuthGuard]},
+  {path: 'admin/class/diaries/:id', component: DetailClassCompleteComponent, canActivate: [AuthGuard]},
   {path: 'admin/class/edit/:id', component: ClassComponent, canActivate: [AuthGuard]},
   {path: 'admin/class/detail/:id', component: DetailClassComponent, canActivate: [AuthGuard]},
   {path: 'admin/class/student/:id', component: DetailResultComponent, canActivate: [AuthGuard]},
@@ -130,6 +133,7 @@ const routes: Routes = [
   {path: 'admin/statistic1', component: Statistic1Component, canActivate: [AuthGuard]},
   {path: 'admin/statistic2', component: Statistic2Component, canActivate: [AuthGuard]},
   {path: 'admin/statistic3', component: Statistic3Component, canActivate: [AuthGuard]},
+  {path: 'admin/tea_statis', component: TeacherStatisticComponent, canActivate: [AuthGuard]},
   {path: 'admin/config', component: ConfigComponent, canActivate: [AuthGuard]},
   {path: '', redirectTo: 'home', pathMatch:'full'},
   {path: '**', component: PageNotFoundComponent}
@@ -139,6 +143,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes, {
       onSameUrlNavigation: 'reload',
+      scrollPositionRestoration: 'enabled',
     }),
     CommonModule
   ],

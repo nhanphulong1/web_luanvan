@@ -24,9 +24,9 @@
                 <mat-grid-tile class="form_right">
                     <mat-form-field appearance="outline">
                         <mat-label>Ngày sinh</mat-label>
-                        <input type="date" [max]="now" formControlName="stu_birthday" matInput>
+                        <input type="date" (change)="checkBirthDay()" formControlName="stu_birthday" matInput>
                         <mat-error *ngIf="formStudent.get('stu_birthday').hasError('required')">Vui lòng nhập ngày sinh!</mat-error>
-                        <mat-error *ngIf="formStudent.get('stu_birthday').hasError('date-minimum')">Ngày sinh không hợp lệ!</mat-error>
+                        <mat-error *ngIf="!formStudent.get('stu_birthday').hasError('required') && formStudent.get('stu_birthday').hasError('age')">Học viên chưa đủ 18 tuổi!</mat-error>
                     </mat-form-field>
                 </mat-grid-tile>
 
@@ -135,7 +135,7 @@
                     <mat-form-field style="width: 100%;" class="example-full-width" appearance="outline">
                         <mat-label>Tên lớp học</mat-label>
                         <mat-select formControlName="cla_id">
-                            <mat-option *ngFor="let item of classData" [value]="item.cla_id">{{item.cla_code}} - {{item.cla_name}}</mat-option>
+                            <mat-option *ngFor="let item of classData" [value]="item.cla_id">{{item.cla_code}} - {{item.cla_name}} - Khóa {{item.cla_course}}</mat-option>
                         </mat-select>
                         <mat-error *ngIf="formRegisClass.get('cla_id').hasError('required')">Vui lòng chọn tên lớp</mat-error>
                     </mat-form-field>

@@ -40,6 +40,7 @@ export class LoginAdminComponent implements OnInit {
                         } else if(data?.status == 1){
                             this.auth.setToken(data.token);
                             this.router.navigate(['/admin/trangchu']);
+                            // window.location.reload();
                         }else if(data?.status == 2){
                             Swal.fire({
                                 text: 'Tài khoản của bạn đã bị khóa!',

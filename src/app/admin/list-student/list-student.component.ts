@@ -7,6 +7,7 @@ import { PaymentComponent } from 'src/app/form/payment/payment.component';
 import { CourseService } from 'src/app/Services/course.service';
 import { StudentService } from 'src/app/Services/student.service';
 import Swal from 'sweetalert2';
+import { BillComponent } from '../bill/bill.component';
 
 @Component({
   selector: 'app-list-student',
@@ -14,12 +15,12 @@ import Swal from 'sweetalert2';
   styleUrls: ['./list-student.component.scss']
 })
 export class ListStudentComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'stu_code', 'stu_name', 'stu_email', 'stu_gender', 'stu_phone', 'stu_birthday', 'cou_name', 'pay_type', 're_result', 'action'];
+  displayedColumns: string[] = ['id', 'stu_code', 'stu_name', 'stu_email', 'stu_gender', 'stu_phone', 'stu_birthday', 'cou_name', 'cla_code', 'cla_name', 'cla_course', 'pay_type', 're_result', 'action'];
   dataSource = new MatTableDataSource();
   courseData;
   name = "";
   cou_id = "";
-  type = "";
+  type = "-1";
 
   constructor(
     private service: StudentService,
@@ -77,6 +78,13 @@ export class ListStudentComponent implements OnInit {
   })
   }
 
+  openBill(id){
+    const dialogRef = this.dialog.open(BillComponent, {
+      width: '850px',
+      data: {stu_id: id}
+    });
+  }
+
   deleteStudent(id) {
     Swal.fire({
       title: 'Xóa học viên?',
@@ -85,14 +93,15 @@ export class ListStudentComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Xóa'
+      confirmButtonText: 'Xóa',
+      cancelButtonText: 'Hủy'
     }).then((result) => {
       if (result.isConfirmed) {
         this.service.deleteStudent(id).subscribe((result) => {
           console.log(result);
           if (result.status == 1) {
             Swal.fire(
-              'Deleted!',
+              'Thành công!',
               'Xóa học viên thành công!',
               'success'
             );

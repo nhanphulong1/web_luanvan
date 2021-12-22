@@ -65,7 +65,7 @@
                     <mat-menu #menu="matMenu">
                         <a mat-menu-item (click)="updateNews(element.n_id)">
                             <mat-icon style="color: #024888;">visibility</mat-icon>Chi tiết</a>
-                        <a mat-menu-item>
+                        <a mat-menu-item (click)="deleteNews(element.n_id)">
                             <mat-icon style="color: red;">delete</mat-icon>Xóa tin tức</a>
                     </mat-menu>
                 </td>

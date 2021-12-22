@@ -10,7 +10,7 @@
     position: relative;
 }
 
-.content h2 {
+.content>h2 {
     margin: 15px 10px;
     font-size: 24px;
     border-bottom: 1px solid black;
@@ -19,6 +19,10 @@
     font-family: 'Times New Roman', Times, serif;
     font-weight: 800;
     text-transform: uppercase;
+}
+
+#print {
+    display: none;
 }
 
 .btn_back {
@@ -47,6 +51,12 @@
 }
 
 .btn-detail button {
+    margin-right: 10px;
+}
+
+.btn-detail button img {
+    height: 32px;
+    width: 32px;
     margin-right: 10px;
 }
 
@@ -83,6 +93,14 @@
     margin-top: 20px;
     width: 95%;
     padding: 0 25px;
+}
+
+.table .table-search {
+    text-align: right;
+}
+
+.table .table-search mat-form-field {
+    width: 100%;
 }
 
 .table table {

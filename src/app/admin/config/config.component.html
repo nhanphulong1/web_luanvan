@@ -1,4 +1,36 @@
 <div class="content">
     <h2>Cấu hình hệ thống</h2>
-
+    <form [formGroup]="formConfig" (ngSubmit)="onSubmit()">
+        <div class="name">
+            <label for="">Tên trung tâm: </label>
+            <input formControlName="c_name" type="text">
+        </div>
+        <div class="form-group">
+            <div>
+                <label for="">Email trung tâm:</label>
+                <input formControlName="c_email" type="email" [autocomplete]="false">
+            </div>
+            <div>
+                <label for="">Pass Email:</label>
+                <input id="c_pass" formControlName="c_pass" [type]="type ? 'password':'text'">
+                <mat-icon (click)="showPass()">visibility</mat-icon>
+            </div>
+        </div>
+        <div>
+            <label for="">Số điện thoại trung tâm: </label>
+            <input formControlName="c_phone" type="text">
+        </div>
+        <div>
+            <label for="">Địa chỉ trung tâm:</label>
+            <input formControlName="c_address" type="text">
+        </div>
+        <div>
+            <label for="">Trang facefook của trung tâm:</label>
+            <input formControlName="c_facebook" type="text">
+        </div>
+        <div class="form-btn">
+            <button type="reset" mat-raised-button color="secondary">Làm mới</button>
+            <button type="submit" mat-raised-button color="primary">Cập nhật</button>
+        </div>
+    </form>
 </div>

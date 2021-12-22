@@ -1,7 +1,7 @@
 <app-breadcrumb name="Lớp học"></app-breadcrumb>
 <div class="body">
     <div class="content">
-        <h2>Lớp {{classData?.cla_name}}</h2>
+        <h2>Lớp {{classData?.cla_name}} - Khóa {{classData?.cla_course}}</h2>
         <app-card-class [type]="type" [cla_id]="id"></app-card-class>
         <div class="nofitication">
             <div class="btn" *ngIf="type!=0">

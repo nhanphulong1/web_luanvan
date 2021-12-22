@@ -13,6 +13,41 @@
         </div> -->
         <app-card-class [type]="type" [cla_id]="id"></app-card-class>
         <div class="nofitication">
+            <div id="print">
+                <div class="print-header" style="margin-top: 10px; font-size: 15px; margin-bottom: 25px;">
+                    <h2 style="color: black; text-align: center; text-transform: uppercase; margin-bottom: 0px;">DANH SÁCH HỌC VIÊN LỚP {{data?.cla_name}}</h2>
+                    <h2 style="color: black; text-align: center;">KHÓA: {{data?.cla_course}} - HẠNG: {{data?.cou_name}}</h2>
+                </div>
+                <table border="1" style="font-size:10px;border-collapse: collapse;width: 98%; margin: auto;">
+                    <thead>
+                        <tr style="height: 30px;">
+                            <th>STT</th>
+                            <th>Mã SV</th>
+                            <th>Họ và tên</th>
+                            <th>Email</th>
+                            <th>SĐT</th>
+                            <th>Giới tính</th>
+                            <th>Ngày sinh</th>
+                            <th>Ghi chú</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="height: 30px;" *ngFor="let item of dataStudent; let i = index">
+                            <td>{{i+1}}</td>
+                            <td>{{item.stu_code}}</td>
+                            <td>{{item.stu_name}}</td>
+                            <td>{{item.stu_email}}</td>
+                            <td>{{item.stu_phone}}</td>
+                            <td>{{item.stu_gender == 0 ? 'Nữ': 'Nam'}}</td>
+                            <td>{{item.stu_birthday | date: 'dd/MM/yyyy'}}</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="btn">
+                <button mat-raised-button color="primary" printSectionId="print" ngxPrint>In danh sách</button>
+            </div>
             <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
                 <ng-container matColumnDef="id">

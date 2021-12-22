@@ -13,12 +13,13 @@ import { DiariesService } from 'src/app/Services/diaries.service';
 })
 export class DetailDiariesComponent implements OnInit {
 
-    displayedColumns: string[] = ['id', 'stu_code', 'stu_name', 'stu_email', 'stu_gender', 'stu_birthday', 'stu_phone'];
+    displayedColumns: string[] = ['id', 'stu_code', 'stu_name', 'stu_email', 'stu_gender', 'att_status'];
     dataSource = new MatTableDataSource();
     di_id;
     cla_id;
     cla_name;
     diaryData;
+    data;
     type;
 
     constructor(
@@ -43,8 +44,10 @@ export class DetailDiariesComponent implements OnInit {
         this.cla_id = this.diaryData.cla_id;
         let classData = await this.classService.getClassById(this.cla_id).toPromise();
         this.cla_name = classData.data[0].cla_name;
-        let atten = await this.attendance.getAttendanceByDiaries(this.diaryData.di_id).toPromise();
+        let atten = await this.attendance.getAttendanceByDiaries(this.diaryData.di_id, this.cla_id).toPromise();
         this.dataSource = new MatTableDataSource(atten.data);
+        this.data = atten.data.filter(element => element.att_comment != null);
+        console.log(this.data);
     }
 
 }

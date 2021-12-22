@@ -1,0 +1,11 @@
+<div mat-dialog-content>
+    <h2>Điểm danh</h2>
+    <mat-form-field appearance="outline" style="width: 90%">
+        <mat-label>Bình luận</mat-label>
+        <textarea matInput name="comment" [(ngModel)]="comment"></textarea>
+    </mat-form-field>
+    <div class="btn">
+        <button mat-raised-button type="button" mat-raised-button mat-dialog-close="false">Trở lại</button>
+        <button mat-raised-button color="primary" (click)="onSubmit()">Điểm danh</button>
+    </div>
+</div>

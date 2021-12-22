@@ -69,7 +69,8 @@ export class DetailClassCompleteComponent implements OnInit {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Hoàn thành'
+            confirmButtonText: 'Hoàn thành',
+            cancelButtonText: 'Hủy'
         }).then((result) => {
             if (result.isConfirmed) {
                 var data = { 'cla_status': 1 };
@@ -77,11 +78,11 @@ export class DetailClassCompleteComponent implements OnInit {
                     console.log(result);
                     if (result.status == 1) {
                         Swal.fire(
-                            'Success!',
+                            'Thành công!',
                             'Hoàn thành lớp học thành công!',
                             'success'
                         ).then((result)=>{
-                            this.router.navigate(['/admin/class/complete']);
+                            this.router.navigate(['/admin/class/detail/'+id]);
                         });
                     } else {
                         Swal.fire({

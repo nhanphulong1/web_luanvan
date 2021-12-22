@@ -54,6 +54,7 @@ export class ClassComponent implements OnInit {
     cla_status: ['0'],
     cla_admission: [0,Validators.required],
     cou_id: ['', [Validators.required]],
+    cou_name:'',
     tea_id: [null]
   });
 
@@ -72,6 +73,7 @@ export class ClassComponent implements OnInit {
   setFee(data){
     this.formClass.controls['cla_fee'].setValue(data.cou_fee);
     this.formClass.controls['cla_count'].setValue(data.cou_quantity);
+    this.formClass.controls['cou_name'].setValue(data.cou_name);
   }
 
   onSubmit(){
@@ -82,7 +84,7 @@ export class ClassComponent implements OnInit {
       this.service.createClass(this.formClass.value).subscribe((data) => {
         if(data.status == 1){
           Swal.fire(
-            'Success!',
+            'Thành công!',
             'Bạn đã thêm lớp học mới thành công!',
             'success'
           ).then(() =>
@@ -92,7 +94,7 @@ export class ClassComponent implements OnInit {
           console.error(data.message);
           Swal.fire({
             icon: 'error',
-            title: 'Error',
+            title: 'Lỗi!',
             text: 'Có lỗi đã xảy ra!',
           })
         }
@@ -105,7 +107,7 @@ export class ClassComponent implements OnInit {
       this.service.updateClass(this.id, this.formClass.value).subscribe((data) => {
         if(data.status == 1){
           Swal.fire(
-            'Success!',
+            'Thành công!',
             'Bạn đã cập nhật lớp học mới thành công!',
             'success'
           ).then(() =>
@@ -114,7 +116,7 @@ export class ClassComponent implements OnInit {
         }else{
           Swal.fire({
             icon: 'error',
-            title: 'Error',
+            title: 'Lỗi!',
             text: 'Có lỗi đã xảy ra!',
           })
         }

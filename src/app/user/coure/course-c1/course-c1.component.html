@@ -1,53 +1,22 @@
-<app-breadcrumb name="Khoá học C1"></app-breadcrumb>
+<app-breadcrumb name="Khoá học"></app-breadcrumb>
 <div class="body">
     <div class="content">
-        <h2>Khóa đào tạo lái xe bằng C1</h2>
-        <div class="content-detail">
-            <p>Học lái xe ô tô C là nhu cầu trở nên phổ biến hơn bao giờ hết, bằng lái xe hạng C là loại giấy phép lái xe được sử dụng nhiều nhất với các tài xế vì tính tiện lợi, có thể lái được hầu hết các loại xe chở người thông dụng và xe tải loại nhỏ.
-                Và việc học lái xe để có giấy phép lái xe loại này cũng không tốn quá nhiều thời gian. Thời gian học lái xe và thi sát hạch bằng lái chỉ mất khoảng 6 tháng.</p>
-            <p>Bạn nên học lái xe C vì khi đó bạn sẽ nắm vững kỹ thuật và rất dễ dàng làm chủ tay lái khi chuyển sang lái xe số tự động. Ngoài ra nếu bạn cần kinh doanh vận tải hoặc sau này muốn nâng bằng lên hạng D - E thì bạn phải học số sàn nhé.</p>
-            <p>Một yếu tố quan trọng nữa là học phí học lái xe hạng C rất thấp chỉ với 8.500k là bạn đã có thể đăng ký dự thi. Nếu học từ đầu trọn gói chỉ 6.800k rất phù hợp với điều kiện kinh tế của nhiều người.</p>
-            <img src="../../../../assets/image/hoc-lai-xe-o-to-tai-da-nang-4.jpg" alt="">
-
-            <h4>Các loại xe ô tô được chạy khi có bằng C1</h4>
-            <p>C1 là bằng lái xe thông dụng nhất hiện nay, trong đó bằng C1 được chia làm bằng C1 lái xe tự động và C1 lái xe số sàn. Mỗi loại bằng sẽ được phép điều khiển các loại xe ô tô sau:</p>
-            <ul>
-                <li>
-                    Bằng lái xe C1 số tự động ( bằng C11) cho phép người không hành nghề lái xe điều khiển các loại xe sau:
-                    <ul>
-                        <li>Ô tô số tự động chở người đến 9 chỗ ngồi, kể cả chỗ ngồi của người lái xe.</li>
-                        <li>Ô tô tải kể cả ô tô chuyên dùng số tự động có trọng tải thiết kế dưới 3,5 tấn.</li>
-                        <li>Ô tô dùng cho người khuyết tật.</li>
-                    </ul>
-                </li>
-                <li>
-                    Bằng lái hạng C12 số sàn cho phép người không hành nghề lái xe để điều khiển các loại xe:
-                    <ul>
-                        <li>Ô tô số tự động chở người đến 9 chỗ ngồi, kể cả chỗ ngồi của người lái xe.</li>
-                        <li>Ô tô tải kể cả ô tô tải chuyên dụng có trọng tải thiết kế dưới 3,5 tấn.</li>
-                        <li>Máy kéo kéo rơ moóc có trọng tải thiết kế dưới 3,5 tấn.</li>
-                    </ul>
-                </li>
-            </ul>
-
-            <h4>Độ tuổi được học bằng C1?</h4>
-            <p>C1 là bằng lái xe thông dụng và có giá trị sử dụng thấp nhất cho nên tất cả những người từ 18 tuổi trở lên có đủ sức khỏe đều được phép tham gia học và thi để được cấp bằng.</p>
-            <p>Bên cạnh đó, độ tuổi không được học, thi và cấp bằng C1 đối với nam là trên 60 và đối với nữ là 55.</p>
-
-            <h4>Thời hạn của bằng lái C1 là bao lâu?</h4>
-            <p>Theo quy định mới của bằng lái C1 thì thời hạn của bằng sẽ bằng tuổi nghỉ hưu của người được cấp. Cụ thể đối với nam thì giá trị bằng đến tuổi 60 còn đối với nữ thì 55 tuổi.</p>
-            <img src="../../../../assets/image/bang-lai-xe-C136.jpg" alt="">
-            <p>Trường hợp nữ trên 45 và nam trên 50 thì giấy phép lái xe được cấp có thời hạn 10 năm kể từ ngày cấp.</p>
+        <h2>Khóa đào tạo lái xe bằng {{data?.cou_name}}</h2>
+        <div class="content-detail" [innerHTML]="data?.cou_content">
         </div>
         <div class="card card-info">
             <h4 class="card-header">Thông tin khoá học</h4>
             <div class="card-content">
-                <p>Tên khóa học: <span><b>{{data?.cou_name}}</b></span></p>
-                <p>Học phí: <span class="text-danger">{{ data?.cou_fee | number }}vnđ</span></p>
-                <p>Thời gian đào tạo: <span class="text-info">{{data?.cou_training}}</span></p>
-                <p>Số tiết học: 3 buổi/tuần</p>
-                <p>Hình thức: <b>Lý thuyết + thực hành(hướng dẫn trực tiếp)</b></p>
-                <div class="btn"><a mat-raised-button [routerLink]="['/front/regis']" routerLinkActive="router-link-active">Đăng ký khóa học</a></div>
+                <div *ngFor="let element of dataClass">
+                    <p>Lớp học: <span class="class_name">{{element.cla_name}} Khóa {{element.cla_course}}</span></p>
+                    <p>Học phí: <span class="class_fee">{{element.cla_fee |number}} VNĐ</span></p>
+                    <p>Ngày khai giảng: {{element.cla_start | date: 'dd/MM/yyyy'}}</p>
+                    <p>Số lượng: {{element.cla_number}}/{{element.cla_quantity}}</p>
+                    <a mat-button color="warn" [routerLink]="['/front/regis']" routerLinkActive="router-link-active">Đăng ký khóa học</a>
+                </div>
+                <div class="class_none" *ngIf="length">
+                    Chưa có lớp học xắp khai giảng
+                </div>
             </div>
         </div>
         <div class="card card-course">
@@ -55,7 +24,8 @@
             <div class="card-content">
                 <a [routerLink]="['/front/course/b1']" routerLinkActive="router-link-active">+ Khóa học lái xe bằng B1</a>
                 <a [routerLink]="['/front/course/b2']" routerLinkActive="router-link-active">+ Khóa học lái xe bằng B2</a>
-                <a [routerLink]="['/front/course/c1']" routerLinkActive="router-link-active">+ Khóa học lái xe bằng C1</a>
+                <a [routerLink]="['/front/course/C']" routerLinkActive="router-link-active">+ Khóa học lái xe bằng C</a>
+                <a [routerLink]="['/front/course/D']" routerLinkActive="router-link-active">+ Khóa học lái xe bằng D</a>
             </div>
         </div>
     </div>

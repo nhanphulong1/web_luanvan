@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Thêm học viên</h1>
+<form [formGroup]="formExam" (ngSubmit)="onSubmit()">
+    <div mat-dialog-content>
+        <div>
+            <mat-form-field style="width: 100%" appearance="outline">
+                <mat-label>Lớp học</mat-label>
+                <mat-select formControlName="cla_id">
+                    <mat-option *ngFor="let item of classData" [value]="item.cla_id">{{item.cla_code}} - {{item.cla_name}} - Khóa {{item.cla_course}} - Số lượng: {{item.cla_number}}HV</mat-option>
+                </mat-select>
+                <mat-error *ngIf="formExam.get('cla_id').hasError('required')">Vui lòng chọn lớp học!</mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="btn" mat-dialog-actions>
+        <button type="button" mat-raised-button mat-dialog-close="false">Đóng</button>
+        <button type="submit" mat-raised-button color="primary">Cập nhật</button>
+    </div>
+</form>

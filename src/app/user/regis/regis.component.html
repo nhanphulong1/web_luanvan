@@ -18,8 +18,9 @@
                     <mat-grid-tile class="form_right">
                         <mat-form-field appearance="outline">
                             <mat-label>Ngày sinh</mat-label>
-                            <input type="date" formControlName="stu_birthday" matInput>
-                            <mat-error *ngIf="formStudent.get('stu_birthday').hasError('required')">Vui lòng nhập họ và tên!</mat-error>
+                            <input type="date" formControlName="stu_birthday" matInput (change)="checkBirthDay()">
+                            <mat-error *ngIf="formStudent.get('stu_birthday').hasError('required')">Vui lòng nhập ngày sinh!</mat-error>
+                            <mat-error *ngIf="!formStudent.get('stu_birthday').hasError('required') && formStudent.get('stu_birthday').hasError('age')">Học viên chưa đủ 18 tuổi!</mat-error>
                         </mat-form-field>
                     </mat-grid-tile>
 
@@ -86,7 +87,7 @@
                         <mat-form-field style="width: 100%;" class="example-full-width" appearance="outline">
                             <mat-label>Khóa học</mat-label>
                             <mat-select formControlName="cla_id">
-                                <mat-option *ngFor="let item of classData" [value]="item.cla_id" (click)="loadInfoClass()">{{item.cla_code}}-{{item.cla_name}}</mat-option>
+                                <mat-option *ngFor="let item of classData" [value]="item.cla_id" (click)="loadInfoClass()">{{item.cla_code}}-{{item.cla_name}}-Khóa {{item.cla_course}}</mat-option>
                             </mat-select>
                             <mat-error *ngIf="formStudent.get('stu_address').hasError('required')">Vui lòng chọn lớp!</mat-error>
                         </mat-form-field>
@@ -136,15 +137,15 @@
             <h4 class="card-header">Thông tin liên hệ</h4>
             <div class="card-content">
                 <h6>+ Phòng tuyển sinh:</h6>
-                <p>Tòa nhà số 35 đường số 11, Phường 13, Quận 6. TP HCM</p>
+                <p>Đường 3/2, p. Xuân Khánh, q. Ninh Kiều, TPCT</p>
                 <p>Email: trungtam@hoclaixenhandv.com </p>
                 <p>Phone: 0399584884</p>
                 <h6>+ Văn phòng số 1:</h6>
-                <p>CEO Tower, Mễ Trì Hạ, Phạm Hùng, Nam Từ Liêm</p>
+                <p>Đường 3/2, p. Xuân Khánh, q. Ninh Kiều, TPCT</p>
                 <p>Email: trungtam@hoclaixenhandv.com </p>
                 <p>Phone: 0399584884</p>
                 <h6>+ Văn phòng số 2:</h6>
-                <p>CEO Tower, Mễ Trì Hạ, Phạm Hùng, Nam Từ Liêm</p>
+                <p>Đường 3/2, p. Xuân Khánh, q. Ninh Kiều, TPCT</p>
                 <p>Email: trungtam@hoclaixenhandv.com </p>
                 <p>Phone: 0399584884</p>
             </div>

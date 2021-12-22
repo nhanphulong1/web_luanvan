@@ -53,7 +53,7 @@ export class ClassTeacherComponent implements OnInit {
         if (this.type == 1 && (this.classData?.tea_id != this.userData.tea_id)) {
             Swal.fire({
                 icon: 'warning',
-                text: 'Bạn không có quyền truy cập lớp này 1!',
+                text: 'Bạn không có quyền truy cập lớp này!',
                 timer: 2500
             });
             this.router.navigate(['front/class/manage']);
@@ -63,7 +63,7 @@ export class ClassTeacherComponent implements OnInit {
                 if (!(this.id == kq.data[0].cla_id)) {
                     Swal.fire({
                         icon: 'warning',
-                        text: 'Bạn không có quyền truy cập lớp này 2!',
+                        text: 'Bạn không có quyền truy cập lớp này!',
                         timer: 2500
                     });
                     this.router.navigate(['front/class/'+kq.data[0].cla_id]);
@@ -90,7 +90,8 @@ export class ClassTeacherComponent implements OnInit {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Xóa'
+            confirmButtonText: 'Xóa',
+            cancelButtonText: 'Hủy'
         }).then(async (result) => {
             if (result.isConfirmed) {
                 let kq = await this.notifi.deleteNotifi(id).toPromise();

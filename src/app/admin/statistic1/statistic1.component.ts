@@ -15,6 +15,7 @@ import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material
 import { MatChipInputEvent } from '@angular/material/chips';
 import { map, reduce, startWith } from 'rxjs/operators';
 import { TeacherService } from 'src/app/Services/teacher.service';
+import { ClassService } from 'src/app/Services/class.service';
 
 @Component({
     selector: 'app-statistic1',
@@ -27,6 +28,7 @@ export class Statistic1Component implements OnInit {
     dataSource = new MatTableDataSource();
     data;
     courseData;
+    classData;
     formDate;
     toDate;
     cla_course = '';
@@ -34,41 +36,44 @@ export class Statistic1Component implements OnInit {
     result = '0';
     cou_id = '0';
     status_class = '0';
+    cla_id = '0';
+    es_status = '0';
     totalPrice = 0;
     totalPass = 0;
     totalFail = 0;
     totalPay = 0;
     totalPayFail = 0;
 
-    // visible = true;
-    // selectable = true;
-    // removable = true;
-    // separatorKeysCodes: number[] = [ENTER, COMMA];
-    // fruitCtrl = new FormControl();
-    // filteredFruits: Observable<string[]>;
-    // fruits: string[] = [];
-    // allFruits: string[] = [];
+    visible = true;
+    selectable = true;
+    removable = true;
+    separatorKeysCodes: number[] = [ENTER, COMMA];
+    fruitCtrl = new FormControl();
+    filteredFruits: Observable<string[]>;
+    fruits: string[] = [];
+    allFruits: string[] = [];
 
-    // @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
-    // @ViewChild('auto') matAutocomplete: MatAutocomplete;
+    @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
+    @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
     constructor(
         private service: StudentService,
         private course: CourseService,
+        private classService: ClassService,
         private exportService: ExportExelService,
         public dialog: MatDialog,
         private teacher: TeacherService,
     ) {
-        // teacher.getAllTeacher().subscribe((result) => {
-        //     if (result.status == 1) {
-        //         result.data.forEach(element => {
-        //             this.allFruits.push(element.tea_name);
-        //         });
-        //     }
-        //     this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
-        //         startWith(null),
-        //         map((fruit: string | null) => fruit ? this._filter(fruit) : this.allFruits.slice()));
-        // })
+        teacher.getAllTeacher().subscribe((result) => {
+            if (result.status == 1) {
+                result.data.forEach(element => {
+                    this.allFruits.push(element.tea_name);
+                });
+            }
+            this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
+                startWith(null),
+                map((fruit: string | null) => fruit ? this._filter(fruit) : this.allFruits.slice()));
+        })
     }
 
     @ViewChild(MatPaginator, { static: false })
@@ -86,10 +91,8 @@ export class Statistic1Component implements OnInit {
     }
 
     ngOnInit(): void {
-        // this.service.getAllStudent().subscribe((result) => {
-        //     this.loadTable(result.data);
-        // });
         this.onSearch();
+        this.loadClass();
         this.course.getAllCourse().subscribe((result) => {
             this.courseData = result.data;
         });
@@ -118,6 +121,24 @@ export class Statistic1Component implements OnInit {
         });
     }
 
+    async loadClass(){
+        if(this.cou_id != '0'){
+            let kq = await this.classService.getAllClassByCourse(this.cou_id).toPromise();
+            if(this.cla_course == ''){
+                this.classData = kq.data;
+            }else{
+                this.classData = kq.data.filter( element => element.cla_course == this.cla_course );
+            }
+        }else{
+            let kq = await this.classService.getAllClass().toPromise();
+            if(this.cla_course == ''){
+                this.classData = kq.data;
+            }else{
+                this.classData = kq.data.filter( element => element.cla_course == this.cla_course );
+            }
+        }
+    }
+
     async onSearch() {
         let data = {
             start: this.formDate,
@@ -127,7 +148,9 @@ export class Statistic1Component implements OnInit {
             cou_id: this.cou_id,
             status: this.status_class,
             cla_course: this.cla_course,
-            // teacher: this.fruits
+            teacher: this.fruits,
+            cla_id: this.cla_id,
+            es_status: this.es_status,
         };
         let kq = await this.course.getStatistic1(data).toPromise();
         this.loadTable(kq.data);
@@ -156,41 +179,41 @@ export class Statistic1Component implements OnInit {
         this.exportService.exportExcel(dataExport, 'Thống kê');
     }
 
-    // add(event: MatChipInputEvent): void {
-    //     const input = event.input;
-    //     const value = event.value;
+    add(event: MatChipInputEvent): void {
+        const input = event.input;
+        const value = event.value;
 
-    //     // Add our fruit
-    //     if ((value || '').trim()) {
-    //         this.fruits.push(value.trim());
-    //     }
+        // Add our fruit
+        if ((value || '').trim()) {
+            this.fruits.push(value.trim());
+        }
 
-    //     // Reset the input value
-    //     if (input) {
-    //         input.value = '';
-    //     }
+        // Reset the input value
+        if (input) {
+            input.value = '';
+        }
 
-    //     this.fruitCtrl.setValue(null);
-    // }
+        this.fruitCtrl.setValue(null);
+    }
 
-    // remove(fruit: string): void {
-    //     const index = this.fruits.indexOf(fruit);
+    remove(fruit: string): void {
+        const index = this.fruits.indexOf(fruit);
 
-    //     if (index >= 0) {
-    //         this.fruits.splice(index, 1);
-    //     }
-    // }
+        if (index >= 0) {
+            this.fruits.splice(index, 1);
+        }
+    }
 
-    // selected(event: MatAutocompleteSelectedEvent): void {
-    //     this.fruits.push(event.option.viewValue);
-    //     this.fruitInput.nativeElement.value = '';
-    //     this.fruitCtrl.setValue(null);
-    // }
+    selected(event: MatAutocompleteSelectedEvent): void {
+        this.fruits.push(event.option.viewValue);
+        this.fruitInput.nativeElement.value = '';
+        this.fruitCtrl.setValue(null);
+    }
 
-    // private _filter(value: string): string[] {
-    //     const filterValue = value.toLowerCase();
+    private _filter(value: string): string[] {
+        const filterValue = value.toLowerCase();
 
-    //     return this.allFruits.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
-    // }
+        return this.allFruits.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
+    }
 
 }

@@ -57,6 +57,20 @@ export class ResultService {
             ).pipe(catchError(this.handleError));
     }
 
+    public createMultiResult(data): Observable<any> {
+        const url = this.REST_API_SERVER + '/arr';
+        return this.httpClient.post<any>(url,data)
+            .pipe(
+                map((data) => {
+                    // console.log('data: ',data, this.httpOptions);
+                    if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+                        console.log('DataService: getResult: error', data);
+                    }
+                    return data;
+                })
+            ).pipe(catchError(this.handleError));
+    }
+
     public updateResult(id,data): Observable<any> {
         const url = this.REST_API_SERVER + '/'+id;
         return this.httpClient.put<any>(url,data)
