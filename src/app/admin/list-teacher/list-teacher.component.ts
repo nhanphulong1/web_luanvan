@@ -11,11 +11,11 @@ import Swal from 'sweetalert2';
   styleUrls: ['./list-teacher.component.scss']
 })
 export class ListTeacherComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'tea_code','tea_name', 'tea_email','tea_image', 'tea_phone', 'action'];
+  displayedColumns: string[] = ['id', 'tea_code','tea_name', 'tea_email', 'tea_phone', 'tea_gender', 'tea_birthday', 'action'];
   dataSource = new MatTableDataSource();
   email = "";
   name = "";
-  type = 3;
+  tea_code;
 
   constructor(
     private service: TeacherService
@@ -58,7 +58,7 @@ export class ListTeacherComponent implements OnInit {
     var data = {
       'email': this.email,
       'name': this.name,
-      'type': this.type
+      'tea_code': this.tea_code
     };
     this.service.searchTeacher(data).subscribe((result) => {
       this.dataSource = new MatTableDataSource(result.data);

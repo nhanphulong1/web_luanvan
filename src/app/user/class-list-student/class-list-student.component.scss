@@ -17,7 +17,7 @@
     min-height: calc(100vh - 320px);
 }
 
-.body .content h2 {
+.body .content>h2 {
     font-size: 24px;
     border-bottom: 2px solid black;
     color: #024888;
@@ -25,6 +25,10 @@
     font-family: 'Times New Roman', Times, serif;
     font-weight: 800;
     text-transform: uppercase;
+}
+
+#print {
+    display: none;
 }
 
 //Card
@@ -89,4 +93,12 @@ th.mat-sort-header-sorted {
 .mat-column-action {
     flex: none;
     width: 120px;
+}
+
+.btn {
+    margin: 10px 5px;
+}
+
+.btn button {
+    padding: 2px 15px;
 }

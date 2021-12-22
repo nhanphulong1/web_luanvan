@@ -103,7 +103,9 @@ export class AuthService {
                 return 1;
             if(url.includes('admin/contact') && this.permissions.includes(7))
                 return 1;
-            if(url.includes('admin/statistic') && this.permissions.includes(8))
+            // if(url.includes('admin/statistic') && this.permissions.includes(8))
+            //     return 1;
+            if(url.includes('admin/tea_statis') && this.type == 1)
                 return 1;
             if(url.includes('admin/exam') && this.permissions.includes(9))
                 return 1;

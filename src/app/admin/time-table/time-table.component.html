@@ -1,12 +1,12 @@
 <div class="content">
-    <h2>Chi tiết giáo viên</h2>
+    <h2>Thời Khóa Biểu Lớp Học</h2>
     <div class="btn_back">
         <a [routerLink]="['/admin/class/detail/'+id]" routerLinkActive="router-link-active">
             <mat-icon>keyboard_backspace</mat-icon>Quay lại
         </a>
     </div>
     <div class="btn-detail">
-        <a [routerLink]="['/admin/schedule/'+id]" routerLinkActive="router-link-active" mat-raised-button color="primary">Thêm mới</a>
+        <a *ngIf="data?.cla_status != 1" [routerLink]="['/admin/schedule/'+id]" routerLinkActive="router-link-active" mat-raised-button color="primary">Thêm mới</a>
     </div>
     <div class="info">
         <h4>Thông tin chi tiết:</h4>
@@ -14,11 +14,17 @@
             <mat-grid-tile class="list_header">Tên lớp học:</mat-grid-tile>
             <mat-grid-tile class="bold">{{ data?.cla_name }}</mat-grid-tile>
 
-            <mat-grid-tile class="border-left list_header">Thời gian đào tạo:</mat-grid-tile>
-            <mat-grid-tile class="border-right">{{ data?.cou_training }}</mat-grid-tile>
+            <mat-grid-tile class="border-left list_header">Giáo viên chủ nhiệm:</mat-grid-tile>
+            <mat-grid-tile class="border-right">
+                <span *ngIf="data?.tea_name" style="color: blue; font-weight: bold;"> {{data?.tea_name}} </span>
+                <span *ngIf="!data?.tea_name" style="color: red; font-weight: bold;"> Chưa phân công </span>
+            </mat-grid-tile>
 
-            <mat-grid-tile class="list_header">Ngày bắt đầu:</mat-grid-tile>
-            <mat-grid-tile>{{ data?.cla_start | date : 'dd/MM/yyyy' }}</mat-grid-tile>
+            <mat-grid-tile class="list_header">Mã giáo viên:</mat-grid-tile>
+            <mat-grid-tile>
+                <span *ngIf="data?.tea_name" style="color: blue; font-weight: bold;"> {{data?.tea_code}} </span>
+                <span *ngIf="!data?.tea_name"></span>
+            </mat-grid-tile>
 
             <mat-grid-tile class="list_header">Mã khóa học:</mat-grid-tile>
             <mat-grid-tile class="bold red">{{ data?.cou_name }}</mat-grid-tile>
@@ -26,8 +32,17 @@
             <mat-grid-tile class="border-left list_header">Số lượng học viên:</mat-grid-tile>
             <mat-grid-tile class="border-right">{{data?.cla_number}}/{{data?.cla_quantity}}</mat-grid-tile>
 
-            <mat-grid-tile class="list_header">Số buổi học:</mat-grid-tile>
-            <mat-grid-tile>{{ data?.cla_count }}</mat-grid-tile>
+            <mat-grid-tile class="list_header">Ngày khai giảng:</mat-grid-tile>
+            <mat-grid-tile>{{ data?.cla_start | date : 'dd/MM/yyyy' }}</mat-grid-tile>
+
+            <mat-grid-tile class="list_header">Mã lớp:</mat-grid-tile>
+            <mat-grid-tile class="bold red">{{ data?.cla_code }}</mat-grid-tile>
+
+            <mat-grid-tile class="border-left list_header">Học phí:</mat-grid-tile>
+            <mat-grid-tile class="border-right">{{ data?.cla_fee | number }} VNĐ</mat-grid-tile>
+
+            <mat-grid-tile class="list_header">Trạng thái lớp học:</mat-grid-tile>
+            <mat-grid-tile>{{(data?.status == 0) ? 'Đang mở': 'Hoàn thành'}}</mat-grid-tile>
         </mat-grid-list>
     </div>
     <div class="table">
@@ -36,7 +51,7 @@
 
             <ng-container matColumnDef="day_id">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Thứ </th>
-                <td mat-cell *matCellDef="let element"> {{element.day_name}} </td>
+                <td mat-cell *matCellDef="let element">{{element.day_name}} </td>
             </ng-container>
 
             <ng-container matColumnDef="shi_id">
@@ -57,7 +72,7 @@
             <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Hành động</th>
                 <td mat-cell *matCellDef="let element">
-                    <a *ngIf="element.shi_id != ''" mat-menu-item (click)="deleteSchedule(element.sche_id)">
+                    <a *ngIf="data?.cla_status != 1" mat-menu-item (click)="deleteSchedule(element.sche_id)">
                         <mat-icon style="color: red;">delete</mat-icon>
                     </a>
                 </td>

@@ -19,6 +19,7 @@ export class DetailClassComponent implements OnInit {
     dataSource = new MatTableDataSource();
     id;
     data;
+    dataStudent;
 
     constructor(
         private classService: ClassService,
@@ -50,6 +51,7 @@ export class DetailClassComponent implements OnInit {
             this.data = result.data[0];
         });
         this.classService.getStudentInClass(this.id).subscribe((result) => {
+            this.dataStudent = result.data;
             this.dataSource = new MatTableDataSource(result.data);
         })
     }

@@ -86,7 +86,7 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Trạng thái </th>
                 <td mat-cell *matCellDef="let element">
                     <!-- <span class='badge-info' *ngIf="element.cla_status == 0 && element.cla_start > nowDate">Sắp khai giảng</span> -->
-                    <span class='badge-primary' *ngIf="element.cla_status == 0">Đang mở</span>
+                    <span class='badge-primary' *ngIf="element.cla_status == 0">Đang mở lớp</span>
                     <span class="badge-warning" *ngIf="element.cla_status == 1">Hoàn thành</span>
                 </td>
             </ng-container>

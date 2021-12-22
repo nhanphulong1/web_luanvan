@@ -95,6 +95,20 @@ export class CourseService {
     ).pipe(catchError(this.handleError));
   }
 
+  public getStatisticTeacher(data): Observable<any>{
+    const url = this.REST_API_SERVER+'/course/statistic/teacher';
+    return this.httpClient.post<any>(url,data)
+    .pipe(
+      map((data)=>{
+        // console.log('data: ',data, this.httpOptions);
+        if (Object.prototype.hasOwnProperty.call(data, 'error')) {
+          console.log('DataService: getCourse: error', data);
+        }
+        return data;
+      })
+    ).pipe(catchError(this.handleError));
+  }
+
   public getStatistic2(data): Observable<any>{
     const url = this.REST_API_SERVER+'/course/statistic2';
     return this.httpClient.post<any>(url,data)

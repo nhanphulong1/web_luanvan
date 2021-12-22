@@ -6,9 +6,10 @@
         </a>
     </div>
     <div class="btn-detail">
-        <a *ngIf="data?.status != 1" [routerLink]="['/admin/class/edit/'+id]" routerLinkActive="router-link-active" mat-raised-button color="primary">Cập nhật</a>
+        <a *ngIf="data?.cla_status != 1" [routerLink]="['/admin/class/edit/'+id]" routerLinkActive="router-link-active" mat-raised-button color="primary">Cập nhật</a>
         <a [routerLink]="['/admin/timetable/'+id]" routerLinkActive="router-link-active" mat-raised-button color="primary">Quản lý thời khóa biểu</a>
         <a [routerLink]="['/admin/class/diaries/'+id]" routerLinkActive="router-link-active" mat-raised-button color="primary">Nhật ký giảng dạy</a>
+        <button mat-raised-button color="primary" printSectionId="print" ngxPrint>In danh sách</button>
         <button mat-raised-button color="primary" (click)="deleteClass(id)">Xóa lớp học</button>
     </div>
     <div class="info">
@@ -47,6 +48,40 @@
             <mat-grid-tile class="list_header">Trạng thái lớp học:</mat-grid-tile>
             <mat-grid-tile>{{(data?.status == 0) ? 'Đang mở': 'Hoàn thành'}}</mat-grid-tile>
         </mat-grid-list>
+    </div>
+    <div id="print">
+        <div class="print-header" style="margin-top: 10px; margin-bottom: 25px;">
+            <h2 style="color: black; text-align: center; text-transform: uppercase; margin-bottom: 0px;">DANH SÁCH HỌC VIÊN LỚP {{data?.cla_name}} - {{data?.cla_code}}</h2>
+            <h2 style="color: black; text-align: center;">KHÓA: {{data?.cla_course}} - HẠNG: {{data?.cou_name}}</h2>
+        </div>
+        <table border="1" style="border-collapse: collapse;width: 98%; margin: auto; font-size: 10px;">
+            <thead>
+                <tr style="height: 30px;">
+                    <th>STT</th>
+                    <th>Mã SV</th>
+                    <th>Họ và tên</th>
+                    <th>Email</th>
+                    <th>SĐT</th>
+                    <th>Giới tính</th>
+                    <th>Ngày sinh</th>
+                    <th>Kết quả</th>
+                    <th>Ghi chú</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="height: 30px;" *ngFor="let item of dataStudent; let i = index">
+                    <td style="text-align: center;">{{i+1}}</td>
+                    <td>{{item.stu_code}}</td>
+                    <td>{{item.stu_name}}</td>
+                    <td>{{item.stu_email}}</td>
+                    <td>{{item.stu_phone}}</td>
+                    <td>{{item.stu_gender == 0 ? 'Nữ': 'Nam'}}</td>
+                    <td>{{item.stu_birthday | date: 'dd/MM/yyyy'}}</td>
+                    <td><span *ngIf="item.re_result==1">Đậu</span><span *ngIf="item.re_result==0">Rớt</span></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <div class="table">
         <h4>Danh sách học viên:</h4>

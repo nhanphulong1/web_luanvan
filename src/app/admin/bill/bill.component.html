@@ -1,0 +1,43 @@
+<div mat-dialog-content>
+    <div id="print">
+        <div class="header">
+            <div class="header-name">
+                <h5>Đơn vị:{{name}}</h5>
+                <h5>Địa chỉ:{{address}}</h5>
+            </div>
+            <div>
+                <h5>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</h5>
+                <h6><span>Độc lập - Tự do - Hạnh phúc</span></h6>
+            </div>
+        </div>
+        <div class="name">
+            <h2>BIÊN LAI THU HỌC PHÍ</h2>
+        </div>
+        <div>
+            <p>Đơn vị: {{name}}</p>
+            <p>Họ tên: {{dataStudent?.stu_name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SĐT: {{dataStudent?.stu_phone}}</p>
+            <p>Lớp học: {{dataStudent?.cla_code}} - {{dataStudent?.cla_name}} - Khóa {{dataStudent?.cla_course}}</p>
+            <p>Hạng bằng lái: {{dataStudent?.cou_name}}</p>
+            <p>Học Phí: {{dataStudent?.cla_fee | number}} VNĐ</p>
+            <p>Hình thức thanh toán: <span *ngIf="dataStudent?.pay_type == 0">Tiền mặt</span><span *ngIf="dataStudent?.pay_type == 1">Chuyển khoản</span></p>
+        </div>
+        <div class="footer">
+            <div>
+                <p></p>
+                <h5>Người thu</h5>
+                <p></p>
+                <p>......................................</p>
+            </div>
+            <div>
+                <p>..........,Ngày ... Tháng ... Năm 202..</p>
+                <h5>Người Nộp</h5>
+                <p></p>
+                <p>{{dataStudent?.stu_name}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="btn" mat-dialog-actions>
+    <button type="button" mat-raised-button mat-dialog-close="false">Đóng</button>
+    <button type="submit" mat-raised-button color="primary" printSectionId="print" [useExistingCss]="true" ngxPrint>In biên lai</button>
+</div>

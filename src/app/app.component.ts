@@ -36,7 +36,7 @@ export class AppComponent {
       this.isFront = false;
       this.isBack=false;
     }
-    console.log(this.isFront);
+    // console.log(this.isFront);
   }
 
 }

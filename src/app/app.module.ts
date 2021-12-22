@@ -21,6 +21,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
+import { NgxPrintModule } from 'ngx-print';
 
 // Firebase services + enviorment module
 import { AngularFireModule } from '@angular/fire';
@@ -111,6 +112,8 @@ import { ConfigComponent } from './admin/config/config.component';
 import { SearchNewComponent } from './user/search-new/search-new.component';
 import { AddExamsComponent } from './form/add-exams/add-exams.component';
 import { CommentComponent } from './user/comment/comment.component';
+import { TeacherStatisticComponent } from './admin/teacher-statistic/teacher-statistic.component';
+import { BillComponent } from './admin/bill/bill.component';
 
 @NgModule({
   declarations: [
@@ -190,6 +193,8 @@ import { CommentComponent } from './user/comment/comment.component';
     SearchNewComponent,
     AddExamsComponent,
     CommentComponent,
+    TeacherStatisticComponent,
+    BillComponent,
   ],
   imports: [
     BrowserModule,
@@ -221,6 +226,7 @@ import { CommentComponent } from './user/comment/comment.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    NgxPrintModule,
   ],
   exports:[
     FrontHeaderComponent,

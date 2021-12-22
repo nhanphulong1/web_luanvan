@@ -99,7 +99,12 @@
             <a [routerLink]="['/admin/contact']" routerLinkActive="router-link-active">
                 <mat-icon>contact_phone</mat-icon>Liên hệ</a>
         </li>
-        <li *ngIf="checkPermission(8)">
+        <li *ngIf="type == 1">
+            <a [routerLink]="['/admin/tea_statis']" routerLinkActive="router-link-active">
+                <mat-icon>dashboard</mat-icon>Thống kê</a>
+        </li>
+
+        <li *ngIf="type == 2">
             <!-- <a routerLink="admin/statistic1" routerLinkActive="router-link-active">
                 <mat-icon>insert_chart</mat-icon>Thống kê báo cáo</a> -->
             <a (click)="showNav(6)">

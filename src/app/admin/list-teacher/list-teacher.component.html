@@ -6,8 +6,8 @@
         <mat-grid-list cols="4" rowHeight="4:1">
             <mat-grid-tile>
                 <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Email</mat-label>
-                    <input matInput name="email" [(ngModel)]="email">
+                    <mat-label>Mã giáo viên</mat-label>
+                    <input matInput name="tea_code" [(ngModel)]="tea_code">
                 </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile>
@@ -18,12 +18,14 @@
             </mat-grid-tile>
             <mat-grid-tile>
                 <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Trạng thái</mat-label>
-                    <mat-select name="type" [(ngModel)]="type">
+                    <!-- <mat-label>Trạng thái</mat-label> -->
+                    <!-- <mat-select name="type" [(ngModel)]="type">
                         <mat-option value="-1">Tất cả</mat-option>
                         <mat-option value="0">Đang dạy học</mat-option>
                         <mat-option value="1">Chưa phân lớp</mat-option>
-                    </mat-select>
+                    </mat-select> -->
+                    <mat-label>Email</mat-label>
+                    <input matInput name="email" [(ngModel)]="email">
                 </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile class="search_btn">
@@ -54,14 +56,27 @@
                 <td mat-cell *matCellDef="let element"> {{element.tea_email}} </td>
             </ng-container>
 
-            <ng-container matColumnDef="tea_image">
+            <!-- <ng-container matColumnDef="tea_image">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Ảnh đại diện </th>
                 <td mat-cell *matCellDef="let element"> <img [src]="element.tea_image" height="100px" width="100px"> </td>
-            </ng-container>
+            </ng-container> -->
 
             <ng-container matColumnDef="tea_phone">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Số điện thoại </th>
                 <td mat-cell *matCellDef="let element"> {{element.tea_phone}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="tea_gender">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Giới tính </th>
+                <td mat-cell *matCellDef="let element">
+                    <span *ngIf="element.tea_gender != 1">Nam</span>
+                    <span *ngIf="element.tea_gender == 1">Nữ</span>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="tea_birthday">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Ngày sinh </th>
+                <td mat-cell *matCellDef="let element"> {{element.tea_birthday | date: 'dd/MM/yyyy'}} </td>
             </ng-container>
 
             <!-- <ng-container matColumnDef="cla_status">

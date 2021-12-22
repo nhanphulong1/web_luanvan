@@ -33,11 +33,11 @@
 
                 <mat-grid-tile class="form_left">
                     <mat-form-field appearance="outline">
-                        <mat-label>Loại khóa học</mat-label>
+                        <mat-label>Hạng bằng lái</mat-label>
                         <mat-select formControlName="cou_id">
                             <mat-option *ngFor="let item of courseData" [value]="item.cou_id" (click)="setFee(item)">{{item.cou_name}}</mat-option>
                         </mat-select>
-                        <mat-error *ngIf="formClass.get('cou_id').hasError('required')">Vui lòng chọn loại khóa học!</mat-error>
+                        <mat-error *ngIf="formClass.get('cou_id').hasError('required')">Vui lòng chọn hạng bằng lái!</mat-error>
                     </mat-form-field>
                 </mat-grid-tile>
 

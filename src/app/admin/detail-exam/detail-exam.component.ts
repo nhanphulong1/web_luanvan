@@ -22,7 +22,7 @@ import { ResultService } from 'src/app/Services/result.service';
 })
 export class DetailExamComponent implements OnInit {
 
-    displayedColumns: string[] = ['id', 'stu_code', 'stu_name', 'stu_email', 'stu_gender', 'stu_phone', 'cla_code', 'cla_name', 'cla_course', 'tea_name', 're_result', 'action'];
+    displayedColumns: string[] = ['id', 'stu_code', 'stu_name', 'stu_email', 'stu_gender', 'stu_phone', 'cla_code', 'cla_name', 'cla_course', 're_result', 'action'];
     dataSource = new MatTableDataSource();
     id;
     data;
@@ -75,6 +75,11 @@ export class DetailExamComponent implements OnInit {
             this.dataSource = new MatTableDataSource(this.dataStudent);
         });
     }
+
+    applyFilter(event: Event) {
+        const filterValue = (event.target as HTMLInputElement).value;
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+      }
 
     async getStudent(id) {
         // let kq = await this.student.getStudentByCourse(id).toPromise();

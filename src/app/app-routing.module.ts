@@ -21,7 +21,6 @@ import { ListStudentComponent } from './admin/list-student/list-student.componen
 import { ListTeacherComponent } from './admin/list-teacher/list-teacher.component';
 import { ListUserComponent } from './admin/list-user/list-user.component';
 import { LoginAdminComponent } from './admin/login-admin/login-admin.component';
-// import { StatisticCourseComponent } from './admin/statistic-course/statistic-course.component';
 import { StatisticComponent } from './admin/statistic/statistic.component';
 import { Statistic1Component } from './admin/statistic1/statistic1.component';
 import { TimeTableComponent } from './admin/time-table/time-table.component';
@@ -62,6 +61,7 @@ import { Statistic2Component } from './admin/statistic2/statistic2.component';
 import { Statistic3Component } from './admin/statistic3/statistic3.component';
 import { ConfigComponent } from './admin/config/config.component';
 import { SearchNewComponent } from './user/search-new/search-new.component';
+import { TeacherStatisticComponent } from './admin/teacher-statistic/teacher-statistic.component';
 
 
 
@@ -133,6 +133,7 @@ const routes: Routes = [
   {path: 'admin/statistic1', component: Statistic1Component, canActivate: [AuthGuard]},
   {path: 'admin/statistic2', component: Statistic2Component, canActivate: [AuthGuard]},
   {path: 'admin/statistic3', component: Statistic3Component, canActivate: [AuthGuard]},
+  {path: 'admin/tea_statis', component: TeacherStatisticComponent, canActivate: [AuthGuard]},
   {path: 'admin/config', component: ConfigComponent, canActivate: [AuthGuard]},
   {path: '', redirectTo: 'home', pathMatch:'full'},
   {path: '**', component: PageNotFoundComponent}

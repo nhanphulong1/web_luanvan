@@ -54,6 +54,7 @@ export class ClassComponent implements OnInit {
     cla_status: ['0'],
     cla_admission: [0,Validators.required],
     cou_id: ['', [Validators.required]],
+    cou_name:'',
     tea_id: [null]
   });
 
@@ -72,6 +73,7 @@ export class ClassComponent implements OnInit {
   setFee(data){
     this.formClass.controls['cla_fee'].setValue(data.cou_fee);
     this.formClass.controls['cla_count'].setValue(data.cou_quantity);
+    this.formClass.controls['cou_name'].setValue(data.cou_name);
   }
 
   onSubmit(){

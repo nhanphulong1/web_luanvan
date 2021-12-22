@@ -7,6 +7,7 @@ import { PaymentComponent } from 'src/app/form/payment/payment.component';
 import { CourseService } from 'src/app/Services/course.service';
 import { StudentService } from 'src/app/Services/student.service';
 import Swal from 'sweetalert2';
+import { BillComponent } from '../bill/bill.component';
 
 @Component({
   selector: 'app-list-student',
@@ -75,6 +76,13 @@ export class ListStudentComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result)=>{
       this.loadTable();
   })
+  }
+
+  openBill(id){
+    const dialogRef = this.dialog.open(BillComponent, {
+      width: '850px',
+      data: {stu_id: id}
+    });
   }
 
   deleteStudent(id) {

@@ -15,6 +15,8 @@ export class ClassListStudentComponent implements OnInit {
     dataSource = new MatTableDataSource();
     id;
     type;
+    data;
+    dataStudent;
 
     constructor(
         private route: ActivatedRoute,
@@ -27,7 +29,11 @@ export class ClassListStudentComponent implements OnInit {
             this.id = params.get('id');
         });
         this.type = this.auth.getType();
+        this.classService.getClassById(this.id).subscribe((result)=>{
+            this.data = result.data[0];
+        })
         this.classService.getStudentInClass(this.id).subscribe((result) => {
+            this.dataStudent = result.data;
             this.dataSource = new MatTableDataSource(result.data);
         })
     }
